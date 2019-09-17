@@ -51,15 +51,22 @@ client.on('connected', onConnectedHandler);
 client.connect();
 
 
+const prefix = "!"
+var last_command = ""
+
 
 // Called every time a message comes in
 function onMessageHandler (target, context, msg, self) {
+
+    let cmd = msg.trim().toLowerCase();
   
+
     if (self) { return; } // Ignore messages from the bot
+    else if (cmd.slice(0, prefix.length) !== prefix) { return; } // Ensure prefix start
+
 
     // Parse message accordingly
-    let cmd = msg.trim().toLowerCase();
-    let args = cmd.split(" ")
+    let args = cmd.slice(1).split(" ")
     cmd = args[0]
     args.splice(0, 1)
 
@@ -68,19 +75,37 @@ function onMessageHandler (target, context, msg, self) {
 
 
     // COMMANDS
-    if (cmd === "!ping") {
-        client.say(target, "pong!");
+    if (cmd === "ping") {
+        var _buffer = "";
+        if (last_command === "ping") {
+            _buffer = "!"
+            last_command = null
+        } else { last_command = "ping"; }
+
+        client.say(target, `pong${_buffer}!`);
     }
 
-    else if (cmd === "!help") {
+    else if (cmd === "help") {
+        var _buffer = "";
+        if (last_command === "help") {
+            _buffer = " "
+            last_command = null
+        } else { last_command = "help"; }
+
         client.say(
             target,
-            "You can find a list of commands here: https://tyler.akins.me/twitch_bit_counter/"
+            `You can find a list of commands here${_buffer}: https://tyler.akins.me/twitch_bit_counter/`
         )
     }
 
-    else if (cmd === "!lead") {
+    else if (cmd === "lead") {
         let leader = ["Absolutely nobody", 0];
+
+        var _buffer = "";
+        if (last_command === "lead") {
+            _buffer = "!"
+            last_command = null
+        } else { last_command = "lead"; }
 
         for (IGP of data) {
             let total_points = Math.sum(Object.values(IGP.points));
@@ -93,20 +118,20 @@ function onMessageHandler (target, context, msg, self) {
 
         client.say(
             target,
-            `${leader[0]} is in the lead with ${leader[1]} bits!`
+            `${leader[0]} is in the lead with ${leader[1]} bits${_buffer}!`
         )
     }
 
     else if (is_mod) {
 
         if (args.length < 2) {
-            client.say(target, "Error: Not enough arguments.")
+            client.say(target, `Error${_buffer}: Not enough arguments.`)
             return;
         };
 
-        var points = parseInt(args[0])
-        var date_target = args[1]
-        var donator = "%anonymous%"
+        let points = parseInt(args[0])
+        let date_target = args[1]
+        let donator = "%anonymous%"
 
         if (args.length === 3) {
             donator = args[2]
@@ -114,7 +139,15 @@ function onMessageHandler (target, context, msg, self) {
 
 
 
-        if (cmd === "!add") {
+        if (cmd === "add") {
+
+
+            var _buffer = "";
+            if (last_command === "add") {
+                _buffer = " "
+                last_command = null
+            } else { last_command = "add"; }
+
 
             for (IGP of data) {
                 if (IGP.names.includes(date_target)) {
@@ -125,7 +158,7 @@ function onMessageHandler (target, context, msg, self) {
                     }
                     client.say(
                         target,
-                        `${donator} has added ${points} to ${date_target}.`
+                        `${donator} has added ${points} to ${date_target}${_buffer}.`
                     )
                 }
             }
@@ -133,7 +166,13 @@ function onMessageHandler (target, context, msg, self) {
             save(data)
         }
 
-        else if (cmd === "!remove") {
+        else if (cmd === "remove") {
+
+            var _buffer = "";
+            if (last_command === "remove") {
+                _buffer = " "
+                last_command = null
+            } else { last_command = "remove"; }
 
             for (IGP of data) {
                 if (IGP.names.includes(date_target)) {
@@ -142,20 +181,20 @@ function onMessageHandler (target, context, msg, self) {
                             IGP.points[donator] = 0
                             client.say(
                                 target,
-                                `${donator} has removed ${points} from ${date_target}.`
+                                `${donator} has removed ${points} from ${date_target}${_buffer}.`
                             )
                         }
                         else {
                             IGP.points[donator] -= points
                             client.say(
                                 target,
-                                `${donator} has removed ${points} from ${date_target}.`
+                                `${donator} has removed ${points} from ${date_target}${_buffer}.`
                             )
                         }
                     } else {
                         client.say(
                             target,
-                            "Error: That user doesn't have any points on that IGP."
+                            `Error${_buffer}: That user doesn't have any points on that IGP.`
                         )
                     }
                 }
