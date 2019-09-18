@@ -12,6 +12,22 @@ const CHANNELS = [
 
 
 
+const dates = [
+    "Abigail",
+    "Haley",
+    "Leah",
+    "Maru",
+    "Penny",
+    "Emily",
+    "Shane",
+    "Elliot",
+    "Harvey",
+    "Sam",
+    "Sebastian",
+    "Shane"
+]
+
+
 
 const filename = "./src/data.json"
 
@@ -59,7 +75,7 @@ var last_command = ""
 function onMessageHandler (target, context, msg, self) {
 
     let cmd = msg.trim().toLowerCase();
-  
+
 
     if (self) { return; } // Ignore messages from the bot
     else if (cmd.slice(0, prefix.length) !== prefix) { return; } // Ensure prefix start
@@ -75,7 +91,13 @@ function onMessageHandler (target, context, msg, self) {
 
 
     // COMMANDS
-    if (cmd === "ping") {
+    if (cmd === "list") {
+        client.say(
+            target,
+            `You can vote for any of the following people in-game for Spring to marry: ${dates.join(', ')}`
+        )
+    }
+    else if (cmd === "ping") {
         var _buffer = "";
         if (last_command === "ping") {
             _buffer = "!"
@@ -158,7 +180,7 @@ function onMessageHandler (target, context, msg, self) {
                     }
                     client.say(
                         target,
-                        `${donator} has added ${points} to ${date_target}${_buffer}.`
+                        `${donator} has added ${points} to ${IGP.full_name}${_buffer}.`
                     )
                 }
             }
@@ -181,14 +203,14 @@ function onMessageHandler (target, context, msg, self) {
                             IGP.points[donator] = 0
                             client.say(
                                 target,
-                                `${donator} has removed ${points} from ${date_target}${_buffer}.`
+                                `${donator} has removed ${points} from ${IGP.full_name}${_buffer}.`
                             )
                         }
                         else {
                             IGP.points[donator] -= points
                             client.say(
                                 target,
-                                `${donator} has removed ${points} from ${date_target}${_buffer}.`
+                                `${donator} has removed ${points} from ${IGP.full_name}${_buffer}.`
                             )
                         }
                     } else {
