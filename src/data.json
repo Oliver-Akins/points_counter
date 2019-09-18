@@ -7,8 +7,11 @@
       "ab",
       "gail"
     ],
+    "full_name": "Abigail",
     "points": {
-      "%anonymous%": 0
+      "%anonymous%": 0,
+      "@cabernray": 3,
+      "ray": 5
     }
   },
   {
@@ -16,8 +19,10 @@
       "emily",
       "em"
     ],
+    "full_name": "Emily",
     "points": {
-      "%anonymous%": 0
+      "%anonymous%": 0,
+      "billybogota": 48
     }
   },
   {
@@ -26,6 +31,7 @@
       "hale",
       "hal"
     ],
+    "full_name": "Haley",
     "points": {
       "%anonymous%": 0
     }
@@ -36,6 +42,7 @@
       "lea",
       "le"
     ],
+    "full_name": "Leah",
     "points": {
       "%anonymous%": 0
     }
@@ -46,6 +53,7 @@
       "ma",
       "mar"
     ],
+    "full_name": "Maru",
     "points": {
       "%anonymous%": 0
     }
@@ -56,11 +64,13 @@
       "penn",
       "pe"
     ],
+    "full_name": "Penny",
     "points": {
       "%anonymous%": 0
     }
   },
   {
+    "full_name": "Alex",
     "names": [
       "alex",
       "al"
@@ -74,11 +84,14 @@
       "elliot",
       "el"
     ],
+    "full_name": "Elliot",
     "points": {
-      "%anonymous%": 0
+      "%anonymous%": 0,
+      "barefootbug": 100
     }
   },
   {
+    "full_name": "Harvey",
     "names": [
       "harvey",
       "har"
@@ -88,6 +101,7 @@
     }
   },
   {
+    "full_name": "Sam",
     "names": [
       "sam",
       "sa"
@@ -97,6 +111,7 @@
     }
   },
   {
+    "full_name": "Sebastian",
     "names": [
       "sebastian",
       "seb",
@@ -104,10 +119,12 @@
       "sebastion"
     ],
     "points": {
-      "%anonymous%": 0
+      "%anonymous%": 0,
+      "jenny": 20
     }
   },
   {
+    "full_name": "Shane",
     "names": [
       "shane",
       "sh"
