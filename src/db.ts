@@ -6,17 +6,17 @@
 //
 
 import { writeFile, readFileSync } from "fs"
-import { FILENAME } from "./config.js"
-import { UNLOCK_BOT } from "./chat.js"
+import { DB_ROUTE } from "./config";
+import { UNLOCK_BOT } from "./main";
 
 
 
 export function load () {
-    let data = readFileSync(FILENAME);
+    let data = readFileSync(DB_ROUTE);
     return JSON.parse(data);
 }
 
 
 export function save (data) {
-    writeFile(FILENAME, JSON.stringify(data, null, 2), UNLOCK_BOT)
+    writeFile(DB_ROUTE, JSON.stringify(data, null, 2), UNLOCK_BOT)
 }

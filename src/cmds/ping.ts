@@ -5,11 +5,14 @@
 // Written by: Tyler Akins (2019/09/17)
 //
 
-export function PING_COMMAND(client, target) {
+
+var toggle = false;
+
+export function PING_COMMAND(client: any, target: string) {
     
-    let buffer = "", toggle = false;
+    let buffer = "";
 
     if (toggle) { buffer = "!"; toggle = false; } else { toggle = true; }
 
-    client.say(target, `pong${_buffer}!`);
+    client.say(target, `pong${buffer}!`);
 };

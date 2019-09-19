@@ -6,20 +6,21 @@
 //
 
 
-const tmi = require('tmi.js')
+import * as tmi from "tmi.js"
 
 // Importing all the commands
-import {REMOVE_COMMAND} from "./cmds/remove.js"
-import {PING_COMMAND} from "./cmds/ping.js"
-import {HELP_COMMAND} from "./cmds/help.js"
-import {LEAD_COMMAND} from "./cmds/lead.js"
-import {ADD_COMMAND} from "./cmds/add.js"
+import { REMOVE_COMMAND } from "./cmds/remove"
+import { PING_COMMAND } from "./cmds/ping"
+import { HELP_COMMAND } from "./cmds/help"
+import { LEAD_COMMAND } from "./cmds/lead"
+import { LIST_COMMAND } from "./cmds/list"
+import { ADD_COMMAND } from "./cmds/add"
 import {
+    BOT_PREFIX as prefix,
     OAUTH_TOKEN,
     USERNAME,
-    CHANNELS,
-    BOT_PREFIX as prefix
-} from "./config.js"
+    CHANNELS
+} from "./config"
 
 
 // Define configuration options
@@ -47,7 +48,7 @@ client.connect();
 var bot_locked = false
 
 
-function UNLOCK_BOT() {
+export function UNLOCK_BOT() {
     bot_locked = false;
 }
 
@@ -70,19 +71,26 @@ function onMessageHandler (target, context, msg, self) {
 
 
     let is_mod = context.mod || context.badges.broadcaster == 1
+    let log_message = `* [${target}][mod:${is_mod}] Running command: ${cmd}`
 
 
     // USER COMMANDS:
-    if      (cmd === "list") { LIST_COMMAND(client, target); }
-    else if (cmd === "ping") { PING_COMMAND(client, target); }
-    else if (cmd === "help") { HELP_COMMAND(client, target); }
-    else if (cmd === "lead") { LEAD_COMMAND(client, target, data); }
-
+    if      (cmd === "list") { LIST_COMMAND(client, target); console.log(log_message); }
+    else if (cmd === "ping") { PING_COMMAND(client, target); console.log(log_message); }
+    else if (cmd === "help") { HELP_COMMAND(client, target); console.log(log_message); }
+    else if (cmd === "lead") { LEAD_COMMAND(client, target); console.log(log_message); }
 
     // MODERATOR COMMANDS:
     else if (is_mod) {
-        if (cmd === "add") { bot_locked = true; ADD_COMMAND(client, target, ); }
-        else if (cmd === "remove") { bot_locked = true; REMOVE_COMMAND(client, target); };
+        if (cmd === "add") {
+            bot_locked = true;
+            ADD_COMMAND(client, target, args );
+            console.log(log_message); }
+        else if (cmd === "remove") {
+            bot_locked = true;
+            REMOVE_COMMAND(client, target, args);
+            console.log(log_message);
+        };
     };
 };
 

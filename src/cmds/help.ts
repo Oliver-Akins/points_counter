@@ -5,8 +5,12 @@
 // Written by: Tyler Akins (2019/09/17)
 //
 
-export function HELP_COMMAND (client, target) {
-    var buffer = "", toggle = false;
+
+var toggle = false;
+
+
+export function HELP_COMMAND (client: any, target: string) {
+    var buffer = "";
     
     // Ensure messages don't get deleted by Twitch
     if (toggle) { buffer = "/"; toggle = false; } else { toggle = true; };

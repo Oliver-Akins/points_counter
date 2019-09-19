@@ -5,10 +5,14 @@
 // Written by: Tyler Akins (2019/09/17)
 //
 
-import {save, load} from "./db.js"
+import {save, load} from "../db"
 
-export function ADD_COMMAND (client, target, args, data) {
-    let buffer = "", toggle = false;
+
+var toggle = false;
+
+
+export function ADD_COMMAND (client: any, target: string, args: string[]) {
+    let buffer = "";
     let data = load();
 
     // Ensure Twitch doesn't delete our message due to duplication
@@ -23,21 +27,23 @@ export function ADD_COMMAND (client, target, args, data) {
 
 
     // Parse arguments
-    let points = parseInt(args[0]);
-    let date_target = args[1];
-    let donator = "%anonymous%";
+    let points: number = parseInt(args[0]);
+    // @ts-ignore
+    let date_target: string = args[1];
+    let donator: string = "%anonymous%";
+    // @ts-ignore
     if (args.length >= 3) { donator = args[2]; };
 
 
     // Find the target date
-    for (IGP of data) {
+    for (var IGP of data) {
 
 
         if (IGP.names.includes(date_target)) {
 
 
             // Check if we can increment or set
-            if (Object.keys(IGP.points).includes(donator)) {
+            if (Object.keys(IGP.points).indexOf(donator) != -1) {
                 IGP.points[donator] += points
             } else {
                 IGP.points[donator] = points

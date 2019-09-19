@@ -5,14 +5,17 @@
 // Written by: Tyler Akins (2019/09/17)
 //
 
-const Math = require("mathjs");
-import { load } from "./db.js"
+import * as Math from "mathjs";
+import { load } from "../db";
 
 
-export function LEAD_COMMAND (client, target) {
+var toggle = false;
+
+
+export function LEAD_COMMAND (client: any, target: string) {
 
     let leader = ["Absolutely nobody", 0];
-    let buffer = "", toggle = false;
+    let buffer = "";
     let data = load();
 
 
@@ -21,7 +24,7 @@ export function LEAD_COMMAND (client, target) {
 
 
     // Compare all the IGPs to find the one with the greatest value
-    for (IGP of data) {
+    for (var IGP of data) {
         let total_points = Math.sum(Object.values(IGP.points));
 
         if (total_points > leader[1]) {
