@@ -13,6 +13,7 @@ import { UNLOCK_BOT } from "./main";
 
 export function load () {
     let data = readFileSync(DB_ROUTE);
+    // @ts-ignore
     return JSON.parse(data);
 }
 

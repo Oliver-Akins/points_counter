@@ -9,12 +9,13 @@
 import * as tmi from "tmi.js"
 
 // Importing all the commands
-import { REMOVE_COMMAND } from "./cmds/remove"
-import { PING_COMMAND } from "./cmds/ping"
-import { HELP_COMMAND } from "./cmds/help"
-import { LEAD_COMMAND } from "./cmds/lead"
-import { LIST_COMMAND } from "./cmds/list"
-import { ADD_COMMAND } from "./cmds/add"
+import { REMOVE_COMMAND } from "./cmds/remove";
+import { PING_COMMAND } from "./cmds/ping";
+import { HELP_COMMAND } from "./cmds/help";
+import { LEAD_COMMAND } from "./cmds/lead";
+import { LIST_COMMAND } from "./cmds/list";
+import { TOP3_COMMAND } from "./cmds/top";
+import { ADD_COMMAND } from "./cmds/add";
 import {
     BOT_PREFIX as prefix,
     OAUTH_TOKEN,
@@ -79,6 +80,7 @@ function onMessageHandler (target, context, msg, self) {
     else if (cmd === "ping") { PING_COMMAND(client, target); console.log(log_message); }
     else if (cmd === "help") { HELP_COMMAND(client, target); console.log(log_message); }
     else if (cmd === "lead") { LEAD_COMMAND(client, target); console.log(log_message); }
+    else if (cmd === "top")  { TOP3_COMMAND(client, target); console.log(log_message); }
 
     // MODERATOR COMMANDS:
     else if (is_mod) {
