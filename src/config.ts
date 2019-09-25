@@ -8,4 +8,4 @@ export const BOT_VERSION = "2.1.0"
 
 
 export const CMD_COOLDOWN = 5 // IN SECONDS
-export const GLOBAL_CMD_COOLDOWN = true
+export const GLOBAL_CMD_COOLDOWN = false
