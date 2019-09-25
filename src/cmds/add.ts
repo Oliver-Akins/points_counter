@@ -5,15 +5,32 @@
 // Written by: Tyler Akins (2019/09/17)
 //
 
-import {save, load} from "../db"
+import { SAVE, LOAD } from "../db";
+import {
+    GLOBAL_CMD_COOLDOWN,
+    CMD_COOLDOWN
+} from "../config";
 
 
-var toggle = false;
+var toggle = false,
+    last_ran = null;
 
 
 export function ADD_COMMAND (client: any, target: string, args: string[]) {
+
+
+    if (!GLOBAL_CMD_COOLDOWN) {
+        if (last_ran != null) {
+            if (Date.now() - last_ran < CMD_COOLDOWN * 1000) {
+                return;
+            };
+        };
+        last_ran = Date.now();
+    };
+
+
     let buffer = "";
-    let data = load();
+    let data = LOAD();
 
     // Ensure Twitch doesn't delete our message due to duplication
     if (toggle) { buffer = " "; toggle = false; } else { toggle = true; }
@@ -47,16 +64,16 @@ export function ADD_COMMAND (client: any, target: string, args: string[]) {
                 IGP.points[donator] += points
             } else {
                 IGP.points[donator] = points
-            }
+            };
 
 
             client.say(
                 target,
                 `${donator} has added ${points} to ${IGP.full_name}${buffer}.`
-            )
+            );
             break;
-        }
-    }
+        };
+    };
 
-    save(data)
+    SAVE(data);
 }

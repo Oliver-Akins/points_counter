@@ -6,17 +6,32 @@
 //
 
 import * as Math from "mathjs";
-import { load } from "../db";
+import { LOAD } from "../db";
+import {
+    GLOBAL_CMD_COOLDOWN,
+    CMD_COOLDOWN
+} from "../config";
 
 
-var toggle = false;
+var toggle = false,
+    last_ran = null;
 
 
 export function LEAD_COMMAND (client: any, target: string) {
 
+    if (!GLOBAL_CMD_COOLDOWN) {
+        if (last_ran != null) {
+            if (Date.now() - last_ran < CMD_COOLDOWN * 1000) {
+                return;
+            };
+        };
+        last_ran = Date.now();
+    };
+
+
     let leader = ["Absolutely nobody", 0];
     let buffer = "";
-    let data = load();
+    let data = LOAD();
 
 
     // Prevent Twitch from removing messages due to being a duplicate

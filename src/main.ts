@@ -9,6 +9,7 @@
 import * as tmi from "tmi.js"
 
 // Importing all the commands
+import { VERSION_COMMAND } from "./cmds/version";
 import { REMOVE_COMMAND } from "./cmds/remove";
 import { PING_COMMAND } from "./cmds/ping";
 import { HELP_COMMAND } from "./cmds/help";
@@ -17,8 +18,10 @@ import { LIST_COMMAND } from "./cmds/list";
 import { TOP3_COMMAND } from "./cmds/top";
 import { ADD_COMMAND } from "./cmds/add";
 import {
-    BOT_PREFIX as prefix,
+    GLOBAL_CMD_COOLDOWN,
+    CMD_COOLDOWN,
     OAUTH_TOKEN,
+    BOT_PREFIX,
     USERNAME,
     CHANNELS
 } from "./config"
@@ -46,50 +49,78 @@ client.on('connected', onConnectedHandler);
 client.connect();
 
 
-var bot_locked = false
-
-
-export function UNLOCK_BOT() {
-    bot_locked = false;
-}
+var last_ran = null;
 
 
 // Called every time a message comes in
-function onMessageHandler (target, context, msg, self) {
+function onMessageHandler (target:any, context:any, msg:string, self:boolean) {
 
     let cmd = msg.trim().toLowerCase();
 
 
     if (self) { return; } // Ignore messages from the bot
-    else if (bot_locked) { return; }
-    else if (cmd.slice(0, prefix.length) !== prefix) { return; } // Ensure prefix start
 
+    else if (cmd.slice(0, BOT_PREFIX.length) !== BOT_PREFIX) { return; }
+
+    else if (GLOBAL_CMD_COOLDOWN) {
+        if (last_ran != null) {
+            if (Date.now() - last_ran < CMD_COOLDOWN * 1000) {
+                return;
+            };
+        };
+        last_ran = Date.now();
+    }
 
     // Parse message accordingly
-    let args = cmd.slice(1).split(" ")
-    cmd = args[0]
-    args.splice(0, 1)
+    let args = cmd.slice(1).split(" ");
+    cmd = args[0];
+    args.splice(0, 1);
 
 
-    let is_mod = context.mod || context.badges.broadcaster == 1
-    let log_message = `* [${target}][mod:${is_mod}] Running command: ${cmd}`
 
+    let is_mod = context.mod || context.badges.broadcaster == 1;
+    let log_message = `* [c:${target}][m:${is_mod}][u:${context.username}] - Running command: ${cmd}`;
 
     // USER COMMANDS:
-    if      (cmd === "list") { LIST_COMMAND(client, target); console.log(log_message); }
-    else if (cmd === "ping") { PING_COMMAND(client, target); console.log(log_message); }
-    else if (cmd === "help") { HELP_COMMAND(client, target); console.log(log_message); }
-    else if (cmd === "lead") { LEAD_COMMAND(client, target); console.log(log_message); }
-    else if (cmd === "top")  { TOP3_COMMAND(client, target); console.log(log_message); }
+    if (cmd === "list") {
+        LIST_COMMAND(client, target);
+        console.log(log_message);
+    }
+
+    else if (cmd === "ping") {
+        PING_COMMAND(client, target);
+        console.log(log_message);
+    }
+
+    else if (cmd === "help") {
+        HELP_COMMAND(client, target);
+        console.log(log_message);
+    }
+
+    else if (cmd === "lead") {
+        LEAD_COMMAND(client, target);
+        console.log(log_message);
+    }
+
+    else if (cmd === "top")  {
+        TOP3_COMMAND(client, target);
+        console.log(log_message);
+    }
+
+    else if (cmd === "version") {
+        VERSION_COMMAND(client, target);
+        console.log(log_message);
+    }
 
     // MODERATOR COMMANDS:
     else if (is_mod) {
+
         if (cmd === "add") {
-            bot_locked = true;
             ADD_COMMAND(client, target, args );
-            console.log(log_message); }
+            console.log(log_message);
+        }
+
         else if (cmd === "remove") {
-            bot_locked = true;
             REMOVE_COMMAND(client, target, args);
             console.log(log_message);
         };
@@ -99,6 +130,6 @@ function onMessageHandler (target, context, msg, self) {
 
 
 // Called every time the bot connects to Twitch chat
-function onConnectedHandler (addr, port) {
+function onConnectedHandler (addr:string, port:string) {
     console.log(`* Connected to ${addr}:${port}`);
 }

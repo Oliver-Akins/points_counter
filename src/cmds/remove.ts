@@ -5,15 +5,32 @@
 // Written by: Tyler Akins (2019/09/17)
 //
 
-import {save, load} from "../db";
+import { SAVE, LOAD } from "../db";
+import {
+    GLOBAL_CMD_COOLDOWN,
+    CMD_COOLDOWN
+} from "../config";
 
 
-var toggle = false;
+var toggle = false,
+    last_ran = null;
 
 
 export function REMOVE_COMMAND (client: any, target: string, args: string[]) {
+
+
+    if (!GLOBAL_CMD_COOLDOWN) {
+        if (last_ran != null) {
+            if (Date.now() - last_ran < CMD_COOLDOWN * 1000) {
+                return;
+            };
+        };
+        last_ran = Date.now();
+    };
+
+
     let buffer = "";
-    let data = load();
+    let data = LOAD();
 
 
     // Ensure Twitch doesn't delete our message due to duplication
@@ -70,7 +87,7 @@ export function REMOVE_COMMAND (client: any, target: string, args: string[]) {
                 )
             }
         }
-    }
+    };
 
-    save(data)
+    SAVE(data);
 }

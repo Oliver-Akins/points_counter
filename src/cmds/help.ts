@@ -6,14 +6,32 @@
 //
 
 
-var toggle = false;
+import {
+    GLOBAL_CMD_COOLDOWN,
+    CMD_COOLDOWN
+} from "../config";
+
+
+var toggle = false,
+    last_ran = null;
 
 
 export function HELP_COMMAND (client: any, target: string) {
-    var buffer = "";
-    
+
+    if (!GLOBAL_CMD_COOLDOWN) {
+        if (last_ran != null) {
+            if (Date.now() - last_ran < CMD_COOLDOWN * 1000) {
+                return;
+            };
+        };
+        last_ran = Date.now();
+    };
+
+
     // Ensure messages don't get deleted by Twitch
+    var buffer = "";
     if (toggle) { buffer = "/"; toggle = false; } else { toggle = true; };
+
 
     client.say(
         target,

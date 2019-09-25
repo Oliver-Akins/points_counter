@@ -7,17 +7,16 @@
 
 import { writeFile, readFileSync } from "fs"
 import { DB_ROUTE } from "./config";
-import { UNLOCK_BOT } from "./main";
 
 
 
-export function load () {
+export function LOAD () {
     let data = readFileSync(DB_ROUTE);
     // @ts-ignore
     return JSON.parse(data);
 }
 
 
-export function save (data) {
-    writeFile(DB_ROUTE, JSON.stringify(data, null, 2), UNLOCK_BOT)
+export function SAVE (data: any) {
+    writeFile(DB_ROUTE, JSON.stringify(data, null, 2), () => {console.log("* [DB] Data updated")})
 }
