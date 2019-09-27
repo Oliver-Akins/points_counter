@@ -5,9 +5,10 @@
 // Written by: Tyler Akins (2019/09/17)
 //
 
-import { writeFile, readFileSync } from "fs"
-import { DB_ROUTE } from "./config";
+import { writeFile, readFileSync } from "fs";
 
+
+const DB_ROUTE = require.resolve("../data/data.json");
 
 
 export function LOAD () {

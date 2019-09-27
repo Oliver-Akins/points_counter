@@ -5,12 +5,9 @@
 // Written by: Tyler Akins (2019/09/19)
 //
 
+import * as config from "../../config.json";
 import * as Math from "mathjs";
 import { LOAD } from "../db";
-import {
-    GLOBAL_CMD_COOLDOWN,
-    CMD_COOLDOWN
-} from "../config";
 
 
 var toggle = false,
@@ -28,11 +25,12 @@ const COMPARE_IGP = (a: any, b: any) => {
 };
 
 
+
 export function TOP3_COMMAND (client: any, target: string) {
 
-    if (!GLOBAL_CMD_COOLDOWN) {
+    if (!config.bot.GLOBAL_CMD_COOLDOWN) {
         if (last_ran != null) {
-            if (Date.now() - last_ran < CMD_COOLDOWN * 1000) {
+            if (Date.now() - last_ran < config.bot.CMD_COOLDOWN * 1000) {
                 return;
             };
         };

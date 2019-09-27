@@ -17,25 +17,17 @@ import { LEAD_COMMAND } from "./cmds/lead";
 import { LIST_COMMAND } from "./cmds/list";
 import { TOP3_COMMAND } from "./cmds/top";
 import { ADD_COMMAND } from "./cmds/add";
-import {
-    GLOBAL_CMD_COOLDOWN,
-    CMD_COOLDOWN,
-    OAUTH_TOKEN,
-    BOT_PREFIX,
-    USERNAME,
-    CHANNELS
-} from "./config"
+import * as config from "../config.json";
 
 
 // Define configuration options
 const opts = {
     identity: {
-        username: USERNAME,
-        password: OAUTH_TOKEN
+        username: config.chat.USERNAME,
+        password: config.chat.OAUTH_TOKEN
     },
-    channels: CHANNELS
+    channels: config.chat.CHANNELS
 };
-
 
 
 // Create a client with our options
@@ -60,11 +52,11 @@ function onMessageHandler (target:any, context:any, msg:string, self:boolean) {
 
     if (self) { return; } // Ignore messages from the bot
 
-    else if (cmd.slice(0, BOT_PREFIX.length) !== BOT_PREFIX) { return; }
+    else if (cmd.slice(0, config.bot.PREFIX.length) !== config.bot.PREFIX) { return; }
 
-    else if (GLOBAL_CMD_COOLDOWN) {
+    else if (config.bot.GLOBAL_CMD_COOLDOWN) {
         if (last_ran != null) {
-            if (Date.now() - last_ran < CMD_COOLDOWN * 1000) {
+            if (Date.now() - last_ran < config.bot.CMD_COOLDOWN * 1000) {
                 return;
             };
         };

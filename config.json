@@ -1,0 +1,21 @@
+{
+  "chat": {
+    "OAUTH_TOKEN": "oauth:3cyrtaxcq0btrzi5e44pkff4gfi196",
+    "USERNAME": "stardew_date_counter",
+    "CHANNELS": [
+      "alkali_metal",
+      "resonym"
+    ]
+  },
+  "bot": {
+    "PREFIX": "!",
+    "VERSION": "2.1.0",
+    "CMD_COOLDOWN": 5,
+    "GLOBAL_CMD_COOLDOWN": false
+  },
+  "api": {
+    "SECRET": "6p83y98azi21s6aae44fqxdg93b7q3",
+    "REDIRECT_URL": "https://localhost",
+    "CLIENT_ID": "ppdc1az13seeogxaz0glwcbyeimo5f"
+  }
+}

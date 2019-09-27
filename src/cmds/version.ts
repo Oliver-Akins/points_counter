@@ -6,11 +6,7 @@
 //
 
 
-import {
-    GLOBAL_CMD_COOLDOWN,
-    CMD_COOLDOWN,
-    BOT_VERSION
-} from "../config";
+import * as config from "../../config.json";
 
 
 var toggle = false,
@@ -19,9 +15,9 @@ var toggle = false,
 
 export function VERSION_COMMAND (client: any, target: string) {
 
-    if (!GLOBAL_CMD_COOLDOWN) {
+    if (!config.bot.GLOBAL_CMD_COOLDOWN) {
         if (last_ran != null) {
-            if (Date.now() - last_ran < CMD_COOLDOWN * 1000) {
+            if (Date.now() - last_ran < config.bot.CMD_COOLDOWN * 1000) {
                 return;
             };
         };
@@ -32,5 +28,5 @@ export function VERSION_COMMAND (client: any, target: string) {
     let buffer: string = "";
     if (toggle) { buffer = " "; toggle = false; } else { toggle = true; }
 
-    client.say(target, `Bot Version${buffer}: ${BOT_VERSION}`)
+    client.say(target, `Bot Version${buffer}: ${config.bot.VERSION}`)
 };
