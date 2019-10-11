@@ -19,7 +19,7 @@ import { LEAD_COMMAND } from "./cmds/lead";
 import { LIST_COMMAND } from "./cmds/list";
 import { TOP3_COMMAND } from "./cmds/top";
 import { ADD_COMMAND } from "./cmds/add";
-import * as config from "../config.json";
+import * as config from "./config.json";
 
 
 // Define configuration options

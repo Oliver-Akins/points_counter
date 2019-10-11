@@ -6,7 +6,7 @@
 //
 
 import { SAVE, LOAD } from "../db";
-import * as config from "../../config.json";
+import * as config from "../config.json";
 
 
 var toggle = false,
