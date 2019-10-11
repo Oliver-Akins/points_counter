@@ -1,5 +1,5 @@
 //
-// remove.js
+// remove.ts
 // Protected under Canadian Copyright Laws
 //
 // Written by: Tyler Akins (2019/09/17)
@@ -75,7 +75,7 @@ export function REMOVE_COMMAND (client: any, target: string, args: string[]) {
                     )
                 }
             }
-            
+
             // User wasn't found; error
             else {
                 client.say(
