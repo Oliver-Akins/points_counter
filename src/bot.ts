@@ -6,11 +6,11 @@
 //
 
 
-import * as requests from "request-promise-native";
 import * as tmi from "tmi.js"
 
 
-// Importing all the commands
+// Importing bot modules
+/* Commands */
 import { VERSION_COMMAND } from "./cmds/version";
 import { REMOVE_COMMAND } from "./cmds/remove";
 import { PING_COMMAND } from "./cmds/ping";
@@ -19,7 +19,9 @@ import { LEAD_COMMAND } from "./cmds/lead";
 import { LIST_COMMAND } from "./cmds/list";
 import { TOP3_COMMAND } from "./cmds/top";
 import { ADD_COMMAND } from "./cmds/add";
+/* Misc */
 import * as config from "./config.json";
+import { PUSH } from "./webhook";
 
 
 // Define configuration options
@@ -79,31 +81,37 @@ function onMessageHandler (target:any, context:any, msg:string, self:boolean) {
         if (cmd === "list") {
             LIST_COMMAND(client, target);
             console.log(log_message);
+            PUSH({"content": `\`${log_message}\``});
         }
 
         else if (cmd === "ping") {
             PING_COMMAND(client, target);
             console.log(log_message);
+            PUSH({"content": `\`${log_message}\``});
         }
 
         else if (cmd === "help") {
             HELP_COMMAND(client, target);
             console.log(log_message);
+            PUSH({"content": `\`${log_message}\``});
         }
 
         else if (cmd === "lead") {
             LEAD_COMMAND(client, target);
             console.log(log_message);
+            PUSH({"content": `\`${log_message}\``});
         }
 
         else if (cmd === "top")  {
             TOP3_COMMAND(client, target);
             console.log(log_message);
+            PUSH({"content": `\`${log_message}\``});
         }
 
         else if (cmd === "version") {
             VERSION_COMMAND(client, target);
             console.log(log_message);
+            PUSH({"content": `\`${log_message}\``});
         }
 
         // MODERATOR COMMANDS:
@@ -112,55 +120,45 @@ function onMessageHandler (target:any, context:any, msg:string, self:boolean) {
             if (cmd === "add") {
                 ADD_COMMAND(client, target, args );
                 console.log(log_message);
+                PUSH({"content": `\`${log_message}\``});
             }
 
             else if (cmd === "remove") {
                 REMOVE_COMMAND(client, target, args);
                 console.log(log_message);
+                PUSH({"content": `\`${log_message}\``});
             }
         };
     } catch (error) {
-
-
-        let options = {
-            uri: config.ERROR_WEBHOOK,
-            body: {
-                "embeds": [
-                    {
-                        "title": `${error.name} @ ${error.fileName} ${error.lineNumber}`,
-                        "color": 13238272,
-                        "description": `**Error Message:**\n\`\`\`\n${error.message}\n\`\`\``,
-                        "fields": [
-                            {
-                                "name": "**Message Context:**",
-                                "value": `\`\`\`\n${JSON.stringify(context, null, 2)}\n\`\`\``
-                            },
-                            {
-                                "name": "**Message Content:**",
-                                "value": `\`\`\`\n${msg}\`\`\``
-                            },
-                            {
-                                "name": "**Is Mod:**",
-                                "value": `\`${is_mod}\``,
-                                "inline": true
-                            },
-                            {
-                                "name": "**Channel:**",
-                                "value": `\`${target}\``,
-                                "inline": true
-                            }
-                        ]
-                    }
-                ]
-            },
-            json: true
-        };
-
-
-        requests.post(options)
-            .catch((error: any) => {
-                console.error("OHNO, SHIT REALLY WENT WRONG");
-            });
+        PUSH({
+            "embeds": [
+                {
+                    "title": `${error.name} @ ${error.fileName} ${error.lineNumber}`,
+                    "color": 13238272,
+                    "description": `**Error Message:**\n\`\`\`\n${error.message}\n\`\`\``,
+                    "fields": [
+                        {
+                            "name": "**Message Context:**",
+                            "value": `\`\`\`\n${JSON.stringify(context, null, 2)}\n\`\`\``
+                        },
+                        {
+                            "name": "**Message Content:**",
+                            "value": `\`\`\`\n${msg}\`\`\``
+                        },
+                        {
+                            "name": "**Is Mod:**",
+                            "value": `\`${is_mod}\``,
+                            "inline": true
+                        },
+                        {
+                            "name": "**Channel:**",
+                            "value": `\`${target}\``,
+                            "inline": true
+                        }
+                    ]
+                }
+            ]
+        });
     };
 };
 
@@ -169,4 +167,5 @@ function onMessageHandler (target:any, context:any, msg:string, self:boolean) {
 // Called every time the bot connects to Twitch chat
 function onConnectedHandler (addr:string, port:string) {
     console.log(`* Connected to ${addr}:${port}`);
+    PUSH({"content": `\`* Connected to ${addr}:${port}\``});
 }
