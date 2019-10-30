@@ -18,8 +18,8 @@ var bot = new Eris(config.discord.OAUTH_TOKEN);
 
 
 bot.on("ready", () => {
-    console.log(`* Connected to Discord gateways.`);
-    PUSH({"content": `\`* Connected to Discord gateways.\``});
+    console.log(`* Connected to Discord gateways`);
+    PUSH({"content": `\`* Connected to Discord gateways\``});
 });
 
 
