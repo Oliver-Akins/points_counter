@@ -28,7 +28,7 @@ bot.on("messageCreate", (msg: any) => {
     try {
 
         // SECTION: Message parsing
-        let args = msg.content.split(" ");
+        let args = msg.content.trim().toLowerCase().split(" ");
         let cmd = args[0];
         args.splice(0, 1);
         // !SECTION: Message parsing
