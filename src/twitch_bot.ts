@@ -10,16 +10,8 @@ import * as tmi from "tmi.js"
 
 
 // Importing bot modules
-/* Commands */
-import { VERSION_COMMAND } from "./cmds/version";
-import { REMOVE_COMMAND } from "./cmds/remove";
-import { PING_COMMAND } from "./cmds/ping";
-import { HELP_COMMAND } from "./cmds/help";
-import { LEAD_COMMAND } from "./cmds/lead";
-import { LIST_COMMAND } from "./cmds/list";
-import { TOP3_COMMAND } from "./cmds/top";
-import { ADD_COMMAND } from "./cmds/add";
 /* Misc */
+import { COMMAND_HANDLER } from "./cmd_handler";
 import * as config from "./config.json";
 import { PUSH } from "./webhook";
 
@@ -27,10 +19,10 @@ import { PUSH } from "./webhook";
 // Define configuration options
 const opts = {
     identity: {
-        username: config.chat.USERNAME,
-        password: config.chat.OAUTH_TOKEN
+        username: config.twitch.USERNAME,
+        password: config.twitch.OAUTH_TOKEN
     },
-    channels: config.chat.CHANNELS
+    channels: config.twitch.CHANNELS
 };
 
 
@@ -50,15 +42,21 @@ var last_ran = null;
 
 // Called every time a message comes in
 function onMessageHandler (target:any, context:any, msg:string, self:boolean) {
-
     try {
         let cmd = msg.trim().toLowerCase();
 
 
+        // SECTION: Exit conditions
+
+        // NOTE: Ignore self
         if (self) { return; } // Ignore messages from the bot
 
+
+        // NOTE: Ignore non-prefixed
         else if (cmd.slice(0, config.bot.PREFIX.length) !== config.bot.PREFIX) { return; }
 
+
+        // NOTE: Global command cooldown
         else if (config.bot.GLOBAL_CMD_COOLDOWN) {
             if (last_ran != null) {
                 if (Date.now() - last_ran < config.bot.CMD_COOLDOWN * 1000) {
@@ -67,69 +65,39 @@ function onMessageHandler (target:any, context:any, msg:string, self:boolean) {
             };
             last_ran = Date.now();
         }
+        // !SECTION: Exit conditions
 
-        // Parse message accordingly
+
+
+        // SECTION: Context parsing
+        // NOTE: Message parsing
         let args = cmd.slice(1).split(" ");
         cmd = args[0];
         args.splice(0, 1);
 
-
         var is_mod = context.mod || context.badges.broadcaster == 1;
-        let log_message = `* [c:${target}][m:${is_mod}][u:${context.username}] - Running command: ${cmd}`;
+        var datetime = new Date();
+        var date = `${datetime.getFullYear()}-${datetime.getMonth()}-${datetime.getDate()}`;
+        var log_message = `* [${date}][c:${target}][m:${is_mod}][u:${context.username}][s:Twitch] - Running command: ${cmd}`;
+        // !SECTION: Context parsing
 
-        // USER COMMANDS:
-        if (cmd === "list") {
-            LIST_COMMAND(client, target);
+
+        var response: string|void = COMMAND_HANDLER(cmd, args, is_mod);
+
+        // NOTE: Ensure response isn't null
+        if (response !== null) {
+            // NOTE: Reply with string
+            client.say(
+                target,
+                response
+            );
             console.log(log_message);
             PUSH({"content": `\`${log_message}\``});
-        }
-
-        else if (cmd === "ping") {
-            PING_COMMAND(client, target);
-            console.log(log_message);
-            PUSH({"content": `\`${log_message}\``});
-        }
-
-        else if (cmd === "help") {
-            HELP_COMMAND(client, target);
-            console.log(log_message);
-            PUSH({"content": `\`${log_message}\``});
-        }
-
-        else if (cmd === "lead") {
-            LEAD_COMMAND(client, target);
-            console.log(log_message);
-            PUSH({"content": `\`${log_message}\``});
-        }
-
-        else if (cmd === "top")  {
-            TOP3_COMMAND(client, target);
-            console.log(log_message);
-            PUSH({"content": `\`${log_message}\``});
-        }
-
-        else if (cmd === "version") {
-            VERSION_COMMAND(client, target);
-            console.log(log_message);
-            PUSH({"content": `\`${log_message}\``});
-        }
-
-        // MODERATOR COMMANDS:
-        else if (is_mod) {
-
-            if (cmd === "add") {
-                ADD_COMMAND(client, target, args );
-                console.log(log_message);
-                PUSH({"content": `\`${log_message}\``});
-            }
-
-            else if (cmd === "remove") {
-                REMOVE_COMMAND(client, target, args);
-                console.log(log_message);
-                PUSH({"content": `\`${log_message}\``});
-            }
         };
-    } catch (error) {
+    }
+
+    // SECTION: Error Handling
+    catch (error) {
         PUSH({
             "embeds": [
                 {
@@ -160,6 +128,7 @@ function onMessageHandler (target:any, context:any, msg:string, self:boolean) {
             ]
         });
     };
+    // !SECTION: Error Handling
 };
 
 
