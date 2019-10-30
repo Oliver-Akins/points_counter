@@ -17,7 +17,7 @@ var toggle = false,
     last_ran = null;
 
 
-export function LIST_COMMAND (client: any, target: string) {
+export function LIST_COMMAND (): string {
 
     if (!config.bot.GLOBAL_CMD_COOLDOWN) {
         if (last_ran != null) {
@@ -33,8 +33,5 @@ export function LIST_COMMAND (client: any, target: string) {
     if (toggle) { buffer = " "; toggle = false; } else { toggle = true; }
 
 
-    client.say(
-        target,
-        `You can vote for any of the following people in-game for Spring to marry${buffer}: ${dates.join(', ')}`
-    );
+    return `You can vote for any of the following people in-game for Spring to marry${buffer}: ${dates.join(', ')}`;
 };

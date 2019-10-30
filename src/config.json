@@ -1,22 +1,32 @@
 {
-  "chat": {
+  "twitch": {
     "OAUTH_TOKEN": "oauth:3cyrtaxcq0btrzi5e44pkff4gfi196",
     "USERNAME": "stardew_date_counter",
     "CHANNELS": [
       "alkali_metal",
       "resonym"
+    ],
+    "SECRET": "6p83y98azi21s6aae44fqxdg93b7q3",
+    "CLIENT_ID": "ppdc1az13seeogxaz0glwcbyeimo5f"
+  },
+  "discord": {
+    "OAUTH_TOKEN": "MzM2NDAzMjA3OTAxMTUxMjQ1.Xbi57w.A2BHWq8GbhKHGxguU8rSi8L7jvw",
+    "SECRET": "ZEEyXku7pzRoRen88VSZTzHwXLFq9vFT",
+    "PERMISSIONS_VALUE": 3072,
+    "CLIENT_ID": "336403207901151245",
+    "MOD_ROLES": [
+      "590276982885974035",
+      "589104819717799936"
     ]
   },
   "bot": {
     "PREFIX": "!",
-    "VERSION": "2.2.1",
+    "VERSION": "2.3.0",
     "CMD_COOLDOWN": 5,
     "GLOBAL_CMD_COOLDOWN": false
   },
   "api": {
-    "SECRET": "6p83y98azi21s6aae44fqxdg93b7q3",
-    "REDIRECT_URL": "https://localhost",
-    "CLIENT_ID": "ppdc1az13seeogxaz0glwcbyeimo5f"
+    "REDIRECT_URL": "https://localhost"
   },
   "ERROR_WEBHOOK": "https://discordapp.com/api/webhooks/632018616061001738/zMA9aFu3Jva3jv2MLFbYXCLwic5hKd0bnSAUQQW4eYSYR13aK95PHaGvaw3RkmEepb1x"
 }

@@ -26,7 +26,7 @@ const COMPARE_IGP = (a: any, b: any) => {
 
 
 
-export function TOP3_COMMAND (client: any, target: string) {
+export function TOP3_COMMAND () {
 
     if (!config.bot.GLOBAL_CMD_COOLDOWN) {
         if (last_ran != null) {
@@ -48,14 +48,11 @@ export function TOP3_COMMAND (client: any, target: string) {
     if (toggle) { buffer = " "; toggle = false; } else { toggle = true; }
 
 
-    client.say(
-        target,
-        `The top 3 characters for Spring are${buffer} --` +
+    return `The top 3 characters for Spring are${buffer} --` +
         //@ts-ignore
         ` ${top_data[0].full_name}: ${Math.sum(Object.values(top_data[0].points))},` +
         //@ts-ignore
         ` ${top_data[1].full_name}: ${Math.sum(Object.values(top_data[1].points))},` +
         //@ts-ignore
         ` ${top_data[2].full_name}: ${Math.sum(Object.values(top_data[2].points))}`
-    )
 };

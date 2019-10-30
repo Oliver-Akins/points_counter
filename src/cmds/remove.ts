@@ -13,13 +13,13 @@ var toggle = false,
     last_ran = null;
 
 
-export function REMOVE_COMMAND (client: any, target: string, args: string[]) {
+export function REMOVE_COMMAND (args: string[]): string|void  {
 
 
     if (!config.bot.GLOBAL_CMD_COOLDOWN) {
         if (last_ran != null) {
             if (Date.now() - last_ran < config.bot.CMD_COOLDOWN * 1000) {
-                return;
+                return null;
             };
         };
         last_ran = Date.now();
@@ -28,6 +28,7 @@ export function REMOVE_COMMAND (client: any, target: string, args: string[]) {
 
     let buffer = "";
     let data = LOAD();
+    let response: string|void = null;
 
 
     // Ensure Twitch doesn't delete our message due to duplication
@@ -36,8 +37,7 @@ export function REMOVE_COMMAND (client: any, target: string, args: string[]) {
 
     // Check argument count
     if (args.length < 2) {
-        client.say(target, `Error${buffer}: Not enough arguments.`)
-        return;
+        return `Error${buffer}: Not enough arguments.`;
     };
 
 
@@ -62,29 +62,21 @@ export function REMOVE_COMMAND (client: any, target: string, args: string[]) {
                 // Make sure we don't go into the negatives
                 if (IGP.points[donator] - points < 0) {
                     IGP.points[donator] = 0
-                    client.say(
-                        target,
-                        `${donator} has removed ${points} from ${IGP.full_name}${buffer}.`
-                    )
+                    response = `${donator} has removed ${points} from ${IGP.full_name}${buffer}.`;
                 }
                 else {
                     IGP.points[donator] -= points
-                    client.say(
-                        target,
-                        `${donator} has removed ${points} from ${IGP.full_name}${buffer}.`
-                    )
-                }
+                    response = `${donator} has removed ${points} from ${IGP.full_name}${buffer}.`;
+                };
             }
 
             // User wasn't found; error
             else {
-                client.say(
-                    target,
-                    `Error${buffer}: That user doesn't have any points on that IGP.`
-                )
-            }
-        }
+                response = `Error${buffer}: That user doesn't have any points on that IGP.`;
+            };
+        };
     };
 
     SAVE(data);
+    return response;
 }

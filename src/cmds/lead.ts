@@ -14,12 +14,12 @@ var toggle = false,
     last_ran = null;
 
 
-export function LEAD_COMMAND (client: any, target: string) {
+export function LEAD_COMMAND (): string|void  {
 
     if (!config.bot.GLOBAL_CMD_COOLDOWN) {
         if (last_ran != null) {
             if (Date.now() - last_ran < config.bot.CMD_COOLDOWN * 1000) {
-                return;
+                return null;
             };
         };
         last_ran = Date.now();
@@ -42,12 +42,9 @@ export function LEAD_COMMAND (client: any, target: string) {
         if (total_points > leader[1]) {
             leader[0] = IGP.full_name;
             leader[1] = total_points;
-        }
+        };
     };
 
 
-    client.say(
-        target,
-        `${leader[0]} is in the lead with ${leader[1]} bits${buffer}!`
-    );
+    return `${leader[0]} is in the lead with ${leader[1]} bits${buffer}!`;
 };

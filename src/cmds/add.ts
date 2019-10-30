@@ -13,13 +13,13 @@ var toggle = false,
     last_ran = null;
 
 
-export function ADD_COMMAND (client: any, target: string, args: string[]) {
+export function ADD_COMMAND (args: string[]): string|void {
 
 
     if (!config.bot.GLOBAL_CMD_COOLDOWN) {
         if (last_ran != null) {
             if (Date.now() - last_ran < config.bot.CMD_COOLDOWN * 1000) {
-                return;
+                return null;
             };
         };
         last_ran = Date.now();
@@ -28,6 +28,7 @@ export function ADD_COMMAND (client: any, target: string, args: string[]) {
 
     let buffer = "";
     let data = LOAD();
+    let response: string|void = null;
 
     // Ensure Twitch doesn't delete our message due to duplication
     if (toggle) { buffer = " "; toggle = false; } else { toggle = true; }
@@ -35,8 +36,7 @@ export function ADD_COMMAND (client: any, target: string, args: string[]) {
 
     // Check argument count
     if (args.length < 2) {
-        client.say(target, `Error${buffer}: Not enough arguments.`)
-        return;
+        return `Error${buffer}: Not enough arguments.`;
     };
 
 
@@ -63,14 +63,10 @@ export function ADD_COMMAND (client: any, target: string, args: string[]) {
                 IGP.points[donator] = points
             };
 
-
-            client.say(
-                target,
-                `${donator} has added ${points} to ${IGP.full_name}${buffer}.`
-            );
-            break;
+            response = `${donator} has added ${points} to ${IGP.full_name}${buffer}.`;
         };
     };
 
     SAVE(data);
+    return response;
 }

@@ -13,12 +13,12 @@ var toggle = false,
     last_ran = null;
 
 
-export function VERSION_COMMAND (client: any, target: string) {
+export function VERSION_COMMAND (): string|void {
 
     if (!config.bot.GLOBAL_CMD_COOLDOWN) {
         if (last_ran != null) {
             if (Date.now() - last_ran < config.bot.CMD_COOLDOWN * 1000) {
-                return;
+                return null;
             };
         };
         last_ran = Date.now();
@@ -28,5 +28,5 @@ export function VERSION_COMMAND (client: any, target: string) {
     let buffer: string = "";
     if (toggle) { buffer = " "; toggle = false; } else { toggle = true; }
 
-    client.say(target, `Bot Version${buffer}: ${config.bot.VERSION}`)
+    return `Bot Version${buffer}: ${config.bot.VERSION}`;
 };

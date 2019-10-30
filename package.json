@@ -4,12 +4,12 @@
   "description": "",
   "main": "dist/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "node dist/main.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Tyler Akins",
   "dependencies": {
     "@types/node": "^12.7.5",
+    "eris": "^0.11.0",
     "fs": "0.0.1-security",
     "mathjs": "^6.2.1",
     "request": "^2.88.0",
