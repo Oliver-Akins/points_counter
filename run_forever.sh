@@ -1,4 +1,2 @@
-until node dist/bot.js; do
-    echo "Crashed with exit code $?. Restarting" >&2
-    sleep 1
-done
+./run_discord.sh
+./run_twitch.sh
