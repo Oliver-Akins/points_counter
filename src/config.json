@@ -21,7 +21,7 @@
   },
   "bot": {
     "PREFIX": "!",
-    "VERSION": "2.3.0",
+    "VERSION": "2.3.1",
     "CMD_COOLDOWN": 5,
     "GLOBAL_CMD_COOLDOWN": false
   },
