@@ -10,11 +10,11 @@ import { LOAD } from "../db";
 
 
 export function ALL_COMMAND(): string {
-    console.log("Hit the cmd function");
+
     let data: character[] = LOAD();
     let response = "Characters with points: ";
     let chars_w_points: string[] = [];
-    console.log
+
     // Iterate through each character
     for (var char of data) {
 
