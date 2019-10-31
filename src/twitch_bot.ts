@@ -77,7 +77,7 @@ function onMessageHandler (target:any, context:any, msg:string, self:boolean) {
 
         var is_mod = context.mod || context.badges.broadcaster == 1;
         var datetime = new Date();
-        var date = `${datetime.getFullYear()}-${datetime.getMonth()}-${datetime.getDate()}`;
+        var date = `${datetime.getFullYear()}-${datetime.getMonth()+1}-${datetime.getDate()}`;
         var log_message = `* [${date}][c:${target}][m:${is_mod}][u:${context.username}][s:Twitch] - Running command: ${cmd}`;
         // !SECTION: Context parsing
 

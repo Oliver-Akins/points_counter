@@ -51,7 +51,7 @@ bot.on("messageCreate", (msg: any) => {
         // SECTION: Context parsing
         var is_mod: boolean = msg.member.roles.filter((value: string) => config.discord.MOD_ROLES.includes(value)).length >= 1;
         var datetime = new Date();
-        var date = `${datetime.getFullYear()}-${datetime.getMonth()}-${datetime.getDate()}`;
+        var date = `${datetime.getFullYear()}-${datetime.getMonth()+1}-${datetime.getDate()}`;
         var log_message = `* [${date}][c:${msg.channel.name}][m:${is_mod}][u:${msg.author.username}][s:Discord] - Running command: ${cmd}`;
         // !SECTION: Context parsing
 
