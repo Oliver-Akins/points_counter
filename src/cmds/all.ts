@@ -26,6 +26,6 @@ export function ALL_COMMAND(): string {
         };
     };
 
-    response += chars_w_points.join(", ")
+    response += chars_w_points.join(", ");
     return response;
 }
