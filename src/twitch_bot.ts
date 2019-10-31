@@ -107,7 +107,7 @@ function onMessageHandler (target:any, context:any, msg:string, self:boolean) {
                     "fields": [
                         {
                             "name": "**Message Context:**",
-                            "value": `\`\`\`\n${JSON.stringify(context, null, 2)}\n\`\`\``
+                            "value": `\`\`\`json\n${JSON.stringify(context, null, 2)}\n\`\`\``
                         },
                         {
                             "name": "**Message Content:**",
@@ -121,6 +121,11 @@ function onMessageHandler (target:any, context:any, msg:string, self:boolean) {
                         {
                             "name": "**Channel:**",
                             "value": `\`${target}\``,
+                            "inline": true
+                        },
+                        {
+                            "name": "Source",
+                            "value": "Twitch",
                             "inline": true
                         }
                     ]

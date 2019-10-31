@@ -87,7 +87,7 @@ bot.on("messageCreate", (msg: any) => {
                         },
                         {
                             "name": "**Message Content:**",
-                            "value": `\`\`\`\n${msg.content}\`\`\``
+                            "value": `\`\`\`json\n${msg.content}\`\`\``
                         },
                         {
                             "name": "**Is Mod:**",
@@ -97,6 +97,11 @@ bot.on("messageCreate", (msg: any) => {
                         {
                             "name": "**Channel:**",
                             "value": `\`${msg.channel.name}\``,
+                            "inline": true
+                        },
+                        {
+                            "name": "Source",
+                            "value": "Discord",
                             "inline": true
                         }
                     ]
