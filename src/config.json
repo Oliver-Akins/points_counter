@@ -1,4 +1,5 @@
 {
+  "dev": false,
   "twitch": {
     "OAUTH_TOKEN": "oauth:3cyrtaxcq0btrzi5e44pkff4gfi196",
     "USERNAME": "stardew_date_counter",
@@ -21,7 +22,7 @@
   },
   "bot": {
     "PREFIX": "!",
-    "VERSION": "2.3.1",
+    "VERSION": "2.3.2",
     "CMD_COOLDOWN": 5,
     "GLOBAL_CMD_COOLDOWN": false
   },
