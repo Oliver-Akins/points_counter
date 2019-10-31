@@ -7,6 +7,7 @@ import { LEAD_COMMAND } from "./cmds/lead";
 import { LIST_COMMAND } from "./cmds/list";
 import { TOP3_COMMAND } from "./cmds/top";
 import { ADD_COMMAND } from "./cmds/add";
+import { ALL_COMMAND } from "./cmds/all";
 
 
 
@@ -30,6 +31,9 @@ export function COMMAND_HANDLER (command: string, args: string[], is_mod=false):
 
     // NOTE: version command
     else if (command === "version") { return VERSION_COMMAND(); }
+
+    // NOTE: all command
+    else if (command === "all") { return ALL_COMMAND(); }
     // !SECTION: User
 
 
