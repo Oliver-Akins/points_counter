@@ -13,7 +13,7 @@ import { ALL_COMMAND } from "./cmds/all";
 
 export function COMMAND_HANDLER (command: string, args: string[], is_mod=false): string|void {
 
-    // SECTION: User
+    // SECTION: User Command
     // NOTE: list command
     if (command === "list") { return LIST_COMMAND(); }
 
@@ -37,15 +37,15 @@ export function COMMAND_HANDLER (command: string, args: string[], is_mod=false):
     // !SECTION: User
 
 
-    // SECTION: Moderator
-    else if (is_mod) {
+    // SECTION: Moderator Commands
+    // NOTE: Permission checking
+    else if (!is_mod) { return "You don't have permission to run that command!"; }
 
-        // NOTE: add command
-        if (command === "add") { return ADD_COMMAND(args); }
+    // NOTE: add command
+    else if (command === "add") { return ADD_COMMAND(args); }
 
-        // NOTE: remove command
-        else if (command === "remove") { return REMOVE_COMMAND(args); }
-    };
+    // NOTE: remove command
+    else if (command === "remove") { return REMOVE_COMMAND(args); }
     // !SECTION: Moderator
 
     return null;
