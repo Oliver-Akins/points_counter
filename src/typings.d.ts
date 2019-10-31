@@ -1,7 +1,7 @@
 interface twitch_options {
     OAUTH_TOKEN: string;
     USERNAME: string;
-    CHANNELS: [string];
+    CHANNELS: string[];
     SECRET: string;
     CLIENT_ID: string;
 }
@@ -25,7 +25,7 @@ interface discord_options {
     SECRET: string;
     PERMISSIONS_VALUE: number;
     CLIENT_ID: string;
-    MOD_ROLES: [string];
+    MOD_ROLES: string[];
 }
 
 
@@ -44,5 +44,5 @@ interface character {
     points: {
         "%anonymous%": number;
         "[key: string]": number;
-    }
+    };
 }
