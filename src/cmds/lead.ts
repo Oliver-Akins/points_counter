@@ -28,7 +28,7 @@ export function LEAD_COMMAND (): string|void  {
 
     let leader = ["Absolutely nobody", 0];
     let buffer = "";
-    let data = LOAD();
+    let data: character[] = LOAD();
 
 
     // Prevent Twitch from removing messages due to being a duplicate
