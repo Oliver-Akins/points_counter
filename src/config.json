@@ -1,5 +1,5 @@
 {
-  "dev": false,
+  "data_file": "data.json",
   "twitch": {
     "OAUTH_TOKEN": "oauth:3cyrtaxcq0btrzi5e44pkff4gfi196",
     "USERNAME": "stardew_date_counter",
@@ -8,7 +8,10 @@
       "resonym"
     ],
     "SECRET": "6p83y98azi21s6aae44fqxdg93b7q3",
-    "CLIENT_ID": "ppdc1az13seeogxaz0glwcbyeimo5f"
+    "CLIENT_ID": "ppdc1az13seeogxaz0glwcbyeimo5f",
+    "ADMIN": [
+      "alkali_metal"
+    ]
   },
   "discord": {
     "OAUTH_TOKEN": "MzM2NDAzMjA3OTAxMTUxMjQ1.Xbi57w.A2BHWq8GbhKHGxguU8rSi8L7jvw",
@@ -18,6 +21,9 @@
     "MOD_ROLES": [
       "590276982885974035",
       "589104819717799936"
+    ],
+    "ADMIN": [
+      "125793782665969664"
     ]
   },
   "bot": {
