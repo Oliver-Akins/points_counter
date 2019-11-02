@@ -5,8 +5,8 @@
 // Written by: Tyler Akins (2019/09/17)
 //
 
-import * as config from "../config.json";
-import { SAVE, LOAD } from "../db";
+import * as config from "../../config.json";
+import { SAVE, LOAD } from "../../utils/db";
 
 
 var toggle = false,
@@ -16,8 +16,12 @@ var toggle = false,
 export function REMOVE_COMMAND (args: string[]): string|void  {
 
 
+    // Command cooldowns
     if (!config.bot.GLOBAL_CMD_COOLDOWN) {
+
         if (last_ran != null) {
+
+            // Check if command cooldown duration has passed
             if (Date.now() - last_ran < config.bot.CMD_COOLDOWN * 1000) {
                 return null;
             };
@@ -26,13 +30,13 @@ export function REMOVE_COMMAND (args: string[]): string|void  {
     };
 
 
-    let buffer = "";
-    let data = LOAD();
     let response: string|void = null;
+    let data: select[] = LOAD();
+    let buffer: string = "";
 
 
     // Ensure Twitch doesn't delete our message due to duplication
-    if (toggle) { buffer = " "; toggle = false; } else { toggle = true; }
+    if (toggle) { buffer = " "; toggle = false; } else { toggle = true; };
 
 
     // Check argument count
@@ -43,30 +47,32 @@ export function REMOVE_COMMAND (args: string[]): string|void  {
 
     // Parse arguments
     let points: number = parseInt(args[0]);
-    // @ts-ignore
-    let date_target: string = args[1];
     let donator: string = "%anonymous%";
-    // @ts-ignore
+    let target: string = args[1];
+
+    // Optional arguments
     if (args.length >= 3) { donator = args[2]; };
 
 
     // Find right character
-    for (var IGP of data) {
+    for (var option of data) {
 
-        if (IGP.names.includes(date_target)) {
+        // Ensure option exists
+        if (option.aliases.includes(target)) {
 
+            option.total -= points;
 
             // Check if user has data on character
-            if (Object.keys(IGP.points).indexOf(donator) != -1) {
+            if (Object.keys(option.points).indexOf(donator) != -1) {
 
                 // Make sure we don't go into the negatives
-                if (IGP.points[donator] - points < 0) {
-                    IGP.points[donator] = 0
-                    response = `${donator} has removed ${points} from ${IGP.full_name}${buffer}.`;
+                if (option.points[donator] - points < 0) {
+                    option.points[donator] = 0;
+                    response = `${donator} has removed ${points} from ${option.proper_alias}${buffer}.`;
                 }
                 else {
-                    IGP.points[donator] -= points
-                    response = `${donator} has removed ${points} from ${IGP.full_name}${buffer}.`;
+                    option.points[donator] -= points;
+                    response = `${donator} has removed ${points} from ${option.proper_alias}${buffer}.`;
                 };
             }
 

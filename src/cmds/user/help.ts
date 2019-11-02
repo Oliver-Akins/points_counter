@@ -6,7 +6,7 @@
 //
 
 
-import * as config from "../config.json";
+import * as config from "../../config.json";
 
 
 var toggle = false,
@@ -15,8 +15,12 @@ var toggle = false,
 
 export function HELP_COMMAND (): string|void {
 
+    // Command cooldowns
     if (!config.bot.GLOBAL_CMD_COOLDOWN) {
+
         if (last_ran != null) {
+
+            // Check if command cooldown duration has passed
             if (Date.now() - last_ran < config.bot.CMD_COOLDOWN * 1000) {
                 return null;
             };
