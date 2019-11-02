@@ -1,5 +1,13 @@
+//
+// webhook.ts
+// Protected under Canadian Copyright Laws
+//
+// Written by: Tyler Akins (2019/10/31)
+//
+
+
 import * as requests from "request-promise-native";
-import * as config from "./config.json";
+import * as config from "../config.json";
 
 
 export const PUSH = (payload: any) => {
