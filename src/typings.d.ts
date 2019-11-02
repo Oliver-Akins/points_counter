@@ -48,9 +48,10 @@ declare module "config.json" {
 }
 
 
-interface character {
-    names: [string];
-    full_name: string;
+interface select {
+    aliases: [string];
+    proper_alias: string;
+    total: number;
     points: {
         "%anonymous%": number;
         "[key: string]": number;
