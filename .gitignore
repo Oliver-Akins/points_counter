@@ -1,6 +1,6 @@
 dist/
-/data/*.json
-!/data/data.template.json
+data/*.json
+!data/data.template.json
 package-lock.json
 
 
