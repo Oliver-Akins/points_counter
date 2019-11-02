@@ -9,7 +9,7 @@
 /* Misc */
 import { COMMAND_HANDLER } from "./cmd_handler";
 import * as config from "./config.json";
-import { PUSH } from "./webhook";
+import { PUSH } from "./utils/webhook";
 
 const Eris = require("eris");
 

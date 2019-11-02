@@ -13,7 +13,7 @@ import * as tmi from "tmi.js"
 /* Misc */
 import { COMMAND_HANDLER } from "./cmd_handler";
 import * as config from "./config.json";
-import { PUSH } from "./webhook";
+import { PUSH } from "./utils/webhook";
 
 
 // Define configuration options
@@ -43,7 +43,7 @@ var last_ran = null;
 // Called every time a message comes in
 function onMessageHandler (target:any, context:any, msg:string, self:boolean) {
     try {
-        let cmd = msg.trim().toLowerCase();
+        let cmd = msg.trim();
 
 
         // SECTION: Exit conditions
@@ -71,8 +71,8 @@ function onMessageHandler (target:any, context:any, msg:string, self:boolean) {
 
         // SECTION: Context parsing
         // NOTE: Message parsing
-        let args = cmd.slice(1).split(" ");
-        cmd = args[0];
+        let args = cmd.slice(config.bot.PREFIX.length).split(" ");
+        cmd = args[0].toLowerCase();
         args.splice(0, 1);
 
         var is_mod = context.mod || context.badges.broadcaster == 1;
