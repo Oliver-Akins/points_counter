@@ -40,7 +40,7 @@ export function COMMAND_HANDLER (command: string, args: string[], is_mod=false, 
 
 
         // NOTE: data file subcommand
-        if (subcommand === "db") { return DATA_FILE_COMMAND(args); }
+        if (subcommand === "db") { return DATA_FILE_COMMAND(args[1].toLowerCase()); }
 
         // NOTE: admin help
         else if (subcommand === "help") { return ADMIN_HELP_COMMAND(); }
@@ -48,24 +48,25 @@ export function COMMAND_HANDLER (command: string, args: string[], is_mod=false, 
 
         // SECTION: Alias subcommand
         else if (subcommand === "alias") {
-            // !admin alias <target> <add|remove> <alias>
-            //          0      1         2           3
+
             // NOTE: Ensure arguments
             if (args.length < 4) { return "Not enough arguments, must specify an action."; }
 
+            let target = args[1].toLowerCase();
+            let alias = args[3].toLowerCase();
+
             // NOTE: Alias add
-            else if (args[2] === "add") { return ADD_ALIAS(args[1], args[3]); }
+            if (args[2] === "add") { return ADD_ALIAS(target, alias); }
 
             // NOTE: alias remove
-            else if (args[2] === "remove") { return REMOVE_ALIAS(args[1], args[3]); }
+            else if (args[2] === "remove") { return REMOVE_ALIAS(target, alias); }
         }
         // !SECTION
 
 
         // SECTION: Select subcommand
         else if (["select", "option"].includes(subcommand)) {
-            // !admin option <add|remove> <alias>
-            //           0       1           2
+
             // NOTE: Ensure arguments
             if (args.length < 3) { return "Not enough arguments, must specify an action."; }
 
@@ -73,7 +74,7 @@ export function COMMAND_HANDLER (command: string, args: string[], is_mod=false, 
             else if (args[1] === "add") { return ADD_SELECT(args[2]); }
 
             // NOTE: alias remove
-            else if (args[1] === "remove") { return REMOVE_SELECT(args[2]); }
+            else if (args[1] === "remove") { return REMOVE_SELECT(args[2].toLowerCase()); }
         }
         //!SECTION
     }
