@@ -9,19 +9,19 @@
 import { UPDATE_CONFIG } from "../../utils/db";
 
 
-export const DATA_FILE_COMMAND = (args: string[]): string => {
-    let new_data_file: string = args[0];
+export const DATA_FILE_COMMAND = (new_data_file: string): string => {
     let old_data_file: string;
 
     let config: config = require("../config.json");
 
     old_data_file = config.data_file;
-    config.data_file = new_data_file;
 
     // Ensure difference of files
     if (old_data_file === new_data_file) {
         return "The given database file is the same as the current database file.";
     };
+
+    config.data_file = new_data_file;
 
     UPDATE_CONFIG(config)
     return `Changed database file from ${old_data_file} to ${new_data_file}.`
