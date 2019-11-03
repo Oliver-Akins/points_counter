@@ -27,9 +27,13 @@ bot.on("ready", () => {
 bot.on("messageCreate", (msg: any) => {
     try {
 
+        // Ensure message to parse
+        if (msg.content.length === 0) { return; };
+
+
         // SECTION: Message parsing
-        let args = msg.content.trim().toLowerCase().split(" ");
-        let cmd = args[0];
+        let args = msg.content.trim().split(" ");
+        let cmd = args[0].toLowerCase();
         args.splice(0, 1);
         // !SECTION: Message parsing
 
@@ -42,6 +46,9 @@ bot.on("messageCreate", (msg: any) => {
         // NOTE: Ensure channel type is GUILD_TEXT
         else if (msg.channel.type !== 0) { return; }
 
+        // NOTE: Ensure not a bot
+        else if (msg.member.bot) { return; }
+
         // NOTE: Ensure prefixed
         else if (cmd.slice(0, config.bot.PREFIX.length) !== config.bot.PREFIX) { return; }
 
@@ -50,8 +57,12 @@ bot.on("messageCreate", (msg: any) => {
 
         // SECTION: Context parsing
         var is_mod: boolean = msg.member.roles.filter((value: string) => config.discord.MOD_ROLES.includes(value)).length >= 1;
+        var is_admin: boolean = config.discord.ADMIN.includes(msg.member.id);
+
+
         var datetime = new Date();
         var date = `${datetime.getFullYear()}-${datetime.getMonth()+1}-${datetime.getDate()}`;
+
         var log_message = `* [${date}][c:${msg.channel.name}][m:${is_mod}][u:${msg.author.username}][s:Discord] - Running command: ${cmd}`;
         // !SECTION: Context parsing
 
@@ -59,7 +70,7 @@ bot.on("messageCreate", (msg: any) => {
         // NOTE: Removing prefix from the command name
         cmd = cmd.slice(config.bot.PREFIX.length, cmd.length);
 
-        let response: string | void = COMMAND_HANDLER(cmd, args, is_mod);
+        let response: string | void = COMMAND_HANDLER(cmd, args, is_mod, is_admin);
 
         // NOTE: Ensure response isn't null
         if (response !== null) {
@@ -77,7 +88,7 @@ bot.on("messageCreate", (msg: any) => {
         PUSH({
             "embeds": [
                 {
-                    "title": `${error.name} @ ${error.fileName} ${error.lineNumber}`,
+                    "title": `${error.name}`,
                     "color": 13238272,
                     "description": `**Error Message:**\n\`\`\`\n${error.message}\n\`\`\``,
                     "fields": [

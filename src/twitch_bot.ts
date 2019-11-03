@@ -76,13 +76,17 @@ function onMessageHandler (target:any, context:any, msg:string, self:boolean) {
         args.splice(0, 1);
 
         var is_mod = context.mod || context.badges.broadcaster == 1;
+        var is_admin: boolean = config.twitch.ADMIN.includes(context.username);
+
+
         var datetime = new Date();
         var date = `${datetime.getFullYear()}-${datetime.getMonth()+1}-${datetime.getDate()}`;
+
         var log_message = `* [${date}][c:${target}][m:${is_mod}][u:${context.username}][s:Twitch] - Running command: ${cmd}`;
         // !SECTION: Context parsing
 
 
-        var response: string|void = COMMAND_HANDLER(cmd, args, is_mod);
+        var response: string|void = COMMAND_HANDLER(cmd, args, is_mod, is_admin);
 
         // NOTE: Ensure response isn't null
         if (response !== null) {
@@ -101,7 +105,7 @@ function onMessageHandler (target:any, context:any, msg:string, self:boolean) {
         PUSH({
             "embeds": [
                 {
-                    "title": `${error.name} @ ${error.fileName} ${error.lineNumber}`,
+                    "title": `${error.name}`,
                     "color": 13238272,
                     "description": `**Error Message:**\n\`\`\`\n${error.message}\n\`\`\``,
                     "fields": [
