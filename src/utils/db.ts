@@ -11,8 +11,8 @@ import { writeFile, readFileSync } from "fs";
 const DB_ROUTE = require.resolve("../../data/data.json");
 
 
-export function LOAD (): select[] {
-    let config = require("../config.json");
+export const LOAD = (): select[] => {
+    let config = LOAD_CONFIG();
     let data_route = require.resolve(`../../data/${config.data_file}`);
 
     let data = readFileSync(data_route);
@@ -22,13 +22,23 @@ export function LOAD (): select[] {
 }
 
 
-export function SAVE (data: select[]): void {
+export const SAVE = (data: select[]): void => {
 
-    let config = require("../config.json");
+    let config = LOAD_CONFIG();
     let data_route = require.resolve(`../../data/${config.data_file}`);
 
     writeFile(data_route, JSON.stringify(data, null, 2), () => {console.log("* [DB] Data updated")})
 }
+
+
+export const LOAD_CONFIG = (): config => {
+    let config = require.resolve("../config.json");
+
+    let data = readFileSync(config);
+
+    // @ts-ignore
+    return JSON.parse(data);
+};
 
 
 export const UPDATE_CONFIG = (data: config): void => {
@@ -36,7 +46,7 @@ export const UPDATE_CONFIG = (data: config): void => {
         require.resolve("../config.json"),
         JSON.stringify(data, null, 2),
         () => {
-            console.log("* [Config] Config written to.")
+            console.log("* [Config] Config written to.");
         }
     )
 };

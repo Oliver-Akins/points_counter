@@ -6,13 +6,13 @@
 //
 
 
-import { UPDATE_CONFIG } from "../../utils/db";
+import { LOAD_CONFIG, UPDATE_CONFIG } from "../../utils/db";
 
 
 export const DATA_FILE_COMMAND = (new_data_file: string): string => {
     let old_data_file: string;
 
-    let config: config = require("../config.json");
+    let config: config = LOAD_CONFIG();
 
     old_data_file = config.data_file;
 
@@ -23,6 +23,6 @@ export const DATA_FILE_COMMAND = (new_data_file: string): string => {
 
     config.data_file = new_data_file;
 
-    UPDATE_CONFIG(config)
-    return `Changed database file from ${old_data_file} to ${new_data_file}.`
+    UPDATE_CONFIG(config);
+    return `Changed database file from ${old_data_file} to ${new_data_file}.`;
 };
