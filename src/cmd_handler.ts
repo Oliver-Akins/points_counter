@@ -20,17 +20,35 @@ import { LEAD_COMMAND } from "./cmds/user/lead";
 import { LIST_COMMAND } from "./cmds/user/list";
 import { TOP3_COMMAND } from "./cmds/user/top";
 import { ALL_COMMAND } from "./cmds/user/all";
+import { PUSH } from "./utils/webhook";
+
+
+const logger = (log_message: string): void => {
+    console.log(log_message);
+    PUSH({"content": `\`${log_message}\``});
+};
 
 
 
-export function COMMAND_HANDLER (command: string, args: string[], is_mod=false, is_admin=false): string|void {
+export const COMMAND_HANDLER = (command: string, args: string[], metadata: cmd_meta): string|void => {
+
+
+    var datetime = new Date();
+    var date = `${datetime.getFullYear()}-${datetime.getMonth()+1}-${datetime.getDate()}`;
+
+
+    let lm = `* [${date}][c:${metadata.channel}]` +
+        `[m:${metadata.is_mod}][a:${metadata.is_admin}]` +
+        `[u:${metadata.username}][s:${metadata.platform}]` +
+        ` - Running command: ${command} ${args.join(" ")}`;
+
 
     // SECTION: Admin Commands
     if (command === "admin") {
-
+        logger(lm)
 
         // NOTE: Permission checking
-        if (!is_admin) { return "You don't have permission to run that command."; }
+        if (!metadata.is_admin) { return "You don't have permission to run that command."; }
 
         // NOTE: Subcommand check
         else if (args.length < 1) { return "Not enough arguments, must specify a sub-command."; }
@@ -83,12 +101,30 @@ export function COMMAND_HANDLER (command: string, args: string[], is_mod=false, 
 
 
     // SECTION: Moderator Commands
-    if (is_mod) {
-        // NOTE: add command
-        if (command === "add") { return ADD_COMMAND(args); }
 
-        // NOTE: remove command
-        else if (command === "remove") { return REMOVE_COMMAND(args); }
+    // NOTE: add command
+    if (command === "add") {
+
+        // Permission check
+        if (!metadata.is_mod && !metadata.is_admin) {
+            return "You don't have permission to run that command.";
+        }
+
+        logger(lm);
+        return ADD_COMMAND(args);
+
+    }
+
+    // NOTE: remove command
+    else if (command === "remove") {
+
+        // Permission check
+        if (!metadata.is_mod && !metadata.is_admin) {
+            return "You don't have permission to run that command.";
+        }
+
+        logger(lm);
+        return ADD_COMMAND(args);
     }
     // !SECTION: Moderator Commands
 
@@ -96,26 +132,53 @@ export function COMMAND_HANDLER (command: string, args: string[], is_mod=false, 
 
     // SECTION: User Commands
     // NOTE: list command
-    if (command === "list") { return LIST_COMMAND(); }
+    else if (command === "list") {
+        logger(lm);
+        return LIST_COMMAND();
+    }
+
 
     // NOTE: ping command
-    else if (command === "ping") { return PING_COMMAND();}
+    else if (command === "ping") {
+        logger(lm);
+        return PING_COMMAND();
+    }
+
 
     // NOTE: help command
-    else if (command === "help") { return HELP_COMMAND(); }
+    else if (command === "help") {
+        logger(lm);
+        return HELP_COMMAND();
+    }
+
 
     // NOTE: lead command
-    else if (command === "lead") { return LEAD_COMMAND(); }
+    else if (command === "lead") {
+        logger(lm);
+        return LEAD_COMMAND();
+    }
+
 
     // NOTE: top command
-    else if (command === "top")  { return TOP3_COMMAND(); }
+    else if (command === "top")  {
+        logger(lm);
+        return TOP3_COMMAND();
+    }
+
 
     // NOTE: version command
-    else if (command === "version") { return VERSION_COMMAND(); }
+    else if (command === "version") {
+        logger(lm);
+        return VERSION_COMMAND();
+    }
+
 
     // NOTE: all command
-    else if (command === "all") { return ALL_COMMAND(); }
+    else if (command === "all") {
+        logger(lm);
+        return ALL_COMMAND();
+    }
     // !SECTION: User Commands
 
     return null;
-}
+};

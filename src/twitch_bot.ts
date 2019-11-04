@@ -69,24 +69,27 @@ function onMessageHandler (target:any, context:any, msg:string, self:boolean) {
 
 
 
-        // SECTION: Context parsing
-        // NOTE: Message parsing
+        // SECTION: Message parsing
         let args = cmd.slice(config.bot.PREFIX.length).split(" ");
         cmd = args[0].toLowerCase();
         args.splice(0, 1);
+        // !SECTION: Message parsing
 
-        var is_mod = context.mod || context.badges.broadcaster == 1;
-        var is_admin: boolean = config.twitch.ADMIN.includes(context.username);
-
-
-        var datetime = new Date();
-        var date = `${datetime.getFullYear()}-${datetime.getMonth()+1}-${datetime.getDate()}`;
-
-        var log_message = `* [${date}][c:${target}][m:${is_mod}][u:${context.username}][s:Twitch] - Running command: ${cmd}`;
-        // !SECTION: Context parsing
+        var is_mod = context.mod || context.badges.broadcaster == 1
+        var is_admin = config.twitch.ADMIN.includes(context.username)
 
 
-        var response: string|void = COMMAND_HANDLER(cmd, args, is_mod, is_admin);
+        var response = COMMAND_HANDLER(
+            cmd,
+            args,
+            {
+                "channel": target,
+                "is_admin": is_admin,
+                "is_mod": is_mod,
+                "platform": "Twitch",
+                "username": context.username
+            }
+        );
 
         // NOTE: Ensure response isn't null
         if (response !== null) {
@@ -95,8 +98,6 @@ function onMessageHandler (target:any, context:any, msg:string, self:boolean) {
                 target,
                 response
             );
-            console.log(log_message);
-            PUSH({"content": `\`${log_message}\``});
         };
     }
 
@@ -120,6 +121,11 @@ function onMessageHandler (target:any, context:any, msg:string, self:boolean) {
                         {
                             "name": "**Is Mod:**",
                             "value": `\`${is_mod}\``,
+                            "inline": true
+                        },
+                        {
+                            "name": "**Is Admin:**",
+                            "value": `\`${is_admin}\``,
                             "inline": true
                         },
                         {

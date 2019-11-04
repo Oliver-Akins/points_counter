@@ -55,30 +55,31 @@ bot.on("messageCreate", (msg: any) => {
         // !SECTION: Exit conditions
 
 
-        // SECTION: Context parsing
-        var is_mod: boolean = msg.member.roles.filter((value: string) => config.discord.MOD_ROLES.includes(value)).length >= 1;
-        var is_admin: boolean = config.discord.ADMIN.includes(msg.member.id);
-
-
-        var datetime = new Date();
-        var date = `${datetime.getFullYear()}-${datetime.getMonth()+1}-${datetime.getDate()}`;
-
-        var log_message = `* [${date}][c:${msg.channel.name}][m:${is_mod}][u:${msg.author.username}][s:Discord] - Running command: ${cmd}`;
-        // !SECTION: Context parsing
-
-
         // NOTE: Removing prefix from the command name
         cmd = cmd.slice(config.bot.PREFIX.length, cmd.length);
 
-        let response: string | void = COMMAND_HANDLER(cmd, args, is_mod, is_admin);
+
+        var is_mod = msg.member.roles.filter((value: string) => config.discord.MOD_ROLES.includes(value)).length >= 1;
+        var is_admin = config.discord.ADMIN.includes(msg.member.id);
+
+
+        var response: string | void = COMMAND_HANDLER(
+            cmd,
+            args,
+            {
+                "is_mod": is_mod,
+                "is_admin": is_admin,
+                "channel": msg.channel.name,
+                "username": msg.author.username,
+                "platform": "Discord"
+            }
+        );
 
         // NOTE: Ensure response isn't null
         if (response !== null) {
 
             // NOTE: Reply with string
             bot.createMessage(msg.channel.id, response)
-            console.log(log_message);
-            PUSH({"content": `\`${log_message}\``});
         };
 
     }
@@ -103,6 +104,11 @@ bot.on("messageCreate", (msg: any) => {
                         {
                             "name": "**Is Mod:**",
                             "value": `\`${is_mod}\``,
+                            "inline": true
+                        },
+                        {
+                            "name": "**Is Admin:**",
+                            "value": `\`${is_admin}\``,
                             "inline": true
                         },
                         {
