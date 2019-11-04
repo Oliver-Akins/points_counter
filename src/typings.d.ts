@@ -57,3 +57,22 @@ interface select {
         "[key: string]": number;
     };
 }
+
+
+
+interface webhook {
+    embeds: [embed];
+}
+
+interface embed {
+    title: string;
+    color: number;
+    description: string;
+    fields?: [webhook_fields]
+}
+
+interface webhook_fields {
+    name: string;
+    value: string;
+    inline?: boolean
+}
