@@ -59,20 +59,10 @@ interface select {
 }
 
 
-
-interface webhook {
-    embeds: [embed];
-}
-
-interface embed {
-    title: string;
-    color: number;
-    description: string;
-    fields?: [webhook_fields]
-}
-
-interface webhook_fields {
-    name: string;
-    value: string;
-    inline?: boolean
+interface cmd_meta {
+    is_mod: boolean;
+    is_admin: boolean;
+    channel: string;
+    username: string;
+    platform: string;
 }
