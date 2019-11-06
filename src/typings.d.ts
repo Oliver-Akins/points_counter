@@ -66,3 +66,9 @@ interface cmd_meta {
     username: string;
     platform: string;
 }
+
+
+interface log_data extends cmd_meta {
+    args: string[];
+    command: string;
+}
