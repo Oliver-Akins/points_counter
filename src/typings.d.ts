@@ -32,8 +32,9 @@ interface api_options {
 interface config {
     dev: boolean;
     data_file: string;
-    chat: twitch_options;
+    LOGGING_WEBHOOK: string;
     discord: discord_options;
+    chat: twitch_options;
     bot: bot_options;
     api: api_options;
 }
@@ -41,8 +42,9 @@ interface config {
 declare module "config.json" {
     const dev: boolean;
     const data_file: string;
-    const chat: twitch_options;
+    const LOGGING_WEBHOOK: string;
     const discord: discord_options;
+    const chat: twitch_options;
     const bot: bot_options;
     const api: api_options;
 }

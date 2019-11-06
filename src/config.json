@@ -28,13 +28,12 @@
     ]
   },
   "bot": {
-    "PREFIX": "!",
-    "VERSION": "2.4.0",
+    "VERSION": "2.4.1",
     "CMD_COOLDOWN": 5,
     "GLOBAL_CMD_COOLDOWN": false
   },
   "api": {
     "REDIRECT_URL": "https://localhost"
   },
-  "ERROR_WEBHOOK": "https://discordapp.com/api/webhooks/632018616061001738/zMA9aFu3Jva3jv2MLFbYXCLwic5hKd0bnSAUQQW4eYSYR13aK95PHaGvaw3RkmEepb1x"
+  "LOGGING_WEBHOOK": "https://discordapp.com/api/webhooks/632018616061001738/zMA9aFu3Jva3jv2MLFbYXCLwic5hKd0bnSAUQQW4eYSYR13aK95PHaGvaw3RkmEepb1x"
 }
