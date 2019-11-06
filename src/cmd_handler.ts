@@ -13,6 +13,8 @@ import { ADMIN_HELP_COMMAND } from "./cmds/admin/admin_help";
 import { DATA_FILE_COMMAND } from "./cmds/admin/data_file";
 import { REMOVE_COMMAND } from "./cmds/mod/remove_points";
 import { VERSION_COMMAND } from "./cmds/user/version";
+import { OPTION_INFO } from "./cmds/user/option_info";
+import { LIST_ALIASES } from "./cmds/mod/alias_list";
 import { ADD_COMMAND } from "./cmds/mod/add_points";
 import { PING_COMMAND } from "./cmds/user/ping";
 import { HELP_COMMAND } from "./cmds/user/help";
@@ -23,33 +25,50 @@ import { ALL_COMMAND } from "./cmds/user/all";
 import { PUSH } from "./utils/webhook";
 
 
-const logger = (log_message: string): void => {
-    console.log(log_message);
-    PUSH({"content": `\`${log_message}\``});
+const logger = (ctx: log_data): void => {
+    var datetime = new Date();
+    var date = `${datetime.getFullYear()}-${datetime.getMonth()+1}-${datetime.getDate()}`;
+
+    console.log(
+        `* [${date}][c:${ctx.channel}]` +
+        `[m:${ctx.is_mod}][a:${ctx.is_admin}]` +
+        `[u:${ctx.username}][s:${ctx.platform}]` +
+        ` - Running command: ${ctx.command}`
+    );
+
+    // TODO: Finish this.
+/*
+    PUSH({
+        content: "New log entry",
+        embeds: [{
+            title: `Log entry:`,
+            color: 123456789,
+            fields: [
+            { name: `Command ran:`, value: ctx.command, inline: true },
+            { name: `Arguments:`, value: `\`${ctx.args.join(" ")}\``, inline: true},
+            { name: ``}
+            ]
+        }]
+    });*/
 };
 
 
 
 export const COMMAND_HANDLER = (command: string, args: string[], metadata: cmd_meta): string|void => {
 
-
-    var datetime = new Date();
-    var date = `${datetime.getFullYear()}-${datetime.getMonth()+1}-${datetime.getDate()}`;
-
-
-    let lm = `* [${date}][c:${metadata.channel}]` +
-        `[m:${metadata.is_mod}][a:${metadata.is_admin}]` +
-        `[u:${metadata.username}][s:${metadata.platform}]` +
-        ` - Running command: ${command}`;
-
-
-    // Argument addition
-    if (args.length !== 0) { lm += ` ${args.join(" ")}`};
-
+    let context = {
+        platform: metadata.platform,
+        username: metadata.username,
+        is_admin: metadata.is_admin,
+        channel: metadata.channel,
+        is_mod: metadata.is_mod,
+        command: command,
+        args: args
+    }
 
     // SECTION: Admin Commands
     if (command === "admin") {
-        logger(lm)
+        logger(context)
 
         // NOTE: Permission checking
         if (!metadata.is_admin) { return "You don't have permission to run that command."; }
@@ -87,7 +106,7 @@ export const COMMAND_HANDLER = (command: string, args: string[], metadata: cmd_m
 
 
         // SECTION: Select subcommand
-        else if (["select", "option"].includes(subcommand)) {
+        else if (subcommand === "option") {
 
             // NOTE: Ensure arguments
             if (args.length < 3) { return "Not enough arguments, must specify an action."; }
@@ -108,78 +127,95 @@ export const COMMAND_HANDLER = (command: string, args: string[], metadata: cmd_m
 
     // NOTE: add command
     if (command === "add") {
+        logger(context);
 
         // Permission check
         if (!metadata.is_mod && !metadata.is_admin) {
             return "You don't have permission to run that command.";
         }
 
-        logger(lm);
         return ADD_COMMAND(args);
 
     }
 
     // NOTE: remove command
     else if (command === "remove") {
+        logger(context);
 
         // Permission check
         if (!metadata.is_mod && !metadata.is_admin) {
             return "You don't have permission to run that command.";
         }
 
-        logger(lm);
-        return ADD_COMMAND(args);
+        return REMOVE_COMMAND(args);
+    }
+
+    else if (command === "aliases") {
+        if (args.length < 1) {
+            return "Not enough arguments, must specify a target.";
+        };
+
+        logger(context);
+        return LIST_ALIASES(args[0].toLowerCase())
     }
     // !SECTION: Moderator Commands
 
 
 
     // SECTION: User Commands
+    // NOTE: info command
+    else if (command === "info") {
+        if (args.length < 1) {
+            return "Not enough arguments, must specify a target.";
+        };
+        logger(context);
+        return OPTION_INFO(args[0].toLowerCase())
+    }
     // NOTE: list command
     else if (command === "list") {
-        logger(lm);
+        logger(context);
         return LIST_COMMAND();
     }
 
 
     // NOTE: ping command
     else if (command === "ping") {
-        logger(lm);
+        logger(context);
         return PING_COMMAND();
     }
 
 
     // NOTE: help command
     else if (command === "help") {
-        logger(lm);
+        logger(context);
         return HELP_COMMAND();
     }
 
 
     // NOTE: lead command
     else if (command === "lead") {
-        logger(lm);
+        logger(context);
         return LEAD_COMMAND();
     }
 
 
     // NOTE: top command
     else if (command === "top")  {
-        logger(lm);
+        logger(context);
         return TOP3_COMMAND();
     }
 
 
     // NOTE: version command
     else if (command === "version") {
-        logger(lm);
+        logger(context);
         return VERSION_COMMAND();
     }
 
 
     // NOTE: all command
     else if (command === "all") {
-        logger(lm);
+        logger(context);
         return ALL_COMMAND();
     }
     // !SECTION: User Commands
