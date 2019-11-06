@@ -36,20 +36,22 @@ const logger = (ctx: log_data): void => {
         ` - Running command: ${ctx.command}`
     );
 
-    // TODO: Finish this.
-/*
     PUSH({
-        content: "New log entry",
-        embeds: [{
-            title: `Log entry:`,
-            color: 123456789,
-            fields: [
-            { name: `Command ran:`, value: ctx.command, inline: true },
-            { name: `Arguments:`, value: `\`${ctx.args.join(" ")}\``, inline: true},
-            { name: ``}
+        "content": "New log entry",
+        "embeds": [{
+            "title": "Log entry:",
+            "color": 43520,
+            "description": `Command ran : \`\`\`\n${ctx.command} ${ctx.args.join(" ")}\n\`\`\``,
+            "fields": [
+                { "name": "Date:", "value": date, "inline": true },
+                { "name": "Is mod:", "value": ctx.is_mod, "inline": true },
+                { "name": "Is admin:", "value": ctx.is_admin, "inline": true },
+                { "name": "Channel:", "value": ctx.channel, "inline": true },
+                { "name": "Username:", "value": ctx.username, "inline": true },
+                { "name": "Platform:", "value": ctx.platform, "inline": true }
             ]
         }]
-    });*/
+    });
 };
 
 
