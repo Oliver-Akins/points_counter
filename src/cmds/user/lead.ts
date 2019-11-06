@@ -31,7 +31,7 @@ export function LEAD_COMMAND (): string|void  {
 
     let leader: [string, number] = ["Absolutely nobody", 0];
     let data: select[] = LOAD();
-    let position: string;
+    let position = "is in the lead";
 
 
     // Prevent Twitch from removing messages due to being a duplicate
