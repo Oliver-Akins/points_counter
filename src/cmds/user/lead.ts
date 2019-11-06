@@ -47,7 +47,7 @@ export function LEAD_COMMAND (): string|void  {
         if (option.total > leader[1]) {
             leader[0] = option.proper_alias;
             leader[1] = option.total;
-            position = "in the lead";
+            position = "is in the lead";
         }
 
         // Tie for first
@@ -58,5 +58,5 @@ export function LEAD_COMMAND (): string|void  {
     };
 
 
-    return `${leader[0]} is ${position} with ${leader[1]} bits${buffer}!`;
+    return `${leader[0]} ${position} with ${leader[1]} bits${buffer}!`;
 };
