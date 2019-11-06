@@ -14,7 +14,7 @@ export const PUSH = (payload: any) => {
     if (config.dev) { return; };
 
     let options = {
-        uri: config.ERROR_WEBHOOK,
+        uri: config.LOGGING_WEBHOOK,
         body: payload,
         json: true
     };
