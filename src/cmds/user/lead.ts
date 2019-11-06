@@ -53,9 +53,9 @@ export function LEAD_COMMAND (): string|void  {
         else if (option.total === leader[1] && leader[1] !== 0) {
             leader[0] += ` & ${option.proper_alias}`;
             position = "are tied for first";
-        }
+        };
     };
 
 
-    return `${leader[0]} ${position} with ${leader[1]} bits${buffer}!`;
+    return `${leader[0]} ${position} with ${leader[1]} points${buffer}!`;
 };
