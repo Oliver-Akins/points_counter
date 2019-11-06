@@ -40,7 +40,11 @@ export const COMMAND_HANDLER = (command: string, args: string[], metadata: cmd_m
     let lm = `* [${date}][c:${metadata.channel}]` +
         `[m:${metadata.is_mod}][a:${metadata.is_admin}]` +
         `[u:${metadata.username}][s:${metadata.platform}]` +
-        ` - Running command: ${command} ${args.join(" ")}`;
+        ` - Running command: ${command}`;
+
+
+    // Argument addition
+    if (args.length !== 0) { lm += ` ${args.join(" ")}`};
 
 
     // SECTION: Admin Commands
