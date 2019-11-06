@@ -6,7 +6,6 @@
 //
 
 import * as config from "../../config.json";
-import * as Math from "mathjs";
 import { LOAD } from "../../utils/db";
 
 
