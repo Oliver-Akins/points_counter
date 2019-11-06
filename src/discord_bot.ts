@@ -46,6 +46,9 @@ bot.on("messageCreate", (msg: any) => {
         // NOTE: Ensure channel type is GUILD_TEXT
         else if (msg.channel.type !== 0) { return; }
 
+        // NOTE: Ensure not a webhook or Clyde
+        else if (msg.author.discriminator === "0000") { return; }
+
         // NOTE: Ensure not a bot
         else if (msg.member.bot) { return; }
 
