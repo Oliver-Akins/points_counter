@@ -20,13 +20,13 @@ export const ADD_ALIAS = (target: string, new_alias: string): string|void => {
         if (option.aliases.includes(target)) {
 
             if (option.aliases.includes(new_alias)) {
-                return `Alias "${new_alias}" already exists on "${target}".`
+                return `Alias "${new_alias}" already exists on "${option.proper_alias}".`
             }
 
             option.aliases.push(new_alias);
             SAVE(data);
 
-            return `Alias "${new_alias}" added to "${target}"`;
+            return `Alias "${new_alias}" added to "${option.proper_alias}"`;
         }
     };
 
