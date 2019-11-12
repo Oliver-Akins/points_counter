@@ -34,5 +34,5 @@ export function HELP_COMMAND (): string|void {
     if (toggle) { buffer = "/"; toggle = false; } else { toggle = true; };
 
 
-    return `You can find a list of commands here: https://tyler.akins.me/twitch_bit_counter${buffer}`;
+    return `You can find a list of commands here: https://tyler.akins.me/points_counter${buffer}`;
 };
