@@ -18,7 +18,7 @@ export const CREATE = (channel: string): boolean => {
     let config = LOAD_CONFIG()
 
     // Ensure file doesn't already exist
-    if (!fs.existsSync(`../${config.data_dir}/${channel}.json`)) {
+    if (!fs.existsSync(`../${config.DATA_DIR}/${channel}.json`)) {
         console.log()
     }
 };

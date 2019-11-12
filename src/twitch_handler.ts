@@ -23,7 +23,7 @@ export const run_twitch = () => {
     // Init Client
     const client = tmi.Client({
         options: {
-            debug: config.dev,
+            debug: config.DEV,
             clientId: config.twitch.CLIENT_ID
         },
         connection: {

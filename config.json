@@ -1,6 +1,7 @@
 {
-  "dev": true,
-  "data_dir": "../data",
+  "DEV": true,
+  "DATA_DIR": "../data",
+  "WEBSITE": "https://tyler.akins.me/points_counter",
   "twitch": {
     "OAUTH_TOKEN": "oauth:3cyrtaxcq0btrzi5e44pkff4gfi196",
     "USERNAME": "stardew_date_counter",

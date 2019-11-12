@@ -2,7 +2,7 @@
 // config.d.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/07-2019/11/08)
+// Written by: Tyler Akins (2019/11/07-2019/11/11)
 //
 
 interface auth_options {
@@ -32,8 +32,9 @@ interface bot_options {
 
 
 interface config {
-    dev: boolean;
-    data_dir: string;
+    DEV: boolean;
+    DATA_DIR: string;
+    WEBSITE: string;
     twitch: twitch_options;
     discord: discord_options;
     bot: bot_options;

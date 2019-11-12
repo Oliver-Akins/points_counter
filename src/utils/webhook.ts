@@ -15,7 +15,7 @@ export const log = (context: log_data) => {
 
 
     // Should we output the data to the console, ensure the data is console-outputable
-    if (config.dev && !context.no_stdout) {
+    if (config.DEV && !context.no_stdout) {
         console.log(context.msg);
         return;
     };
