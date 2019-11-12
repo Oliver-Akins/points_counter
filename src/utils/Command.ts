@@ -20,7 +20,7 @@ export class Command {
     readonly name: string;
 
     private _group: string;
-    private _func: (args: string[]) => string|void;
+    private _func: (context: msg_data, args: string[]) => string|void;
 
     public last_ran: number
 
@@ -53,7 +53,7 @@ export class Command {
     };
 
 
-    public execute (args: string[]): string | void {
-        return this._func(args)
+    public execute (ctx: msg_data, args: string[]): string | void {
+        return this._func(ctx, args)
     };
 };
