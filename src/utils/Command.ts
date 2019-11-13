@@ -58,3 +58,28 @@ export class Command {
         return this._func(ctx, args)
     };
 };
+
+
+
+
+export class Confirmation {
+    readonly username: string;
+    readonly channel: string;
+
+    private callback: (args: string[]) => string|void;
+
+    constructor (username: string, channel: string, cb: (args: string[]) => string|void) {
+        this.callback = cb;
+        this.username = username;
+        this.channel = channel;
+    };
+
+
+    public matches (username: string, channel: string): boolean {
+        return username === this.username && channel === this.channel
+    };
+
+    public run (args: string[]): string|void {
+        return this.callback(args)
+    }
+};
