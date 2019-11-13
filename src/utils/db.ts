@@ -9,6 +9,10 @@
 import * as fs from "fs";
 import { LOAD_CONFIG } from "./Config";
 
+const config = LOAD_CONFIG();
+const template_path = `../${config.DATA_DIR}/%data_template%.json`
+
+
 
 export const LOAD = (channel: string): option[] => {
     // TODO: Write loading code
@@ -25,18 +29,37 @@ export const WRITE = (channel: string, data: option[]) => {
 
 
 export const CREATE = (channel: string): boolean => {
-    let config = LOAD_CONFIG()
+    let filepath =`../${config.DATA_DIR}/${channel}.json`
 
     // Ensure file doesn't already exist
-    if (!fs.existsSync(`../${config.DATA_DIR}/${channel}.json`)) {
-        console.log()
+    if (fs.existsSync(filepath)) {
+        return false;
     };
 
-    // TODO: Figure out how to create a file
+    // Attempt to create the file
+    try {
+        fs.writeFileSync(filepath, "[]", "w");
+        return true;
+    } catch {
+        return false;
+    };
 };
 
 
 
 export const DELETE = (channel: string): boolean => {
-    // TODO: Figure out how to delete a file
+    let filepath =`../${config.DATA_DIR}/${channel}.json`
+
+    // Ensure file doesn't already exist
+    if (!fs.existsSync(filepath)) {
+        return false;
+    };
+
+    // Attempt to delete the file
+    try {
+        fs.unlinkSync(filepath);
+        return true;
+    } catch {
+        return false;
+    };
 };
