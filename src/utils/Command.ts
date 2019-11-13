@@ -1,11 +1,12 @@
-import { LOAD_CONFIG } from "./Config";
-
 //
 // Command.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/06 - 2019/11/11)
+// Written by: Tyler Akins (2019/11/06 - 2019/11/12)
 //
+
+
+import { LOAD_CONFIG } from "./Config";
 
 
 export class Command {
