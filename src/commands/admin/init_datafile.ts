@@ -2,23 +2,23 @@
 // init_datafile.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/11)
+// Written by: Tyler Akins (2019/11/11 - 2019/11/12)
 //
 
 
-import { CREATE } from "../../utils/db";
 import { REGISTER_COMMAND } from "../../cmd_handler";
+import { CREATE } from "../../utils/db";
 import { perm } from "../../constants";
 
 
-const INIT_DATAFILE = (ctx: msg_data, args: string[]) => {
-    let success = CREATE(ctx.channel);
+const INIT_DATAFILE = (ctx: msg_data, args: string[]): string|void => {
+    let success = CREATE(ctx.channel.split(":")[0]);
 
     if (success) {
         return `Created data file for channel: \`${ctx.channel}\``
     } else {
         return `Could not create data file for channel: \`${ctx.channel}\``
-    }
+    };
 };
 
 
