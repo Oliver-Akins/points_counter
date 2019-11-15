@@ -11,21 +11,24 @@ import { CREATE } from "../../utils/db";
 import { perm } from "../../constants";
 
 
+
 const INIT_DATAFILE = (ctx: msg_data, args: string[]): string|void => {
-    let success = CREATE(ctx.channel.split(":")[0]);
+    let success = CREATE(ctx.channel.replace(/\#/, ""));
 
     if (success) {
-        return `Created data file for channel: \`${ctx.channel}\``
+        return `Created data file for channel: ${ctx.channel}`
     } else {
-        return `Could not create data file for channel: \`${ctx.channel}\``
+        return `Could not create data file for channel: ${ctx.channel}`
     };
 };
 
 
+
 const metadata: cmd_metadata = {
     description: "Initializes a data file for the channel the command is ran in.",
-    case_sensitive: false,
     executable: INIT_DATAFILE,
+    requires_confirm: false,
+    case_sensitive: false,
     opt_args: 0,
     args: [],
     syntax: "{pre}admin init",
