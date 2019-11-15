@@ -21,6 +21,7 @@
 		"body": [
 			"const metadata: cmd_metadata = {",
 			"    description: \"\",",
+			"    requires_confirm: false,",
 			"    case_sensitive: false,",
 			"    executable: null,",
 			"    opt_args: 0,",
@@ -28,7 +29,7 @@
 			"    syntax: \"\",",
 			"    group: \"\",",
 			"    name: \"\",",
-			"    level: 0",
+			"    level: 0,",
 			"};",
 		]
 	}
