@@ -31,6 +31,7 @@ export const log = (context: log_data) => {
                 "content": "Log Entry:",
                 "embeds": [
                     {
+                        color: 43520,
                         title: context.title,
                         description: context.msg,
                         fields: []
