@@ -10,7 +10,6 @@ tmi.js DOCS: https://github.com/tmijs/docs/blob/gh-pages/_posts/v1.4.2/2019-03-0
 */
 
 
-var last_ran: number;
 
 
 
@@ -50,17 +49,6 @@ export const run_twitch = () => {
 
         // NOTE: Ensure message starts with prefix
         else if (message.slice(0, config.bot.PREFIX.length) !== config.bot.PREFIX) { return; }
-
-
-        // NOTE: Service command cooldown
-        else if (config.bot.COOLDOWN_TYPE === "SERVICE") {
-            if (last_ran) {
-                if (Date.now() - last_ran < config.bot.CMD_COOLDOWN * 1000) {
-                    return;
-                };
-            };
-            last_ran = Date.now()
-        }
         // !SECTION: Context checking
 
 
@@ -74,7 +62,7 @@ export const run_twitch = () => {
 
         var level = perm.all;
         if (is_mod) { level = perm.mod; };
-        if (is_admin) {level = perm.admin; };
+        if (is_admin) { level = perm.admin; };
         // !SECTION: Context parsing
 
 
