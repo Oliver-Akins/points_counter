@@ -11,19 +11,20 @@ import { LOAD_CONFIG } from "./Config";
 
 export class Command {
 
+    readonly requires_confirm: boolean;
     readonly case_sensitive: boolean;
     readonly arg_list: string[];
     readonly mand_args: number;
     readonly opt_args: number;
     readonly syntax: string;
     readonly level: number;
+    readonly group: string;
     readonly info: string;
     readonly name: string;
 
-    private _group: string;
     private _func: (context: msg_data, args: string[]) => string|void;
 
-    public last_ran: number
+    public last_ran: number;
 
 
     constructor (metadata: cmd_metadata) {
@@ -34,7 +35,7 @@ export class Command {
         this._func = metadata.executable;
         this.arg_list = metadata.args;
         this.syntax = metadata.syntax;
-        this._group = metadata.group;
+        this.group = metadata.group;
         this.level = metadata.level;
         this.name = metadata.name;
     };
@@ -47,7 +48,7 @@ export class Command {
 
         // Construct the regex
         let regex: string = `^${config.bot.PREFIX}`;
-        if (this._group != null) { regex += `(${this._group}\ )`; };
+        if (this.group != null) { regex += `(${this.group}\ )`; };
         regex += `(${this.name})`;
 
         return message.match(regex) !== null;
@@ -63,23 +64,48 @@ export class Command {
 
 
 export class Confirmation {
+
     readonly username: string;
     readonly channel: string;
 
-    private callback: (args: string[]) => string|void;
+    private created: number;
+    private timeout: number;
+    private callback: (type: CONFIRM_TYPE, args: string[]) => string|void;
 
-    constructor (username: string, channel: string, cb: (args: string[]) => string|void) {
+
+    constructor (
+        username: string,
+        channel: string,
+        timeout: number,
+        cb: (type: CONFIRM_TYPE, args: string[]) => string|void
+    ) {
         this.callback = cb;
         this.username = username;
         this.channel = channel;
+        this.created = Date.now();
+        this.timeout = timeout * 1000;
     };
 
 
-    public matches (username: string, channel: string): boolean {
-        return username === this.username && channel === this.channel
+
+    public matches (user: string, channel: string, msg: string): CONFIRM_TYPE {
+
+        // basic user checking
+        if (this.username !== user) { return "no_match"; }
+        else if (this.channel !== channel) { return "no_match"; }
+
+        // Timeout checking
+        else if (Date.now() - this.created > this.timeout) { return "expired"; }
+
+        // Positive or negative match?
+        else if (msg.match(/^![Yy](es)?$/)) { return "confirm"; }
+        else if (msg.match(/^![Nn](o)?$/)) { return "deny"; }
+
+        // Not valid
+        else { return "invalid"; };
     };
 
-    public run (args: string[]): string|void {
-        return this.callback(args)
+    public run (type: CONFIRM_TYPE, args: string[]): string|void {
+        return this.callback(type, args)
     }
 };
