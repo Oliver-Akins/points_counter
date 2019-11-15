@@ -7,6 +7,7 @@
 
 
 import * as fs from "fs";
+import * as path from "path";
 import { LOAD_CONFIG } from "./Config";
 
 const config = LOAD_CONFIG();
@@ -29,7 +30,7 @@ export const WRITE = (channel: string, data: option[]) => {
 
 
 export const CREATE = (channel: string): boolean => {
-    let filepath =`../${config.DATA_DIR}/${channel}.json`
+    let filepath = path.resolve(`../${config.DATA_DIR}`) + `/${channel}.json`;
 
     // Ensure file doesn't already exist
     if (fs.existsSync(filepath)) {
@@ -37,8 +38,8 @@ export const CREATE = (channel: string): boolean => {
     };
 
     // Attempt to create the file
+    fs.writeFileSync(filepath, "[]");
     try {
-        fs.writeFileSync(filepath, "[]", "w");
         return true;
     } catch {
         return false;
@@ -48,7 +49,7 @@ export const CREATE = (channel: string): boolean => {
 
 
 export const DELETE = (channel: string): boolean => {
-    let filepath =`../${config.DATA_DIR}/${channel}.json`
+    let filepath = path.resolve(`../${config.DATA_DIR}`) + `/${channel}.json`;
 
     // Ensure file doesn't already exist
     if (!fs.existsSync(filepath)) {
