@@ -3,11 +3,11 @@
   "DATA_DIR": "../data",
   "WEBSITE": "https://tyler.akins.me/points_counter",
   "twitch": {
-    "OAUTH_TOKEN": "oauth:3cyrtaxcq0btrzi5e44pkff4gfi196",
+    "OAUTH_TOKEN": "oauth:byma8w7r72uwzo9co0iszzg6mw50dh",
     "USERNAME": "stardew_date_counter",
     "CLIENT_ID": "4eev5bvw3gmuh8nv9m5k41qma2sbp7",
     "CHANNELS": [
-      "stardew_date_counter"
+      "alkali_metal"
     ],
     "ADMIN": [
       "alkali_metal"
@@ -29,11 +29,11 @@
   "bot": {
     "PREFIX": "!",
     "VERSION": "3.0.0",
-    "CMD_COOLDOWN": 5,
+    "CMD_COOLDOWN": 3,
     "COOLDOWN_TYPE": "SERVICE"
   },
   "webhooks": {
-      "LOGGING": "https://discordapp.com/api/webhooks/632018616061001738/zMA9aFu3Jva3jv2MLFbYXCLwic5hKd0bnSAUQQW4eYSYR13aK95PHaGvaw3RkmEepb1x",
-      "ERROR": ""
+      "LOGGING": "https://discordapp.com/api/webhooks/641491314260836352/H2oMjbeRobj4DKPsEMHTQKd5vEAALngF34a48REpUC_EFtdk__YT5WFuZgLOjCTaH11k",
+      "ERROR": "https://discordapp.com/api/webhooks/641491314260836352/H2oMjbeRobj4DKPsEMHTQKd5vEAALngF34a48REpUC_EFtdk__YT5WFuZgLOjCTaH11k"
     }
 }
