@@ -1,3 +1,10 @@
+//
+// main.ts
+// Protected under Canadian Copyright Laws
+//
+// Written by: Tyler Akins (2019/11/06 - 2019/11/17)
+//
+
 import { run_discord } from "./discord_handler";
 import { run_twitch } from "./twitch_handler";
 import { LOAD_CONFIG } from "./utils/Config";
@@ -25,9 +32,16 @@ else if (args.length > 1) {
     process.exit(1);
 };
 
+
 let command = args[0];
 
 
-if (["run-all", "run-twitch"].includes(command)) {};
+if (["run-all", "run-twitch"].includes(command)) { run_twitch() };
 if (["run-all", "run-discord"].includes(command)) {};
-if (["compile"].includes(command)) {};
+if (["compile-docs"].includes(command)) {
+    // TODO: Create a specific file for each command object with it's description, syntax, etc.
+    // TODO: Set `{pre}` in all docs to be the prefix from the config
+};
+if (["run-tests"].includes(command)) {
+    // TODO: Call test runner
+}
