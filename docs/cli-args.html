@@ -9,8 +9,46 @@
     </head>
     <body>
         <h1>Points Counter Help</h1>
-        <h2>Commands:</h2>
-        <div></div>
+        <h2>Bot Runners:</h2>
+        <div id="twitch">
+            <h3><code>--twitch</code></h3>
+            <p>
+                This argument tells the code to run a Twitch bot with the
+                credentials given in the config, if the required credentials
+                are not given, the program will exit fully.
+            </p>
+        </div>
+        <div id="discord">
+            <h3><code>--discord</code></h3>
+            <p>
+                This argument tells the code to run a Discord bot with the
+                credentials given in the config, if the required credentials
+                are not given, the program will exit fully.
+            </p>
+        </div>
+        <div id="mixer" hidden>
+            <h3><code>--mixer</code></h3>
+            <p>
+                This argument tells the code to run a Mixer bot with the
+                credentials given in the config, if the required credentials
+                are not given, the program will exit fully.
+            </p>
+        </div>
+        <br><br>
+        <h2>Misc Utilites:</h2>
+        <div id="test">
+            <h3><code>--test</code></h3>
+            <p>
+                Runs the tests for the various commands.
+            </p>
+        </div>
+        <div id="compile-docs">
+            <h3><code>--compile-docs</code></h3>
+            <p>
+                Compiles the documentation for all the commands, this prevents
+                the need for a web server to serve to documentation on.
+            </p>
+        </div>
         <br><br>
         <h2>Copyright:</h2>
         This bot was written for Resonym's Twitch stream on behalf of Tyler Akins, all rights remain under Canadian Copyright Law and Tyler Akins as their rightful owner.
