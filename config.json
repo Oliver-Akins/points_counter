@@ -1,6 +1,6 @@
 {
   "DEV": true,
-  "DATA_DIR": "../data",
+  "DATA_DIR": "./data",
   "WEBSITE": "https://tyler.akins.me/points_counter",
   "twitch": {
     "OAUTH_TOKEN": "oauth:byma8w7r72uwzo9co0iszzg6mw50dh",
