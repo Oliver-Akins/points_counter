@@ -2,16 +2,15 @@
 // db.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/11)
+// Written by: Tyler Akins (2019/11/11 - 2019/11/20)
 //
 
 
-import * as fs from "fs";
-import * as path from "path";
 import { LOAD_CONFIG } from "./Config";
+import * as path from "path";
+import * as fs from "fs";
 
 const config = LOAD_CONFIG();
-const template_path = `../${config.DATA_DIR}/%data_template%.json`
 
 
 
