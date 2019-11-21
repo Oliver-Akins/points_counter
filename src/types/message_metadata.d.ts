@@ -6,9 +6,10 @@
 //
 
 interface msg_data {
+    source: "Discord"|"Twitch";
     channel: string;
     message: string;
-    source: string;
+    test: boolean;
     level: number;
     user: string;
 }
