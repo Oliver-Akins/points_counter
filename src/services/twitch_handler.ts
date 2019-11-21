@@ -1,7 +1,7 @@
 import * as tmi from "tmi.js";
-import {LOAD_CONFIG} from "./utils/Config";
-import { HANDLE_MESSAGE } from "./cmd_handler";
-import { perm } from "./constants";
+import {LOAD_CONFIG} from "../utils/Config";
+import { HANDLE_MESSAGE } from "../cmd_handler";
+import { perm } from "../constants";
 
 /*
 
@@ -72,7 +72,8 @@ export const run_twitch = () => {
             channel: channel,
             level: level,
             source: "Twitch",
-            user: context.username
+            user: context.username,
+            test: false
         })
 
 
