@@ -13,12 +13,17 @@ import { perm } from "../../constants";
 
 
 const INIT_DATAFILE = (ctx: msg_data, args: string[]): string|void => {
-    let success = CREATE(ctx.channel.replace(/\#/, ""));
+    let channel = ctx.channel.replace(/\#/, "");
+    channel = channel.replace(" ", "_");
 
-    if (success) {
-        return `Created data file for channel: ${ctx.channel}`
-    } else {
-        return `Could not create data file for channel: ${ctx.channel}`
+
+    switch (CREATE(channel)) {
+        case "SUCCESS":
+            return `Created data file channel: ${channel}`;
+        case "EXISTS":
+            return `A datafile for a channel with name "${channel}" already exists.`;
+        case "ERROR":
+            return `Something went wrong while creating datafile with name: "${channel}"`;
     };
 };
 
