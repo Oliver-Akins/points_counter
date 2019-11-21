@@ -38,7 +38,7 @@ export const HANDLE_MESSAGE = (context: msg_data): string | void => {
     let datetime = new Date();
     let timezone = datetime.toLocaleTimeString("en-us", {timeZoneName:"short"}).split(" ")[2];
     let date = `${datetime.getFullYear()}-${datetime.getMonth()+1}-${datetime.getDate()}`
-        + `@ ${datetime.getHours()}:${datetime.getMinutes()} ${timezone}`;
+        + ` @ ${datetime.getHours()}:${datetime.getMinutes()} ${timezone}`;
 
 
     // Confirmation handling:
@@ -111,13 +111,13 @@ export const HANDLE_MESSAGE = (context: msg_data): string | void => {
     for (var cmd of commands) {
 
         // NOTE: Checking if message doesn't match
-        if (!cmd.matches(context.message.toLowerCase())) { continue; }
+        if (!cmd.matches(context.message.toLowerCase())) { continue; };
 
 
         // NOTE: Permission checking
         if (context.level < cmd.level) {
-            return `Invalid Permissions, you must be at least level ${cmd.level}, you are level ${context.level}.`
-        }
+            return `Invalid Permissions, you must be at least level ${cmd.level}, you are level ${context.level}.`;
+        };
 
 
         // NOTE: per-command cooldown
@@ -167,5 +167,5 @@ export const HANDLE_MESSAGE = (context: msg_data): string | void => {
 
 
 /* Importing all the commands so they can register */
-import "./commands/mod/ping";
+import "./commands/usr/ping";
 import "./commands/admin/init_datafile";
