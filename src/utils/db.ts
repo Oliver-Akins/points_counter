@@ -24,7 +24,7 @@ export const LOAD = (channel: string): option[] => {
     // Check if the channel is linked to a different channel.
     if (links[channel]) {
         channel = links[channel]
-};
+    };
 
 
     // load the appropriate file
@@ -64,27 +64,27 @@ export const WRITE = (channel: string, data: option[]) => {
 
 
 
-export const CREATE = (channel: string): boolean => {
-    let filepath = path.resolve(`../${config.DATA_DIR}`) + `/${channel}.json`;
+export const CREATE = (channel: string): "SUCCESS"|"ERROR"|"EXISTS" => {
+    let filepath = path.resolve(config.DATA_DIR) + `/${channel}.json`;
 
     // Ensure file doesn't already exist
     if (fs.existsSync(filepath)) {
-        return false;
+        return "EXISTS";
     };
 
     // Attempt to create the file
-    fs.writeFileSync(filepath, "[]");
     try {
-        return true;
+        fs.writeFileSync(filepath, "[]");
+        return "SUCCESS";
     } catch {
-        return false;
+        return "ERROR";
     };
 };
 
 
 
 export const DELETE = (channel: string): boolean => {
-    let filepath = path.resolve(`../${config.DATA_DIR}`) + `/${channel}.json`;
+    let filepath = path.resolve(`${config.DATA_DIR}`) + `/${channel}.json`;
 
     // Ensure file doesn't already exist
     if (!fs.existsSync(filepath)) {
