@@ -5,8 +5,9 @@
 // Written by: Tyler Akins (2019/11/06 - 2019/11/17)
 //
 
-import { run_discord } from "./discord_handler";
-import { run_twitch } from "./twitch_handler";
+import { run_discord } from "./services/discord_handler";
+import { run_twitch } from "./services/twitch_handler";
+import { run_tests } from "./services/test_runner";
 import { LOAD_CONFIG } from "./utils/Config";
 
 
@@ -23,25 +24,24 @@ if (args.length < 1) {
     process.exit(1);
 }
 
-// Too many args
-else if (args.length > 1) {
-    console.error(
-        "Too many arguments given, to get help with running the program, go to:",
-        config.WEBSITE + "/cli-args"
-    );
-    process.exit(1);
+// TODO: Add an init_prog_data system so we don't need to store %links% in git
+if (args.includes("--test")) {
+    run_tests(args.includes("--silent"));
+    process.exit(0)
+}
+
+
+if (args.includes("--twitch")) {
+    run_twitch();
 };
 
 
-let command = args[0];
+if (args.includes("--discord")) {
+    run_discord();
+};
 
 
-if (["run-all", "run-twitch"].includes(command)) { run_twitch() };
-if (["run-all", "run-discord"].includes(command)) {};
-if (["compile-docs"].includes(command)) {
+if (args.includes("--compile-docs")) {
     // TODO: Create a specific file for each command object with it's description, syntax, etc.
     // TODO: Set `{pre}` in all docs to be the prefix from the config
 };
-if (["run-tests"].includes(command)) {
-    // TODO: Call test runner
-}
