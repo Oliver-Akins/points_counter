@@ -16,15 +16,51 @@ const template_path = `../${config.DATA_DIR}/%data_template%.json`
 
 
 export const LOAD = (channel: string): option[] => {
-    // TODO: Write loading code
-    // NOTE: Should also check the the links.json file for if the channel is linked to a different file
+
+    // Load the links file
+    let links: object = fs.readFileSync(
+        path.resolve(`${config.DATA_DIR}/#links#.json`)
+    );
+
+    // Check if the channel is linked to a different channel.
+    if (links[channel]) {
+        channel = links[channel]
+};
+
+
+    // load the appropriate file
+    let data = fs.readFileSync(
+        path.resolve(`${config.DATA_DIR}/${channel}.json`)
+    );
+
+    // @ts-ignore
+    return JSON.parse(data)
 };
 
 
 
 export const WRITE = (channel: string, data: option[]) => {
-    // TODO: Write writing code
-    // NOTE: should also check links.json to ensure we write the right file
+
+    // Load the links file
+    let links: object = fs.readFileSync(
+        path.resolve(`${config.DATA_DIR}/#links#.json`)
+    );
+
+    // Check if the channel is linked to a different channel.
+    if (links[channel]) {
+        channel = links[channel]
+    };
+
+
+    // load the appropriate file
+    fs.writeFile(
+        path.resolve(`${config.DATA_DIR}/${channel}.json`),
+        JSON.stringify(data, null, 2),
+        () => {console.log(`[DB] Data updated for channel: ${channel}`)}
+    );
+
+    // @ts-ignore
+    return JSON.parse(data)
 };
 
 
