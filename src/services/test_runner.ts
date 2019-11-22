@@ -34,11 +34,10 @@ export const run_tests = (silent: boolean) => {
                 // Reset the file if it exists already so we know EXACTLY
                 // what data is inside of it
                 if (fs.existsSync(filepath)) {
-                    data = LOAD(test.msg_meta.channel);
                     data = [];
                 } else {
                     CREATE(test.msg_meta.channel);
-                    data = LOAD(test.msg_meta.channel)
+                    data = [];
                 };
 
 
@@ -95,7 +94,11 @@ export const run_tests = (silent: boolean) => {
             DELETE(test.msg_meta.channel)
         };
     };
+
+    // Check if we are being silent
     if (!silent) { console.log("====================================================="); };
+
+    // Output summary
     console.log(`Tests: ${fail_count} tests failed out of ${tests.length} tests.`);
     console.log(`       ${Math.round(((tests.length - fail_count) / tests.length) * 100)}% passed`);
 };
