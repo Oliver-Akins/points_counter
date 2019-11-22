@@ -10,3 +10,7 @@ export const perm: perms = {
     mod: 1,
     admin: 2
 };
+
+
+export const DISCORD_CHAR_LIMIT: number = 2000;
+export const TWITCH_CHAR_LIMIT: number = 500;
