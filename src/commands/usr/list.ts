@@ -7,6 +7,7 @@
 
 
 import { DISCORD_CHAR_LIMIT, TWITCH_CHAR_LIMIT, perm } from "../../constants";
+import { REGISTER_COMMAND } from "../../cmd_handler";
 import { LOAD } from "../../utils/db";
 
 
@@ -64,3 +65,19 @@ const LIST_OPTIONS = (ctx: msg_data, args: string[]): string|void => {
 
     return response.slice(0, -2);
 };
+
+
+
+const metadata: cmd_metadata = {
+    description: "Lists all of the options that exist for the channel",
+    requires_confirm: false,
+    case_sensitive: false,
+    executable: LIST_OPTIONS,
+    opt_args: 0,
+    args: [],
+    syntax: "{pre}options",
+    group: null,
+    name: "options",
+    level: perm.all,
+};
+REGISTER_COMMAND(metadata);
