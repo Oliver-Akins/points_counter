@@ -27,10 +27,11 @@
 			"    opt_args: 0,",
 			"    args: [],",
 			"    syntax: \"\",",
-			"    group: \"\",",
+			"    group: null,",
 			"    name: \"\",",
-			"    level: 0,",
+			"    level: 0",
 			"};",
+			"REGISTER_COMMAND(metadata);"
 		]
 	}
 }
