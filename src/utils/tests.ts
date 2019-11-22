@@ -113,4 +113,30 @@ export const tests: test[] = [
         "expected_return": "Pong!",
         "datafile_should_exist": "IGNORES"
     },
+    {
+        "id": "0009",
+        "msg_meta": {
+            "channel": "%test_channel%",
+            "level": perm.all,
+            "message": "!options",
+            "source": "Discord",
+            "test": true,
+            "user": "%test_runner%"
+        },
+        "expected_return": "Cannot load data for this channel. Make sure it's been initialized.",
+        "datafile_should_exist": "NOT_EXISTS"
+    },
+    {
+        "id": "000A",
+        "msg_meta": {
+            "channel": "%test_channel%",
+            "level": perm.all,
+            "message": "!options",
+            "source": "Discord",
+            "test": true,
+            "user": "%test_runner%"
+        },
+        "expected_return": "Possible options: Potato, Green",
+        "datafile_should_exist": "EXISTS"
+    },
 ]
