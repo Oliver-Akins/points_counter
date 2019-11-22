@@ -6,7 +6,7 @@
 //
 
 
-import { DISCORD_CHAR_LIMIT, TWITCH_CHAR_LIMIT } from "../../constants";
+import { DISCORD_CHAR_LIMIT, TWITCH_CHAR_LIMIT, perm } from "../../constants";
 import { LOAD } from "../../utils/db";
 
 
@@ -15,13 +15,25 @@ const LIST_OPTIONS = (ctx: msg_data, args: string[]): string|void => {
 
     let data = LOAD(channel);
 
+    if (!data) {
+        return "Cannot load data for this channel. Make sure it's been initialized.";
+    };
+
     let names: string[] = [];
 
+
+    // Make list of names
     for (var option of data) {
         names.push(option.name);
     };
 
-    let response = `Possible options: `;
+    // Check if there are any options to begin with
+    if (names.length == 0) {
+        return "No options in this channel.";
+    };
+
+
+    let response = "Possible options: ";
 
     switch (ctx.source) {
         case "Discord":
