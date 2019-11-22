@@ -22,7 +22,6 @@ const LIST_OPTIONS = (ctx: msg_data, args: string[]): string|void => {
 
     let names: string[] = [];
 
-
     // Make list of names
     for (var option of data) {
         names.push(option.name);
