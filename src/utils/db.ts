@@ -26,14 +26,15 @@ export const LOAD = (channel: string): option[] => {
         channel = links[channel]
     };
 
+    let filepath: string = path.resolve(`${config.DATA_DIR}/${channel}.json`);
 
-    // load the appropriate file
-    let data = fs.readFileSync(
-        path.resolve(`${config.DATA_DIR}/${channel}.json`)
-    );
+    // Ensure file exists
+    if (!fs.existsSync(filepath)) {
+        return null;
+    };
 
     // @ts-ignore
-    return JSON.parse(data)
+    return JSON.parse(fs.readFileSync(filepath))
 };
 
 
@@ -41,25 +42,23 @@ export const LOAD = (channel: string): option[] => {
 export const WRITE = (channel: string, data: option[]) => {
 
     // Load the links file
-    let links: object = fs.readFileSync(
+    let links = fs.readFileSync(
         path.resolve(`${config.DATA_DIR}/#links#.json`)
     );
 
     // Check if the channel is linked to a different channel.
-    if (links[channel]) {
-        channel = links[channel]
+    if (links[channel] != null) {
+        channel = links[channel];
     };
 
+    let filepath = path.resolve(`${config.DATA_DIR}/${channel}.json`)
 
     // load the appropriate file
     fs.writeFile(
-        path.resolve(`${config.DATA_DIR}/${channel}.json`),
+        filepath,
         JSON.stringify(data, null, 2),
-        () => {console.log(`[DB] Data updated for channel: ${channel}`)}
+        () => {console.log("* [DB] Data updated")}
     );
-
-    // @ts-ignore
-    return JSON.parse(data)
 };
 
 
