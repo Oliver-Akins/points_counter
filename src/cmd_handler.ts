@@ -162,6 +162,7 @@ export const HANDLE_MESSAGE = (context: msg_data): string | void => {
         })
         return response;
     };
+    return null;
 }
 
 
