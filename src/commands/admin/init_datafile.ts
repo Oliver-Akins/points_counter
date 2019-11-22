@@ -19,7 +19,7 @@ const INIT_DATAFILE = (ctx: msg_data, args: string[]): string|void => {
 
     switch (CREATE(channel)) {
         case "SUCCESS":
-            return `Created data file channel: ${channel}`;
+            return `Created data file for channel: ${channel}`;
         case "EXISTS":
             return `A datafile for a channel with name "${channel}" already exists.`;
         case "ERROR":
