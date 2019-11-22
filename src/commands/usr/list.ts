@@ -6,6 +6,7 @@
 //
 
 
+import { DISCORD_CHAR_LIMIT, TWITCH_CHAR_LIMIT } from "../../constants";
 import { LOAD } from "../../utils/db";
 
 
@@ -20,12 +21,34 @@ const LIST_OPTIONS = (ctx: msg_data, args: string[]): string|void => {
         names.push(option.name);
     };
 
-    let response = `Possible options: ${names.join(", ")}`;
+    let response = `Possible options: `;
 
     switch (ctx.source) {
         case "Discord":
+            // Run through each name
+            for (var name of names) {
+
+                // Ensure we don't surpass the character limit
+                if (response.length + name.length <= DISCORD_CHAR_LIMIT) {
+                    response += `${name}, `;
+                };
+            };
             break;
+
         case "Twitch":
+            // Run through each name
+            for (var name of names) {
+
+                // Ensure we don't surpass the character limit
+                if (response.length + name.length <= TWITCH_CHAR_LIMIT) {
+                    response += `${name}, `;
+                };
+            };
             break;
-    }
+
+        default:
+            break;
+    };
+
+    return response.slice(0, -2);
 };
