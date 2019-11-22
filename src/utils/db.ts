@@ -23,7 +23,7 @@ export const LOAD = (channel: string): option[] => {
 
     // Check if the channel is linked to a different channel.
     if (links[channel]) {
-        channel = links[channel]
+        channel = links[channel];
     };
 
     let filepath: string = path.resolve(`${config.DATA_DIR}/${channel}.json`);
@@ -54,10 +54,9 @@ export const WRITE = (channel: string, data: option[]) => {
     let filepath = path.resolve(`${config.DATA_DIR}/${channel}.json`)
 
     // load the appropriate file
-    fs.writeFile(
+    fs.writeFileSync(
         filepath,
-        JSON.stringify(data, null, 2),
-        () => {console.log("* [DB] Data updated")}
+        JSON.stringify(data, null, 2)
     );
 };
 
