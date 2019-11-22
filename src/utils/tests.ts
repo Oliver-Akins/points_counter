@@ -138,5 +138,5 @@ export const tests: test[] = [
         },
         "expected_return": "Possible options: Potato, Green",
         "datafile_should_exist": "EXISTS"
-    },
+    }
 ]
