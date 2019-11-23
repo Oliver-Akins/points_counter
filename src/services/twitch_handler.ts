@@ -11,9 +11,6 @@ tmi.js DOCS: https://github.com/tmijs/docs/blob/gh-pages/_posts/v1.4.2/2019-03-0
 
 
 
-
-
-
 export const run_twitch = () => {
 
     let config: config = LOAD_CONFIG();
