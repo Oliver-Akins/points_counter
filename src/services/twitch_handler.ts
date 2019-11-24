@@ -39,16 +39,20 @@ export const run_twitch = () => {
     // SECTION: Handle messages
     client.on("message", (channel: string, context: tmi.Userstate, message: string, self: boolean) => {
         try {
+
             // SECTION: Context checking
 
             // NOTE: Ensure not self
             if (self) { return; }
 
+            // NOTE: Ensure text channel, not whisper or anything else weird.
+            else if (context["message-type"] !== "chat") { return; }
 
             // NOTE: Ensure message starts with prefix
             else if (message.slice(0, config.bot.PREFIX.length) !== config.bot.PREFIX) { return; }
             // !SECTION: Context checking
 
+            console.log(context);
 
             // SECTION: Context parsing
             var is_admin = config.twitch.ADMIN.includes(context.username);
