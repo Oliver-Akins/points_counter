@@ -15,6 +15,7 @@ interface auth_options {
 interface discord_options extends auth_options {
     PERMISSIONS_VALUE: string;
     MOD_ROLES: string;
+    DEV_TOKEN: string;
 }
 interface twitch_options extends auth_options {
     CHANNELS: [string];
