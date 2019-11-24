@@ -52,7 +52,6 @@ export const run_twitch = () => {
             else if (message.slice(0, config.bot.PREFIX.length) !== config.bot.PREFIX) { return; }
             // !SECTION: Context checking
 
-            console.log(context);
 
             // SECTION: Context parsing
             var is_admin = config.twitch.ADMIN.includes(context.username);
