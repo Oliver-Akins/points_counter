@@ -2,7 +2,7 @@
 // tests.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/17 - 2019/11/20)
+// Written by: Tyler Akins (2019/11/17 - 2019/11/23)
 //
 
 import { LOAD_CONFIG } from "./Config";
