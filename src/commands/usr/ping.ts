@@ -17,7 +17,7 @@ const PING_COMMAND = (context: msg_data, args: string[]): string|void => {
 const ping_metadata: cmd_metadata = {
     description: "Allows you to test to make sure the bot is online",
     executable: PING_COMMAND,
-    requires_confirm: true,
+    requires_confirm: false,
     case_sensitive: false,
     syntax: "{pre}ping",
     name: "ping",
