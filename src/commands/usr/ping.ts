@@ -2,7 +2,7 @@
 // ping.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/06 - 2019/11/12)
+// Written by: Tyler Akins (2019/11/06 - 2019/11/23)
 //
 
 import { REGISTER_COMMAND, confirms } from "../../cmd_handler";
@@ -19,7 +19,6 @@ const ping_metadata: cmd_metadata = {
     executable: PING_COMMAND,
     requires_confirm: false,
     case_sensitive: false,
-    syntax: "{pre}ping",
     name: "ping",
     opt_args: 0,
     args: [],

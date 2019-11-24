@@ -2,7 +2,7 @@
 // init_datafile.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/11 - 2019/11/12)
+// Written by: Tyler Akins (2019/11/11 - 2019/11/23)
 //
 
 
@@ -36,7 +36,6 @@ const metadata: cmd_metadata = {
     case_sensitive: false,
     opt_args: 0,
     args: [],
-    syntax: "{pre}admin init",
     group: "admin",
     name: "init",
     level: perm.admin

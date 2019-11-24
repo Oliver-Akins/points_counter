@@ -34,10 +34,19 @@ export class Command {
         this.info = metadata.description;
         this._func = metadata.executable;
         this.arg_list = metadata.args;
-        this.syntax = metadata.syntax;
         this.group = metadata.group;
         this.level = metadata.level;
         this.name = metadata.name;
+
+        // !points add <amount: int> <target: string> [donator: string]
+
+        // NOTE: Create syntax dynamically
+        let config: config = LOAD_CONFIG();
+
+        this.syntax = config.bot.PREFIX;                //    !
+        if (this.group) { this.syntax += this.group; }; //    points
+        this.syntax += ` ${this.name} `;                //    add
+        this.syntax += this.arg_list.join(" ");         //    <amount: int> <target: string> [donator: string]
     };
 
 

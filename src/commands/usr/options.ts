@@ -2,7 +2,7 @@
 // list.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/11)
+// Written by: Tyler Akins (2019/11/11 - 2019/11/23)
 //
 
 
@@ -74,7 +74,6 @@ const metadata: cmd_metadata = {
     executable: LIST_OPTIONS,
     opt_args: 0,
     args: [],
-    syntax: "{pre}options",
     group: null,
     name: "options",
     level: perm.all,

@@ -15,7 +15,6 @@ interface cmd_metadata {
     case_sensitive: boolean;
     description: string;
     opt_args: number;
-    syntax: string;
     group?: string;
     args: string[];
     level: number;
