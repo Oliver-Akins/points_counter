@@ -90,12 +90,12 @@ export class Confirmation {
 
     public matches (user: string, channel: string, msg: string): CONFIRM_TYPE {
 
-        // basic user checking
-        if (this.username !== user) { return "no_match"; }
-        else if (this.channel !== channel) { return "no_match"; }
-
         // Timeout checking
-        else if (Date.now() - this.created > this.timeout) { return "expired"; }
+        if (Date.now() - this.created > this.timeout) { return "expired"; }
+
+        // basic user checking
+        else if (this.username !== user) { return "no_match"; }
+        else if (this.channel !== channel) { return "no_match"; }
 
         // Positive or negative match?
         else if (msg.match(/^![Yy](es)?$/)) { return "confirm"; }
