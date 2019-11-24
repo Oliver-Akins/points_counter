@@ -5,7 +5,11 @@
 // Written by: Tyler Akins (2019/11/17 - 2019/11/20)
 //
 
+import { LOAD_CONFIG } from "./Config";
 import { perm } from "../constants";
+
+
+let config: config = LOAD_CONFIG();
 
 
 export const tests: test[] = [
@@ -138,5 +142,83 @@ export const tests: test[] = [
         },
         "expected_return": "Possible options: Potato, Green",
         "datafile_should_exist": "EXISTS"
-    }
+    },
+    {
+        "id": "000B",
+        "msg_meta": {
+            "channel": "%test_channel%",
+            "level": perm.all,
+            "message": "!version",
+            "source": "Discord",
+            "test": true,
+            "user": "%test_runner%"
+        },
+        "expected_return": `Bot version: ${config.bot.VERSION}`,
+        "datafile_should_exist": "IGNORES"
+    },
+    {
+        "id": "000B",
+        "msg_meta": {
+            "channel": "%test_channel%",
+            "level": perm.all,
+            "message": "!version",
+            "source": "Discord",
+            "test": true,
+            "user": "%test_runner%"
+        },
+        "expected_return": `Bot version: ${config.bot.VERSION}`,
+        "datafile_should_exist": "IGNORES"
+    },
+    {
+        "id": "000C",
+        "msg_meta": {
+            "channel": "%test_channel%",
+            "level": perm.admin,
+            "message": "!version",
+            "source": "Discord",
+            "test": true,
+            "user": "%test_runner%"
+        },
+        "expected_return": `Bot version: ${config.bot.VERSION}`,
+        "datafile_should_exist": "IGNORES"
+    },
+    {
+        "id": "000D",
+        "msg_meta": {
+            "channel": "%test_channel%",
+            "level": perm.all,
+            "message": "!help",
+            "source": "Discord",
+            "test": true,
+            "user": "%test_runner%"
+        },
+        "expected_return": `Help page: ${config.WEBSITE}`,
+        "datafile_should_exist": "IGNORES"
+    },
+    {
+        "id": "000F",
+        "msg_meta": {
+            "channel": "%test_channel%",
+            "level": perm.admin,
+            "message": "!help help",
+            "source": "Discord",
+            "test": true,
+            "user": "%test_runner%"
+        },
+        "expected_return": `Help page: ${config.WEBSITE}/command/help`,
+        "datafile_should_exist": "IGNORES"
+    },
+    {
+        "id": "0010",
+        "msg_meta": {
+            "channel": "%test_channel%",
+            "level": perm.all,
+            "message": "!help ping",
+            "source": "Discord",
+            "test": true,
+            "user": "%test_runner%"
+        },
+        "expected_return": `Help page: ${config.WEBSITE}/command/ping`,
+        "datafile_should_exist": "IGNORES"
+    },
 ]
