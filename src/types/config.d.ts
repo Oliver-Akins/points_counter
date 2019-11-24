@@ -26,7 +26,7 @@ interface twitch_options extends auth_options {
 interface bot_options {
     PREFIX: string;
     VERSION: string;
-    CMD_COOLDOWN: number;
+    COOLDOWN_TIME: number;
     COOLDOWN_TYPE: "GLOBAL"|"COMMAND"|"SERVICE";
 }
 

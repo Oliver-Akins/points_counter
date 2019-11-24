@@ -29,7 +29,7 @@
   "bot": {
     "PREFIX": "!",
     "VERSION": "3.0.0",
-    "CMD_COOLDOWN": 3,
+    "COOLDOWN_TIME": 3,
     "COOLDOWN_TYPE": "SERVICE"
   },
   "webhooks": {
