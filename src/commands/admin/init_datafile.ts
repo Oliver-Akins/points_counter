@@ -8,7 +8,7 @@
 
 import { REGISTER_COMMAND } from "../../cmd_handler";
 import { CREATE } from "../../utils/db";
-import { perm } from "../../constants";
+import { PERM } from "../../constants";
 
 
 
@@ -36,8 +36,8 @@ const metadata: cmd_metadata = {
     case_sensitive: false,
     opt_args: 0,
     args: [],
-    group: "admin",
+    group: "data",
     name: "init",
-    level: perm.admin
+    level: PERM.ADMIN
 };
 REGISTER_COMMAND(metadata)

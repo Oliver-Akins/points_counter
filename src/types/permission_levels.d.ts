@@ -6,7 +6,7 @@
 //
 
 interface perms {
-    all: number;
-    mod: number;
-    admin: number;
+    ALL: number;
+    MOD: number;
+    ADMIN: number;
 }

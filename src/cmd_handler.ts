@@ -10,7 +10,7 @@
 import { Command, Confirmation } from "./utils/Command";
 import { LOAD_CONFIG } from "./utils/Config";
 import { log } from "./utils/webhook";
-import { perm } from "./constants";
+import { PERM } from "./constants";
 
 
 
@@ -63,8 +63,8 @@ export const HANDLE_MESSAGE = (context: msg_data): string | void => {
                     embed: true,
                     fields: {
                         "Date:": date,
-                        "Is Mod:": context.level >= perm.mod,
-                        "Is Admin:": context.level >= perm.admin,
+                        "Is Mod:": context.level >= PERM.MOD,
+                        "Is Admin:": context.level >= PERM.ADMIN,
                         "Level:": context.level,
                         "Channel:": context.channel,
                         "Username": context.user,
@@ -151,8 +151,8 @@ export const HANDLE_MESSAGE = (context: msg_data): string | void => {
             embed: true,
             fields: {
                 "Date:": date,
-                "Is Mod:": context.level >= perm.mod,
-                "Is Admin:": context.level >= perm.admin,
+                "Is Mod:": context.level >= PERM.MOD,
+                "Is Admin:": context.level >= PERM.ADMIN,
                 "Level:": context.level,
                 "Channel:": context.channel,
                 "Username": context.user,

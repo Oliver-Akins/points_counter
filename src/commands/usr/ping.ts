@@ -6,7 +6,7 @@
 //
 
 import { REGISTER_COMMAND, confirms } from "../../cmd_handler";
-import { perm } from "../../constants";
+import { PERM } from "../../constants";
 
 
 const PING_COMMAND = (context: msg_data, args: string[]): string|void => {
@@ -22,6 +22,6 @@ const ping_metadata: cmd_metadata = {
     name: "ping",
     opt_args: 0,
     args: [],
-    level: perm.all
+    level: PERM.ALL
 };
 REGISTER_COMMAND(ping_metadata)

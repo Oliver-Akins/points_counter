@@ -6,7 +6,7 @@
 //
 
 import { LOAD_CONFIG } from "./Config";
-import { perm } from "../constants";
+import { PERM } from "../constants";
 
 
 let config: config = LOAD_CONFIG();
@@ -18,7 +18,7 @@ export const tests: test[] = [
         "msg_meta": {
             "channel": "%test_channel%",
             "user": "%test_runner%",
-            "level": perm.all,
+            "level": PERM.ALL,
             "message": "spam eggs",
             "source": "Discord",
             "cooldown": false
@@ -31,12 +31,12 @@ export const tests: test[] = [
         "msg_meta": {
             "message": "!admin init",
             "channel": "%test_channel%",
-            "level": perm.all,
+            "level": PERM.ALL,
             "source": "Twitch",
             "user": "%test_runner%",
             "cooldown": false
         },
-        "expected_return": `Invalid Permissions, you must be at least level ${perm.admin}, you are level ${perm.all}.`,
+        "expected_return": `Invalid Permissions, you must be at least level ${PERM.ADMIN}, you are level ${PERM.ALL}.`,
         "datafile_should_exist": "IGNORES"
     },
     {
@@ -44,7 +44,7 @@ export const tests: test[] = [
         "msg_meta": {
             "message": "!admin init",
             "channel": "%test_channel%",
-            "level": perm.admin,
+            "level": PERM.ADMIN,
             "source": "Twitch",
             "user": "%test_runner%",
             "cooldown": false
@@ -57,12 +57,12 @@ export const tests: test[] = [
         "msg_meta": {
             "message": "!admin init",
             "channel": "%test_channel%",
-            "level": perm.mod,
+            "level": PERM.MOD,
             "source": "Twitch",
             "user": "%test_runner%",
             "cooldown": false
         },
-        "expected_return": `Invalid Permissions, you must be at least level ${perm.admin}, you are level ${perm.mod}.`,
+        "expected_return": `Invalid Permissions, you must be at least level ${PERM.ADMIN}, you are level ${PERM.MOD}.`,
         "datafile_should_exist": "IGNORES"
     },
     {
@@ -70,7 +70,7 @@ export const tests: test[] = [
         "msg_meta": {
             "message": "!admin",
             "channel": "%test_channel%",
-            "level": perm.admin,
+            "level": PERM.ADMIN,
             "source": "Discord",
             "user": "%test_runner%",
             "cooldown": false
@@ -83,7 +83,7 @@ export const tests: test[] = [
         "msg_meta": {
             "message": "!init",
             "channel": "%test_channel%",
-            "level": perm.all,
+            "level": PERM.ALL,
             "source": "Twitch",
             "user": "%test_runner%",
             "cooldown": false
@@ -96,7 +96,7 @@ export const tests: test[] = [
         "msg_meta": {
             "message": "!admin init",
             "channel": "%test_channel%",
-            "level": perm.admin,
+            "level": PERM.ADMIN,
             "source": "Twitch",
             "user": "%test_runner%",
             "cooldown": false
@@ -109,7 +109,7 @@ export const tests: test[] = [
         "msg_meta": {
             "message": "!ping",
             "channel": "%test_channel%",
-            "level": perm.admin,
+            "level": PERM.ADMIN,
             "source": "Discord",
             "user": "%test_runner%",
             "cooldown": false
@@ -121,7 +121,7 @@ export const tests: test[] = [
         "id": "0009",
         "msg_meta": {
             "channel": "%test_channel%",
-            "level": perm.all,
+            "level": PERM.ALL,
             "message": "!options",
             "source": "Discord",
             "cooldown": false,
@@ -134,7 +134,7 @@ export const tests: test[] = [
         "id": "000A",
         "msg_meta": {
             "channel": "%test_channel%",
-            "level": perm.all,
+            "level": PERM.ALL,
             "message": "!options",
             "source": "Discord",
             "cooldown": false,
@@ -147,7 +147,7 @@ export const tests: test[] = [
         "id": "000B",
         "msg_meta": {
             "channel": "%test_channel%",
-            "level": perm.all,
+            "level": PERM.ALL,
             "message": "!version",
             "source": "Discord",
             "cooldown": false,
@@ -160,7 +160,7 @@ export const tests: test[] = [
         "id": "000B",
         "msg_meta": {
             "channel": "%test_channel%",
-            "level": perm.all,
+            "level": PERM.ALL,
             "message": "!version",
             "source": "Discord",
             "cooldown": false,
@@ -173,7 +173,7 @@ export const tests: test[] = [
         "id": "000C",
         "msg_meta": {
             "channel": "%test_channel%",
-            "level": perm.admin,
+            "level": PERM.ADMIN,
             "message": "!version",
             "source": "Discord",
             "cooldown": false,
@@ -186,7 +186,7 @@ export const tests: test[] = [
         "id": "000D",
         "msg_meta": {
             "channel": "%test_channel%",
-            "level": perm.all,
+            "level": PERM.ALL,
             "message": "!help",
             "source": "Discord",
             "cooldown": false,
@@ -199,7 +199,7 @@ export const tests: test[] = [
         "id": "000F",
         "msg_meta": {
             "channel": "%test_channel%",
-            "level": perm.admin,
+            "level": PERM.ADMIN,
             "message": "!help help",
             "source": "Discord",
             "cooldown": false,
@@ -212,7 +212,7 @@ export const tests: test[] = [
         "id": "0010",
         "msg_meta": {
             "channel": "%test_channel%",
-            "level": perm.all,
+            "level": PERM.ALL,
             "message": "!help ping",
             "source": "Discord",
             "cooldown": false,

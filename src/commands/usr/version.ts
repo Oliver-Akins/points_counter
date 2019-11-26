@@ -7,7 +7,7 @@
 
 import { REGISTER_COMMAND } from "../../cmd_handler";
 import { LOAD_CONFIG } from "../../utils/Config";
-import { perm } from "../../constants";
+import { PERM } from "../../constants";
 
 
 const VERSION_COMMAND = (context: msg_data, args: string[]): string|void => {
@@ -24,6 +24,6 @@ const metadata: cmd_metadata = {
     name: "version",
     opt_args: 0,
     args: [],
-    level: perm.all
+    level: PERM.ALL
 };
 REGISTER_COMMAND(metadata)

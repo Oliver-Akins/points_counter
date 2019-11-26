@@ -6,7 +6,7 @@
 //
 
 
-import { DISCORD_CHAR_LIMIT, TWITCH_CHAR_LIMIT, perm } from "../../constants";
+import { LIMIT, PERM } from "../../constants";
 import { REGISTER_COMMAND } from "../../cmd_handler";
 import { LOAD } from "../../utils/db";
 
@@ -41,7 +41,7 @@ const LIST_OPTIONS = (ctx: msg_data, args: string[]): string|void => {
             for (var name of names) {
 
                 // Ensure we don't surpass the character limit
-                if (response.length + name.length <= DISCORD_CHAR_LIMIT) {
+                if (response.length + name.length <= LIMIT.DISCORD) {
                     response += `${name}, `;
                 };
             };
@@ -52,7 +52,7 @@ const LIST_OPTIONS = (ctx: msg_data, args: string[]): string|void => {
             for (var name of names) {
 
                 // Ensure we don't surpass the character limit
-                if (response.length + name.length <= TWITCH_CHAR_LIMIT) {
+                if (response.length + name.length <= LIMIT.TWITCH) {
                     response += `${name}, `;
                 };
             };
@@ -76,6 +76,6 @@ const metadata: cmd_metadata = {
     args: [],
     group: null,
     name: "options",
-    level: perm.all,
+    level: PERM.ALL,
 };
 REGISTER_COMMAND(metadata);

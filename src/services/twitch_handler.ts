@@ -2,7 +2,7 @@ import * as tmi from "tmi.js";
 import { HANDLE_MESSAGE } from "../cmd_handler";
 import { LOAD_CONFIG } from "../utils/Config";
 import { log_error } from "../utils/webhook";
-import { perm } from "../constants";
+import { PERM } from "../constants";
 
 /*
 
@@ -62,9 +62,9 @@ export const run_twitch = () => {
                 is_admin
             )
 
-            var level = perm.all;
-            if (is_mod) { level = perm.mod; };
-            if (is_admin) { level = perm.admin; };
+            var level = PERM.ALL;
+            if (is_mod) { level = PERM.MOD; };
+            if (is_admin) { level = PERM.ADMIN; };
             // !SECTION: Context parsing
 
 
@@ -135,6 +135,8 @@ export const run_twitch = () => {
     // client.on("cheer", (channel: string, context: tmi.Userstate, message: string) => {
     //     // Do your stuff.
     //     let bit_count: number = context.bits;
+    //     // Should be able to just call the CMD handler with a falsified command message
+    //     // which would allow us to just kinda hack our way around the fact it's automated
     // });
 
     client.on("disconnected", (reason: string) => {

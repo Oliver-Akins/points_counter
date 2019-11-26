@@ -9,7 +9,7 @@ import { HANDLE_MESSAGE } from "../cmd_handler";
 import { LOAD_CONFIG } from "../utils/Config";
 import { DISCORD_MOD } from "../utils/Perms";
 import { log_error } from "../utils/webhook";
-import { perm } from "../constants";
+import { PERM } from "../constants";
 const Eris = require("eris");
 
 
@@ -60,9 +60,9 @@ export const run_discord = () => {
             var is_admin = config.discord.ADMIN.includes(msg.member.id);
 
 
-            var level = perm.all;
-            if (is_mod) { level = perm.mod; };
-            if (is_admin) { level = perm.admin; };
+            var level = PERM.ALL;
+            if (is_mod) { level = PERM.MOD; };
+            if (is_admin) { level = PERM.ADMIN; };
 
 
             var response: string | void = HANDLE_MESSAGE({
