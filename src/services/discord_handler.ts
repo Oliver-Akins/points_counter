@@ -66,12 +66,12 @@ export const run_discord = () => {
 
 
             var response: string | void = HANDLE_MESSAGE({
-                "channel": msg.channel.name,
-                "level": level,
-                "message": msg.content.trim().replace(/\n/g, ""),
-                "source": "Discord",
-                "user": msg.author.username,
-                "test": false
+                channel: msg.channel.name,
+                level: level,
+                message: msg.content.trim().replace(/\n/g, ""),
+                source: "Discord",
+                user: msg.author.username,
+                cooldown: true
             });
 
             // NOTE: Ensure response isn't null

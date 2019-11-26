@@ -21,7 +21,7 @@ export const tests: test[] = [
             "level": perm.all,
             "message": "spam eggs",
             "source": "Discord",
-            "test": true
+            "cooldown": false
         },
         "expected_return": null,
         "datafile_should_exist": "IGNORES"
@@ -34,7 +34,7 @@ export const tests: test[] = [
             "level": perm.all,
             "source": "Twitch",
             "user": "%test_runner%",
-            "test": true
+            "cooldown": false
         },
         "expected_return": `Invalid Permissions, you must be at least level ${perm.admin}, you are level ${perm.all}.`,
         "datafile_should_exist": "IGNORES"
@@ -47,7 +47,7 @@ export const tests: test[] = [
             "level": perm.admin,
             "source": "Twitch",
             "user": "%test_runner%",
-            "test": true
+            "cooldown": false
         },
         "expected_return": `Created data file for channel: %test_channel%`,
         "datafile_should_exist": "NOT_EXISTS"
@@ -60,7 +60,7 @@ export const tests: test[] = [
             "level": perm.mod,
             "source": "Twitch",
             "user": "%test_runner%",
-            "test": true
+            "cooldown": false
         },
         "expected_return": `Invalid Permissions, you must be at least level ${perm.admin}, you are level ${perm.mod}.`,
         "datafile_should_exist": "IGNORES"
@@ -73,7 +73,7 @@ export const tests: test[] = [
             "level": perm.admin,
             "source": "Discord",
             "user": "%test_runner%",
-            "test": true
+            "cooldown": false
         },
         "expected_return": null,
         "datafile_should_exist": "IGNORES"
@@ -86,7 +86,7 @@ export const tests: test[] = [
             "level": perm.all,
             "source": "Twitch",
             "user": "%test_runner%",
-            "test": true
+            "cooldown": false
         },
         "expected_return": null,
         "datafile_should_exist": "IGNORES"
@@ -99,7 +99,7 @@ export const tests: test[] = [
             "level": perm.admin,
             "source": "Twitch",
             "user": "%test_runner%",
-            "test": true
+            "cooldown": false
         },
         "expected_return": `A datafile for a channel with name "%test_channel%" already exists.`,
         "datafile_should_exist": "EXISTS"
@@ -112,7 +112,7 @@ export const tests: test[] = [
             "level": perm.admin,
             "source": "Discord",
             "user": "%test_runner%",
-            "test": true
+            "cooldown": false
         },
         "expected_return": "Pong!",
         "datafile_should_exist": "IGNORES"
@@ -124,7 +124,7 @@ export const tests: test[] = [
             "level": perm.all,
             "message": "!options",
             "source": "Discord",
-            "test": true,
+            "cooldown": false,
             "user": "%test_runner%"
         },
         "expected_return": "Cannot load data for this channel. Make sure it's been initialized.",
@@ -137,7 +137,7 @@ export const tests: test[] = [
             "level": perm.all,
             "message": "!options",
             "source": "Discord",
-            "test": true,
+            "cooldown": false,
             "user": "%test_runner%"
         },
         "expected_return": "Possible options: Potato, Green",
@@ -150,7 +150,7 @@ export const tests: test[] = [
             "level": perm.all,
             "message": "!version",
             "source": "Discord",
-            "test": true,
+            "cooldown": false,
             "user": "%test_runner%"
         },
         "expected_return": `Bot version: ${config.bot.VERSION}`,
@@ -163,7 +163,7 @@ export const tests: test[] = [
             "level": perm.all,
             "message": "!version",
             "source": "Discord",
-            "test": true,
+            "cooldown": false,
             "user": "%test_runner%"
         },
         "expected_return": `Bot version: ${config.bot.VERSION}`,
@@ -176,7 +176,7 @@ export const tests: test[] = [
             "level": perm.admin,
             "message": "!version",
             "source": "Discord",
-            "test": true,
+            "cooldown": false,
             "user": "%test_runner%"
         },
         "expected_return": `Bot version: ${config.bot.VERSION}`,
@@ -189,7 +189,7 @@ export const tests: test[] = [
             "level": perm.all,
             "message": "!help",
             "source": "Discord",
-            "test": true,
+            "cooldown": false,
             "user": "%test_runner%"
         },
         "expected_return": `Help page: ${config.WEBSITE}`,
@@ -202,7 +202,7 @@ export const tests: test[] = [
             "level": perm.admin,
             "message": "!help help",
             "source": "Discord",
-            "test": true,
+            "cooldown": false,
             "user": "%test_runner%"
         },
         "expected_return": `Help page: ${config.WEBSITE}/command/help`,
@@ -215,7 +215,7 @@ export const tests: test[] = [
             "level": perm.all,
             "message": "!help ping",
             "source": "Discord",
-            "test": true,
+            "cooldown": false,
             "user": "%test_runner%"
         },
         "expected_return": `Help page: ${config.WEBSITE}/command/ping`,

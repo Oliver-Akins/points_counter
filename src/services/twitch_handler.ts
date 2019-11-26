@@ -75,7 +75,7 @@ export const run_twitch = () => {
                 level: level,
                 source: "Twitch",
                 user: context.username,
-                test: false
+                cooldown: true
             });
 
 

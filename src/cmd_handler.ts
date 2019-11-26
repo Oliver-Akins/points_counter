@@ -82,7 +82,7 @@ export const HANDLE_MESSAGE = (context: msg_data): string | void => {
 
 
     // SECTION: Global command cooldowns
-    if (config.bot.COOLDOWN_TYPE === "GLOBAL" && !context.test) {
+    if (config.bot.COOLDOWN_TYPE === "GLOBAL" && context.cooldown) {
         if (global_last_ran) {
             if (Date.now() - global_last_ran < config.bot.COOLDOWN_TIME * 1000) {
                 return null;
@@ -95,7 +95,7 @@ export const HANDLE_MESSAGE = (context: msg_data): string | void => {
 
 
     // SECTION: Service command cooldowns
-    else if (config.bot.COOLDOWN_TYPE === "SERVICE" && !context.test) {
+    else if (config.bot.COOLDOWN_TYPE === "SERVICE" && context.cooldown) {
         if (service_last_rans[context.source]) {
             if (Date.now() - service_last_rans[context.source] < config.bot.COOLDOWN_TIME * 1000) {
                 return null;
@@ -121,7 +121,7 @@ export const HANDLE_MESSAGE = (context: msg_data): string | void => {
 
 
         // NOTE: per-command cooldown
-        if (config.bot.COOLDOWN_TYPE === "COMMAND" && !context.test) {
+        if (config.bot.COOLDOWN_TYPE === "COMMAND" && context.cooldown) {
             if (cmd.last_ran) {
                 if (Date.now() - cmd.last_ran < config.bot.COOLDOWN_TIME * 1000) {
                     return null;

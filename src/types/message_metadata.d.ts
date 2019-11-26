@@ -7,9 +7,9 @@
 
 interface msg_data {
     source: "Discord"|"Twitch";
+    cooldown: boolean;
     channel: string;
     message: string;
-    test: boolean;
     level: number;
     user: string;
 }
