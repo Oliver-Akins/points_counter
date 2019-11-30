@@ -7,13 +7,37 @@
 
 
 import { REGISTER_COMMAND } from "../../cmd_handler";
+import { LOAD_CONFIG } from "../../utils/Config";
+import { PERM } from "../../constants";
+import { LOAD, WRITE } from "../../utils/db";
 
-// !options add <Name: string>
-const OPTIONS_ADD_COMMAND = (metadata: msg_data, args: string[]): string|void => {};
 
 
+const OPTIONS_ADD_COMMAND = (ctx: msg_data, args: string[]): string => {
+    ctx.channel = ctx.channel.replace(/\#/, "").replace(" ", "_")
+    let data = LOAD(ctx.channel);
+    let name = args[0]
 
-const OPTIONS_ADD_CONFIRMATION = (type: CONFIRM_TYPE, data: string): string|void => {}
+    for (var option of data) {
+        if (option.aliases.includes(name.toLowerCase())) {
+            return `An option already exists with name: \`${name}\``;
+        };
+    };
+
+    data.push({
+        "aliases": [name.toLowerCase()],
+        "name": name,
+        "points": {
+            "%anonymous%": 0
+        },
+        "total": 0,
+        "data_version": "3.0"
+    });
+
+    WRITE(ctx.channel, data);
+
+    return `Option created with name: \`${name}\``;
+};
 
 
 
@@ -24,10 +48,10 @@ const metadata: cmd_metadata = {
     executable: OPTIONS_ADD_COMMAND,
     opt_args: 0,
     args: [
-        ""
+        "<Name: string>"
     ],
-    group: null,
-    name: "",
-    level: 0
+    group: "options",
+    name: "add",
+    level: PERM.MOD
 };
 REGISTER_COMMAND(metadata);
