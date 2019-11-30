@@ -171,5 +171,5 @@ export const HANDLE_MESSAGE = (context: msg_data): string | void => {
 import "./commands/usr/ping";
 import "./commands/usr/help";
 import "./commands/usr/version";
-import "./commands/usr/options";
+import "./commands/usr/options_list";
 import "./commands/admin/init_datafile";
