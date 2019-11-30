@@ -14,7 +14,7 @@ tmi.js DOCS: https://github.com/tmijs/docs/blob/gh-pages/_posts/v1.4.2/2019-03-0
 
 export const run_twitch = () => {
 
-    let config: config = LOAD_CONFIG();
+    const config: config = LOAD_CONFIG();
 
 
     // Init Client
@@ -69,7 +69,7 @@ export const run_twitch = () => {
 
 
             // NOTE: Get response
-            let response: string|void = HANDLE_MESSAGE({
+            let response: string = HANDLE_MESSAGE({
                 message: message,
                 channel: channel,
                 level: level,
@@ -83,7 +83,7 @@ export const run_twitch = () => {
             if (response) {
                 client.say(
                     channel,
-                    response as string
+                    response.replace(/`/, `"`)
                 );
             };
         } catch (error) {

@@ -11,7 +11,7 @@ import { REGISTER_COMMAND } from "../../cmd_handler";
 import { LOAD } from "../../utils/db";
 
 
-const LIST_OPTIONS = (ctx: msg_data, args: string[]): string|void => {
+const LIST_OPTIONS = (ctx: msg_data, args: string[]): string => {
     let channel = ctx.channel.replace(/\#/, "").replace(" ", "_");
 
     let data = LOAD(channel);

@@ -10,7 +10,7 @@ type CONFIRM_TYPE = "confirm"|"deny"|"no_match"|"expired"|"invalid";
 
 
 interface cmd_metadata {
-    executable(context: msg_data, args: string[]): string|void;
+    executable(context: msg_data, args: string[]): string;
     requires_confirm: boolean;
     case_sensitive: boolean;
     description: string;

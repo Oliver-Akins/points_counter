@@ -10,7 +10,7 @@ import { LOAD_CONFIG } from "../../utils/Config";
 import { PERM } from "../../constants";
 
 
-const HELP_COMMAND = (context: msg_data, args: string[]): string|void => {
+const HELP_COMMAND = (context: msg_data, args: string[]): string => {
     let config: config = LOAD_CONFIG();
 
     let response = `Help page: ${config.WEBSITE}`;

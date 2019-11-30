@@ -10,7 +10,7 @@ import { LOAD_CONFIG } from "../../utils/Config";
 import { PERM } from "../../constants";
 
 
-const VERSION_COMMAND = (context: msg_data, args: string[]): string|void => {
+const VERSION_COMMAND = (context: msg_data, args: string[]): string => {
     let config: config = LOAD_CONFIG();
     return `Bot version: ${config.bot.VERSION}`;
 };

@@ -32,7 +32,7 @@ export const REGISTER_COMMAND = (metadata: cmd_metadata): boolean => {
 
 
 
-export const HANDLE_MESSAGE = (context: msg_data): string | void => {
+export const HANDLE_MESSAGE = (context: msg_data): string => {
 
     let config: config = LOAD_CONFIG();
     let datetime = new Date();

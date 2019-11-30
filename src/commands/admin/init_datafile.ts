@@ -12,7 +12,7 @@ import { PERM } from "../../constants";
 
 
 
-const INIT_DATAFILE = (ctx: msg_data, args: string[]): string|void => {
+const INIT_DATAFILE = (ctx: msg_data, args: string[]): string => {
     let channel = ctx.channel.replace(/\#/, "");
     channel = channel.replace(" ", "_");
 

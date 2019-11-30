@@ -9,7 +9,7 @@ import { REGISTER_COMMAND, confirms } from "../../cmd_handler";
 import { PERM } from "../../constants";
 
 
-const PING_COMMAND = (context: msg_data, args: string[]): string|void => {
+const PING_COMMAND = (context: msg_data, args: string[]): string => {
     return "Pong!"
 };
 

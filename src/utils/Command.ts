@@ -22,7 +22,7 @@ export class Command {
     readonly info: string;
     readonly name: string;
 
-    private _func: (context: msg_data, args: string[]) => string|void;
+    private _func: (context: msg_data, args: string[]) => string;
 
     public last_ran: number;
 
@@ -63,7 +63,7 @@ export class Command {
     };
 
 
-    public execute (ctx: msg_data, args: string[]): string | void {
+    public execute (ctx: msg_data, args: string[]): string {
         return this._func(ctx, args)
     };
 };
@@ -79,14 +79,14 @@ export class Confirmation {
     private data: any;
     private created: number;
     private timeout: number;
-    private callback: (type: CONFIRM_TYPE, data?: any) => string|void;
+    private callback: (type: CONFIRM_TYPE, data?: any) => string;
 
 
     constructor (
         username: string,
         channel: string,
         timeout: number,
-        cb: (type: CONFIRM_TYPE, data?: any) => string|void,
+        cb: (type: CONFIRM_TYPE, data?: any) => string,
         data?: any
     ) {
         this.callback = cb;
@@ -116,7 +116,7 @@ export class Confirmation {
         else { return "invalid"; };
     };
 
-    public run (type: CONFIRM_TYPE): string|void {
+    public run (type: CONFIRM_TYPE): string {
         return this.callback(type, this.data)
     }
 };
