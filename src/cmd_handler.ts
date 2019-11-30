@@ -138,7 +138,9 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
 
 
         // NOTE: Argument parsing
-        let args = context.message.slice(config.bot.PREFIX.length).split(" ").slice(1);
+        let args = context.message.slice(config.bot.PREFIX.length).split(" ").slice(
+            cmd.group ? 2 : 1
+        );
         if (args.length < cmd.mand_args) {
             return `Not enough arguments, missing argument: \`${cmd.arg_list[args.length]}\``;
         };
