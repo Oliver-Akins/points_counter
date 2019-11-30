@@ -52,7 +52,7 @@ export const HANDLE_MESSAGE = (context: msg_data): string | void => {
 
         if (response !== "no_match") {
             confirms.splice(parseInt(index), 1)
-            let cmd_resp = confirmation.run(response, context.message.split(" "));
+            let cmd_resp = confirmation.run(response);
 
 
             // Check if we have a response to log

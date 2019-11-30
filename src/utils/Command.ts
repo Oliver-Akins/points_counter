@@ -79,14 +79,14 @@ export class Confirmation {
     private data: any;
     private created: number;
     private timeout: number;
-    private callback: (type: CONFIRM_TYPE, args: string[], data?: any) => string|void;
+    private callback: (type: CONFIRM_TYPE, data?: any) => string|void;
 
 
     constructor (
         username: string,
         channel: string,
         timeout: number,
-        cb: (type: CONFIRM_TYPE, args: string[]) => string|void,
+        cb: (type: CONFIRM_TYPE, data?: any) => string|void,
         data?: any
     ) {
         this.callback = cb;
@@ -116,7 +116,7 @@ export class Confirmation {
         else { return "invalid"; };
     };
 
-    public run (type: CONFIRM_TYPE, args: string[]): string|void {
-        return this.callback(type, args, this.data)
+    public run (type: CONFIRM_TYPE): string|void {
+        return this.callback(type, this.data)
     }
 };
