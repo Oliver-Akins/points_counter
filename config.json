@@ -15,6 +15,7 @@
   },
   "discord": {
     "OAUTH_TOKEN": "MzM2NDAzMjA3OTAxMTUxMjQ1.Xbi57w.A2BHWq8GbhKHGxguU8rSi8L7jvw",
+    "DEV_TOKEN": "NjQ3OTkwODM1NTg5MjgzODY1.Xdnunw.aYfYfSQHtZLT7dGRdSzZIFGZwmI",
     "SECRET": "ZEEyXku7pzRoRen88VSZTzHwXLFq9vFT",
     "PERMISSIONS_VALUE": 3072,
     "CLIENT_ID": "336403207901151245",
@@ -29,8 +30,9 @@
   "bot": {
     "PREFIX": "!",
     "VERSION": "3.0.0",
-    "COOLDOWN_TIME": 3,
-    "COOLDOWN_TYPE": "SERVICE"
+    "COOLDOWN_TIME": 5,
+    "COOLDOWN_TYPE": "SERVICE",
+    "INVALID_PERM_ERROR": false
   },
   "webhooks": {
       "LOGGING": "https://discordapp.com/api/webhooks/641491314260836352/H2oMjbeRobj4DKPsEMHTQKd5vEAALngF34a48REpUC_EFtdk__YT5WFuZgLOjCTaH11k",

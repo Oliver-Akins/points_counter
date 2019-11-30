@@ -116,7 +116,10 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
 
         // NOTE: Permission checking
         if (context.level < cmd.level) {
-            return `Invalid Permissions, you must be at least level ${cmd.level}, you are level ${context.level}.`;
+            if (config.bot.INVALID_PERM_ERROR) {
+                return `Invalid Permissions, you must be at least level ${cmd.level}, you are level ${context.level}.`;
+            }
+            return null;
         };
 
 
