@@ -49,7 +49,7 @@ export const run_twitch = () => {
             else if (context["message-type"] !== "chat") { return; }
 
             // NOTE: Ensure message starts with prefix
-            else if (message.slice(0, config.bot.PREFIX.length) !== config.bot.PREFIX) { return; }
+            else if (message.trim().slice(0, config.bot.PREFIX.length) !== config.bot.PREFIX) { return; }
             // !SECTION: Context checking
 
 
@@ -83,7 +83,7 @@ export const run_twitch = () => {
             if (response) {
                 client.say(
                     channel,
-                    response.replace(/`/, `"`)
+                    response.replace(/`/g, `"`)
                 );
             };
         } catch (error) {
