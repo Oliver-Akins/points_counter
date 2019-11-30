@@ -76,22 +76,25 @@ export class Confirmation {
     readonly username: string;
     readonly channel: string;
 
+    private data: any;
     private created: number;
     private timeout: number;
-    private callback: (type: CONFIRM_TYPE, args: string[]) => string|void;
+    private callback: (type: CONFIRM_TYPE, args: string[], data?: any) => string|void;
 
 
     constructor (
         username: string,
         channel: string,
         timeout: number,
-        cb: (type: CONFIRM_TYPE, args: string[]) => string|void
+        cb: (type: CONFIRM_TYPE, args: string[]) => string|void,
+        data?: any
     ) {
         this.callback = cb;
         this.username = username;
         this.channel = channel;
         this.created = Date.now();
         this.timeout = timeout * 1000;
+        this.data = data;
     };
 
 
@@ -114,6 +117,6 @@ export class Confirmation {
     };
 
     public run (type: CONFIRM_TYPE, args: string[]): string|void {
-        return this.callback(type, args)
+        return this.callback(type, args, this.data)
     }
 };
