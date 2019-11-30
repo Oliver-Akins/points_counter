@@ -10,7 +10,7 @@ interface option {
     aliases: string[];
     name: string;
     points: {
-        "[key: string]"?: number
+        [key: string]: number
     };
     total: number;
     data_version: string;
