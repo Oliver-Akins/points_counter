@@ -15,4 +15,4 @@ export const PERM: perms = {
 export const LIMIT = {
     DISCORD: 2000,
     TWITCH: 500
-}
+};
