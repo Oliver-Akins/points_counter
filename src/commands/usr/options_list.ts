@@ -67,15 +67,15 @@ const LIST_OPTIONS = (ctx: msg_data, args: string[]): string|void => {
 
 
 
-const metadata: cmd_metadata = {
+// Options command without subcommand
+REGISTER_COMMAND({
     description: "Lists all of the options that exist for the channel",
     requires_confirm: false,
     case_sensitive: false,
     executable: LIST_OPTIONS,
     opt_args: 0,
     args: [],
-    group: null,
-    name: "options",
+    group: "options",
+    name: "list",
     level: PERM.ALL,
-};
-REGISTER_COMMAND(metadata);
+});
