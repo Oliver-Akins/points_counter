@@ -172,6 +172,9 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
 /* Importing all the commands so they can register */
 import "./commands/usr/ping";
 import "./commands/usr/help";
+import "./commands/usr/lead";
 import "./commands/usr/version";
+import "./commands/mod/points_add";
+import "./commands/mod/options_add";
 import "./commands/usr/options_list";
 import "./commands/admin/init_datafile";
