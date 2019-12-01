@@ -5,36 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Points Counter Help</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/dark.css">
         <link rel="stylesheet" href="./style.css">
     </head>
     <body>
-        <div id="mobile-warning" hidden>
-            <div>
-                <span style="font-size: xx-large;">ERROR</span>
-                <br>
-                This site will not work on mobile devices. Please use a device with
-                a larger screen then reload the website to get rid of this error.
-            </div>
+        <h1>{PAGE TITLE}</h1>
+        <hr>
+        {BODY}
+        <hr>
+        <div id="Footer">
+            <ul>
+                <li><a href="./copyright.html">Copyright</a></li>
+            </ul>
         </div>
-        <div id="main-grid" hidden>
-            <div id="header">
-                THIS IS A HEAD
-            </div>
-            <div id="body">
-                THIS IS THE BODY
-            </div>
-            <div id="footer">
-                THIS IS THE FEET
-            </div>
-        </div>
-        <script>
-            if (window.innerWidth >= 640) {
-                document.getElementById("main-grid").hidden = false;
-                document.getElementById("mobile-warning").hidden = true;
-            } else {
-                document.getElementById("main-grid").hidden = true;
-                document.getElementById("mobile-warning").hidden = false;
-            }
-        </script>
     </body>
 </html>
