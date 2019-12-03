@@ -21,6 +21,8 @@ const TOP_COMMAND = (context: msg_data, args: string[]): string => {
     // Ensure message doesn't get too long
     if (top_x > 10) {
         return `I can't display more than 10 of the top options.`;
+    } else if (top_x <= 0) {
+        return `I can't display less than or equal to 0 of the top results.`;
     };
 
 
