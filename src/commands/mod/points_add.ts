@@ -10,7 +10,7 @@ import { REGISTER_COMMAND } from "../../cmd_handler";
 import { LOAD, WRITE } from "../../utils/db";
 import { PERM } from "../../constants";
 
-// !points add 5 potato
+
 
 const POINTS_ADD_COMMAND = (ctx: msg_data, args: string[]): string => {
     ctx.channel = ctx.channel.replace(/\#/, "").replace(" ", "_")
