@@ -7,6 +7,7 @@
 
 
 import { REGISTER_COMMAND } from "../../cmd_handler";
+import { PERM } from "../../constants";
 import { LOAD } from "../../utils/db";
 
 
@@ -53,6 +54,6 @@ const metadata: cmd_metadata = {
     args: [],
     group: null,
     name: "lead",
-    level: 0
+    level: PERM.ALL
 };
 REGISTER_COMMAND(metadata);
