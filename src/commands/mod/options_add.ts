@@ -13,9 +13,9 @@ import { PERM } from "../../constants";
 
 
 const OPTIONS_ADD_COMMAND = (ctx: msg_data, args: string[]): string => {
-    ctx.channel = ctx.channel.replace(/\#/, "").replace(" ", "_")
+    ctx.channel = ctx.channel.replace(/\#/, "").replace(" ", "_");
     let data = LOAD(ctx.channel);
-    let name = args[0]
+    let name = args[0];
 
     for (var option of data) {
         if (option.aliases.includes(name.toLowerCase())) {
