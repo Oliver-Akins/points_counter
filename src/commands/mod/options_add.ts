@@ -7,9 +7,8 @@
 
 
 import { REGISTER_COMMAND } from "../../cmd_handler";
-import { LOAD_CONFIG } from "../../utils/Config";
-import { PERM } from "../../constants";
 import { LOAD, WRITE } from "../../utils/db";
+import { PERM } from "../../constants";
 
 
 
