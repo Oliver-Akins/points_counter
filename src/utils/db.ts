@@ -81,19 +81,19 @@ export const CREATE = (channel: string): "SUCCESS"|"ERROR"|"EXISTS" => {
 
 
 
-export const DELETE = (channel: string): boolean => {
+export const DELETE = (channel: string): "ERROR"|"DELETED"|"NOT_EXIST" => {
     let filepath = path.resolve(`${config.DATA_DIR}`) + `/${channel}.json`;
 
     // Ensure file doesn't already exist
     if (!fs.existsSync(filepath)) {
-        return false;
+        return "NOT_EXIST";
     };
 
     // Attempt to delete the file
     try {
         fs.unlinkSync(filepath);
-        return true;
+        return "DELETED";
     } catch {
-        return false;
+        return "ERROR";
     };
 };
