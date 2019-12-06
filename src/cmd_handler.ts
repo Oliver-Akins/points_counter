@@ -173,6 +173,7 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
 
 
 /* Importing all the commands so they can register */
+import "./commands/usr/all";
 import "./commands/usr/top";
 import "./commands/usr/ping";
 import "./commands/usr/help";
