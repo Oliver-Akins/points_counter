@@ -17,12 +17,9 @@ const POINTS_ADD_COMMAND = (ctx: msg_data, args: string[]): string => {
 
     let data = LOAD(ctx.channel);
 
-    let amount: number;
-    try {
-        amount = parseInt(args[0]);
-    } catch {
-        return `Error: Cannot convert ${args[0]} to an integer.`
-    };
+    let amount: number = parseInt(args[0]);
+    if (!amount) { return `Cannot convert "${args[0]}" into an integer.`; };
+
     let target = args[1];
     let user = args[2] ? args[2] : "%anonymous%";
 
