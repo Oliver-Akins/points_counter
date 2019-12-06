@@ -89,10 +89,10 @@ export class Confirmation {
         cb: (type: CONFIRM_TYPE, data?: any) => string,
         data?: any
     ) {
-        this.callback = cb;
         this.username = username;
         this.channel = channel;
         this.created = Date.now();
+        this.callback = cb;
         this.timeout = timeout * 1000;
         this.data = data;
     };
