@@ -20,7 +20,20 @@ interface discord_options extends auth_options {
 interface twitch_options extends auth_options {
     CHANNELS: [string];
     USERNAME: string;
-    SCOPES: [string];
+}
+
+interface mixer_options extends auth_options {
+    /*
+     * This is a list of channel IDs that the bot should watch messages for
+     */
+    CHANNELS: [number];
+
+    /*
+     * This is the User ID that the OAUTH_TOKEN belongs to.
+     * The bot shoudl use the chatbot example in Mixer's docs to get
+     * the OAUTH_TOKEN if/when needed.
+     */
+    USER_ID: number;
 }
 
 
@@ -39,6 +52,7 @@ interface config {
     WEBSITE: string;
     twitch: twitch_options;
     discord: discord_options;
+    mixer: mixer_options;
     bot: bot_options;
     webhooks: {
         LOGGING?: string;
