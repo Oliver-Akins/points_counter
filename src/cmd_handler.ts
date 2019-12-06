@@ -176,6 +176,7 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
 import "./commands/usr/top";
 import "./commands/usr/ping";
 import "./commands/usr/help";
+import "./commands/usr/lead";
 import "./commands/usr/version";
 import "./commands/mod/points_add";
 import "./commands/mod/options_add";

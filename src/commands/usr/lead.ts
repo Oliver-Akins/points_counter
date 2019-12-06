@@ -42,4 +42,19 @@ const LEAD_COMMAND = (ctx: msg_data, args: string[]): string => {
     };
 
     return `${leader[0]} ${state} with ${leader[1]} points.`
-}
+};
+
+
+
+const metadata: cmd_metadata = {
+    description: "Tells you what characters are in the lead in a nice, English format.",
+    requires_confirm: false,
+    case_sensitive: false,
+    executable: null,
+    opt_args: 0,
+    args: [],
+    group: null,
+    name: "lead",
+    level: 0
+};
+REGISTER_COMMAND(metadata);
