@@ -21,7 +21,7 @@ const POINTS_ADD_COMMAND = (ctx: msg_data, args: string[]): string => {
     if (!amount) { return `Cannot convert "${args[0]}" into an integer.`; };
 
     let target = args[1];
-    let user = args[2] ? args[2] : "%anonymous%";
+    let user = args[2] || "%anonymous%";
 
 
     for (var option of data) {
