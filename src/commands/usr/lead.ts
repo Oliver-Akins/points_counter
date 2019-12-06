@@ -40,7 +40,7 @@ const LEAD_COMMAND = (ctx: msg_data, args: string[]): string => {
         };
     };
 
-    return `${leader[0]} ${leader[1]} with ${leader[1]} points.`;
+    return `${leader[0]} ${leader[1]} with ${leader[2]} points.`;
 };
 
 
