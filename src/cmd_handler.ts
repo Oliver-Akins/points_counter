@@ -50,7 +50,7 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
             context.user, context.channel, context.message
         );
 
-        if (response !== "no_match") {
+        if (!["no_match", "expired"].includes(response)) {
             confirms.splice(parseInt(index), 1)
             let cmd_resp = confirmation.run(response);
 
@@ -75,7 +75,12 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
                 })
             }
 
-            return cmd_resp
+            return cmd_resp;
+        }
+
+        else if (response === "expired") {
+            confirms.splice(parseInt(index), 1)
+            confirmation.run(response);
         };
     };
 
