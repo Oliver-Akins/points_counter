@@ -188,5 +188,6 @@ import "./commands/mod/points_add";
 import "./commands/mod/options_add";
 import "./commands/usr/options_list";
 import "./commands/mod/points_remove";
+import "./commands/mod/options_remove";
 import "./commands/admin/init_datafile";
 import "./commands/admin/delete_datafile";
