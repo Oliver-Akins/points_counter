@@ -13,11 +13,16 @@ import { PERM } from "../../constants";
 
 
 const POINTS_ADD_COMMAND = (ctx: msg_data, args: string[]): string => {
-    ctx.channel = ctx.channel.replace(/\#/, "").replace(" ", "_")
+    ctx.channel = ctx.channel.replace(/\#/, "").replace(" ", "_");
 
     let data = LOAD(ctx.channel);
 
-    let amount = parseInt(args[0]);
+    let amount: number;
+    try {
+        amount = parseInt(args[0]);
+    } catch {
+        return `Error: Cannot convert ${args[0]} to an integer.`
+    };
     let target = args[1];
     let user = args[2] ? args[2] : "%anonymous%";
 
