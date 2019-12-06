@@ -12,7 +12,7 @@ import { LOAD } from "../../utils/db";
 
 
 
-const ALL_OPTIONS_COMMAND = (ctx: msg_data, args: string[]) => {
+const ALL_OPTIONS_COMMAND = (ctx: msg_data, args: string[]): string => {
 
 
     let data = LOAD(ctx.channel.replace(/#/g, "").replace(/ /g, "_"));
