@@ -52,7 +52,7 @@ export class Command {
     // Does the user's message match a command
     public matches (message: string): boolean {
 
-        let config: config = LOAD_CONFIG();
+        const config: config = LOAD_CONFIG();
 
         // Construct the regex
         let regex: string = `^${config.bot.PREFIX}`;
@@ -101,6 +101,9 @@ export class Confirmation {
 
     public matches (user: string, channel: string, msg: string): CONFIRM_TYPE {
 
+        const config: config = LOAD_CONFIG();
+
+
         // Timeout checking
         if (Date.now() - this.created > this.timeout) { return "expired"; }
 
@@ -109,8 +112,8 @@ export class Confirmation {
         else if (this.channel !== channel) { return "no_match"; }
 
         // Positive or negative match?
-        else if (msg.match(/^![Yy](es)?$/)) { return "confirm"; }
-        else if (msg.match(/^![Nn](o)?$/)) { return "deny"; }
+        else if (msg.match(`^${config.bot.PREFIX}[Yy](es)?$`)) { return "confirm"; }
+        else if (msg.match(`^${config.bot.PREFIX}[Nn](o)?$`)) { return "deny"; }
 
         // Not valid
         else { return "invalid"; };
