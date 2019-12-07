@@ -1,6 +1,6 @@
 //
-// ENG_CA.ts
+// ENG_US.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/03)
+// Written by: Tyler Akins ()
 //
