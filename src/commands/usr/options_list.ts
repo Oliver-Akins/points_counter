@@ -67,7 +67,6 @@ const LIST_OPTIONS = (ctx: msg_data, args: string[]): string => {
 
 
 
-// Options command without subcommand
 REGISTER_COMMAND({
     description: "Lists all of the options that exist for the channel",
     requires_confirm: false,
