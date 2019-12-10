@@ -9,13 +9,10 @@
         <link rel="stylesheet" href="/style.css">
     </head>
     <body>
-        <h1 class="title center">{PAGE TITLE}</h1>
+        <h1 class="title center">Points Counter</h1>
         <p class="small center">Version ${d.c.bot.VERSION}</p>
         <hr>
         <div class="nav">
-            <div class="item">
-                <a href="/">Home</a>
-            </div>
             <div class="item">
                 <a href="/commands">Commands</a>
             </div>
@@ -24,7 +21,14 @@
             </div>
         </div>
         <hr>
-        {BODY}
+        <div id="About">
+            <h3>About</h3>
+            This bot was created to be able to track points of whatever you want
+            on your stream. I do not offer support for getting the
+            bot running on your server. If you cannot get it running yourself, I
+            do not have the time to help you. It's fairly simple to get running
+            for yourself.
+        </div>
         <hr>
         <div class="nav">
             <div class="item">
