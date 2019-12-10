@@ -6,23 +6,28 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Points Counter Help</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/dark.css">
-        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="/style.css">
     </head>
     <body>
-        <h1>Points Counter</h1>
+        <h1 class="title center">Points Counter</h1>
+        <p class="small center">Version ${d.c.bot.VERSION}</p>
         <hr>
         <div class="nav">
-            <ul class="link-bar">
-                <li><a href="./">Home</a></li>
-                <li><a href="./command/">Commands</a></li>
-                <li><a href="./tech-specs">Technical</a></li>
-            </ul>
+            <div class="item">
+                <a href="/">Home</a>
+            </div>
+            <div class="item">
+                <a href="/commands">Commands</a>
+            </div>
+            <div class="item">
+                <a href="/cli-args">CLI Arguments</a>
+            </div>
         </div>
         <hr>
         <div class="alert warn">
-            Warning: No support is given to users about how to host the bot
-            on their own. I do not have enough time to help people maintain
-            their own versions of the bot.
+            Warning: No support is given to users concerning how to host the
+            bot on their own. I do not have enough time to help people
+            maintain their own versions of the bot.
         </div>
         <div id="Dependencies">
             <h3>Dependencies</h3>
@@ -32,14 +37,13 @@
                     programming utilities.
                 </li>
                 <li>
-                    Twitch account (optional, required for using Twitch though)
+                    Twitch account. (optional)
                 </li>
                 <li>
-                    Discord bot application. (optional, required for using
-                    Discord though)
+                    Discord bot application. (optional)
                 </li>
                 <li>Node JS v10.16.X</li>
-                <li>npm 6.13.1</li>
+                <li>Node Package Manager 6.13.X</li>
                 <li>Typescript 3.6.X</li>
             </ul>
         </div>
@@ -53,13 +57,8 @@
                 compile the TS to JS using tsc after installing the Node
                 dependencies using
                 <code>npm i</code>.
-                Fill in the config file, then run
-                <code>dist/main.js</code>
-                with the
-                <code>--compile-docs</code>
-                option. Then run the same file with whatever other arguments
-                you want to specify for the services you want to have the bot
-                in.
+                Copy <code>config.template.json</code> to
+                <code>config.json</code> and fill it in.
             </p>
         </div>
         <hr>
@@ -73,10 +72,10 @@
             </p>
         </div>
         <hr>
-        <div id="Footer">
-            <ul>
-                <li><a href="./copyright.html">Copyright</a></li>
-            </ul>
+        <div class="nav">
+            <div class="item">
+                <a href="/copyright">Copyright</a>
+            </div>
         </div>
     </body>
 </html>

@@ -14,7 +14,7 @@ import { PERM } from "./constants";
 
 
 
-var commands: Command[] = [];
+export var commands: Command[] = [];
 export var confirms: Confirmation[] = [];
 var global_last_ran: number;
 var service_last_rans: any = {}

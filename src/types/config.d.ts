@@ -46,6 +46,14 @@ interface bot_options {
 }
 
 
+
+interface web_server_options {
+    ROOT: string;
+    PORT: number;
+}
+
+
+
 interface config {
     DEV: boolean;
     DATA_DIR: string;
@@ -57,5 +65,6 @@ interface config {
     webhooks: {
         LOGGING?: string;
         ERROR?: string;
-    }
+    };
+    web: web_server_options;
 }
