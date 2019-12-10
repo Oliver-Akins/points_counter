@@ -2,7 +2,7 @@
 // top.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/29 - 2019/12/02)
+// Written by: Tyler Akins (2019/11/29 - 2019/12/09)
 //
 
 import { REGISTER_COMMAND } from "../../cmd_handler";
@@ -44,7 +44,7 @@ const metadata: cmd_metadata = {
     name: "top",
     opt_args: 1,
     args: [
-        "<Top: Integer>"
+        "[Amount: Integer]"
     ],
     level: PERM.ALL
 };
