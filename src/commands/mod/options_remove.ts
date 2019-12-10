@@ -2,7 +2,7 @@
 // options_remove.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/06)
+// Written by: Tyler Akins (2019/12/06 - 2019/12/09)
 //
 
 
@@ -13,7 +13,7 @@ import { PERM } from "../../constants";
 
 
 const OPTIONS_REMOVE = (ctx: msg_data, args: string[]): string => {
-    ctx.channel = ctx.channel.replace(/\#/, "").replace(" ", "_");
+    ctx.channel = ctx.channel.replace(/\#/g, "").replace(" ", "_");
     let data = LOAD(ctx.channel);
     let name = args[0].toLowerCase();
 
