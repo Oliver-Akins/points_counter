@@ -2,7 +2,7 @@
 // Command.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/06 - 2019/11/12)
+// Written by: Tyler Akins (2019/11/06 - 2019/12/10)
 //
 
 
@@ -15,6 +15,7 @@ export class Command {
     readonly case_sensitive: boolean;
     readonly arg_list: string[];
     readonly mand_args: number;
+    readonly full_name: string;
     readonly opt_args: number;
     readonly syntax: string;
     readonly level: number;
@@ -37,15 +38,18 @@ export class Command {
         this.group = metadata.group;
         this.level = metadata.level;
         this.name = metadata.name;
+        this.requires_confirm = metadata.requires_confirm;
+        this.full_name = this.group ? `${this.group} ${this.name}` : `${this.name}`;
 
 
         // NOTE: Create syntax dynamically
         let config: config = LOAD_CONFIG();
 
         this.syntax = config.bot.PREFIX;
-        if (this.group) { this.syntax += this.group; };
-        this.syntax += ` ${this.name} `;
-        this.syntax += this.arg_list.join(" ");
+        this.syntax += this.group ? `${this.group} ${this.name}` : `${this.name}`;
+        if (this.arg_list.length > 0) {
+            this.syntax += ` ${this.arg_list.join(" ")}`;
+        }
     };
 
 

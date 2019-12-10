@@ -1,7 +1,4 @@
 :root {
-    --footer-link-margin: 30px;
-
-
     --anchor-default: #00aa00;
     --anchor-hover: #1b7709;
 
@@ -25,13 +22,17 @@ div a:hover, p a:hover { color: var(--anchor-hover); }
 
 
 
-div#Footer ul {
-    list-style: none;
-    padding: 0;
+div.nav {
+    display: inline-flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
 }
-div#Footer li {
-    display: inline-block;
-    margin-right: var(--footer-link-margin);
+div.item {
+    text-align: center;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    flex-basis: content;
 }
 
 
@@ -64,4 +65,16 @@ div.info {
     border-color: var(--info-border);
     color: var(--info-text);
     background-color: var(--info-background);
+}
+
+
+.title {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+.center {
+    text-align: center;
+}
+.small {
+    font-size: small;
 }

@@ -9,22 +9,19 @@
         <link rel="stylesheet" href="/style.css">
     </head>
     <body>
-        <h1 class="title center">{PAGE TITLE}</h1>
+        <h1 class="title center">Points Counter Commands</h1>
         <p class="small center">Version ${d.c.bot.VERSION}</p>
         <hr>
         <div class="nav">
             <div class="item">
-                <a href="/">Home</a>
-            </div>
-            <div class="item">
-                <a href="/commands">Commands</a>
+                <a href="/" class="center">Home</a>
             </div>
             <div class="item">
                 <a href="/tech-specs">Technical</a>
             </div>
         </div>
         <hr>
-        {BODY}
+        ${d.cmds.join("<hr>")}
         <hr>
         <div class="nav">
             <div class="item">

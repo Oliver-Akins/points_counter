@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="/style.css">
     </head>
     <body>
-        <h1 class="title center">{PAGE TITLE}</h1>
+        <h1 class="title center">Points Counter Config</h1>
         <p class="small center">Version ${d.c.bot.VERSION}</p>
         <hr>
         <div class="nav">

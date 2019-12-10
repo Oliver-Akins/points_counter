@@ -6,9 +6,24 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Points Counter Help</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/dark.css">
+        <link rel="stylesheet" href="/style.css">
     </head>
     <body>
-        <h1>Points Counter Help</h1>
+        <h1 class="title center">CLI Arguments</h1>
+        <p class="small center">Version ${d.c.bot.VERSION}</p>
+        <hr>
+        <div class="nav">
+            <div class="item">
+                <a href="/">Home</a>
+            </div>
+            <div class="item">
+                <a href="/commands">Commands</a>
+            </div>
+            <div class="item">
+                <a href="/tech-specs">Technical</a>
+            </div>
+        </div>
+        <hr>
         <h2>Bot Runners:</h2>
         <div id="twitch">
             <h3><code>--twitch</code></h3>
@@ -34,7 +49,7 @@
                 are not given, the program will exit stopping all bots.
             </p>
         </div>
-        <br><br>
+        <hr>
         <h2>Misc Utilites:</h2>
         <div id="test">
             <h3><code>--test</code></h3>
@@ -42,15 +57,22 @@
                 Runs the tests for the various commands.
             </p>
         </div>
-        <div id="compile-docs">
-            <h3><code>--compile-docs</code></h3>
+        <div id="web">
+            <h3><code>--web</code></h3>
             <p>
-                Compiles the documentation for all the commands, this prevents
-                the need for a web server to serve to documentation on.
+                Runs the web server. This allows the serving of the help
+                documentation dynamically.
             </p>
+            <div class="alert info">
+                If this argument is not given, you will not be able to access
+                the help documentation for the bot at all.
+            </div>
         </div>
-        <br><br>
-        <h2>Copyright:</h2>
-        This bot was written for Resonym's Twitch stream on behalf of Tyler Akins, all rights remain under Canadian Copyright Law and Tyler Akins as their rightful owner.
+        <hr>
+        <div class="nav">
+            <div class="item">
+                <a href="/copyright">Copyright</a>
+            </div>
+        </div>
     </body>
 </html>

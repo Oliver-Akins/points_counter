@@ -6,6 +6,7 @@
 //
 
 import { run_discord } from "./services/discord_handler";
+import { run_web_server } from "./services/web_server";
 import { run_twitch } from "./services/twitch_handler";
 import { run_tests } from "./services/test_runner";
 import { LOAD_CONFIG } from "./utils/Config";
@@ -41,7 +42,6 @@ if (args.includes("--discord")) {
 };
 
 
-if (args.includes("--compile-docs")) {
-    // TODO: Create a specific file for each command object with it's description, syntax, etc.
-    // TODO: Set `{pre}` in all docs to be the prefix from the config
+if (args.includes("--web")) {
+    run_web_server();
 };
