@@ -28,5 +28,9 @@
   "webhooks": {
     "LOGGING": "MUST_BE_FILLED_IN",
     "ERROR": "MUST_BE_FILLED_IN"
+  },
+  "web": {
+    "ROOT": "./docs",
+    "PORT": 4000
   }
 }
