@@ -83,8 +83,8 @@ const DELETE_DATAFILE_CONFIRM = (type: CONFIRM_TYPE, data: string): string => {
 
 
 const metadata: cmd_metadata = {
-    description: "Deletes the data for the current channel. Does not follow symlinks.",
-    requires_confirm: false,
+    description: "Deletes the data for the current channel. Does not follow symlinks to other channel files.",
+    requires_confirm: true,
     case_sensitive: false,
     executable: DELETE_DATAFILE,
     opt_args: 0,
