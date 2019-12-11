@@ -23,6 +23,8 @@ export class Command {
     readonly info: string;
     readonly name: string;
 
+    readonly alert: alert_structure;
+
     private _func: (context: msg_data, args: string[]) => string;
 
     public last_ran: number;
@@ -38,6 +40,7 @@ export class Command {
         this.group = metadata.group;
         this.level = metadata.level;
         this.name = metadata.name;
+        this.alert = metadata.alerts;
         this.requires_confirm = metadata.requires_confirm;
         this.full_name = this.group ? `${this.group} ${this.name}` : `${this.name}`;
 
