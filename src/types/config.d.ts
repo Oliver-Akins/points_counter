@@ -18,6 +18,7 @@ interface discord_options extends auth_options {
     DEV_TOKEN: string;
 }
 interface twitch_options extends auth_options {
+    REPLY_TO_AUTO_ADD: boolean
     CHANNELS: [string];
     USERNAME: string;
 }
@@ -30,7 +31,7 @@ interface mixer_options extends auth_options {
 
     /*
      * This is the User ID that the OAUTH_TOKEN belongs to.
-     * The bot shoudl use the chatbot example in Mixer's docs to get
+     * The bot should use the chatbot example in Mixer's docs to get
      * the OAUTH_TOKEN if/when needed.
      */
     USER_ID: number;
