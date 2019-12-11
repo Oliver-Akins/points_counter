@@ -15,6 +15,7 @@ Templater in general (for cmd bit): https://github.com/Drulac/template-literal
 import * as templater from "template-literal";
 import { LOAD_CONFIG } from "../utils/Config";
 import { commands } from "../cmd_handler";
+import { PERM } from "../constants";
 import * as express from "express";
 import * as tl from "express-tl"
 import * as path from "path";
@@ -61,15 +62,31 @@ export const run_web_server = () => {
 
         let cmdTemplate = templater(fs.readFileSync(VIEWS + "/partials/cmd.tl"));
 
-        let cmds: string[] = []
+        let usr_cmds: string[] = [];
+        let mod_cmds: string[] = [];
+        let admin_cmds: string[] = [];
+
         // Iterate through each command parsing it:
         for (var cmd of commands) {
-            cmds.push(cmdTemplate({"cmd": cmd}));
+            switch (cmd.level) {
+                case PERM.MOD:
+                    mod_cmds.push(cmdTemplate({ "cmd": cmd }));
+                    break;
+                case PERM.ADMIN:
+                    admin_cmds.push(cmdTemplate({ "cmd": cmd }));
+                    break;
+                case PERM.ALL:
+                default:
+                    usr_cmds.push(cmdTemplate({ "cmd": cmd }));
+                    break;
+            }
         };
 
         res.render("all_commands", {
             "c": config,
-            "cmds": cmds
+            "u_cmds": usr_cmds,
+            "m_cmds": mod_cmds,
+            "a_cmds": admin_cmds
         });
     });
 

@@ -21,7 +21,14 @@
             </div>
         </div>
         <hr>
-        ${d.cmds.join("<hr>")}
+        <h2>User Commands</h2>
+        ${d.u_cmds.join("\n")}
+        <hr>
+        <h2>Moderator Commands</h2>
+        ${d.m_cmds.join("\n")}
+        <hr>
+        <h2>Admin Commands</h2>
+        ${d.a_cmds.join("\n")}
         <hr>
         <div class="nav">
             <div class="item">
