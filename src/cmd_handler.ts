@@ -8,6 +8,7 @@
 
 /* Imports */
 import { Command, Confirmation } from "./utils/Command";
+import { SORT_COMMANDS } from "./utils/sorting";
 import { LOAD_CONFIG } from "./utils/Config";
 import { log } from "./utils/webhook";
 import { PERM } from "./constants";
@@ -24,9 +25,10 @@ export const REGISTER_COMMAND = (metadata: cmd_metadata): boolean => {
     // Ensure command gets added correctly
     try {
         commands.push(new Command(metadata));
-        return true
+        SORT_COMMANDS(commands);
+        return true;
     } catch (error) {
-        return false
+        return false;
     };
 };
 
