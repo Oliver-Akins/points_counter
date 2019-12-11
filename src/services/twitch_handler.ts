@@ -1,8 +1,16 @@
+//
+// twitch_handler.ts
+// Protected under Canadian Copyright Laws
+//
+// Written by: Tyler Akins (2019/12/10)
+//
+
 import * as tmi from "tmi.js";
 import { HANDLE_MESSAGE } from "../cmd_handler";
 import { LOAD_CONFIG } from "../utils/Config";
-import { log_error } from "../utils/webhook";
+import { log_error, log } from "../utils/webhook";
 import { PERM } from "../constants";
+import { LOAD } from "../utils/db";
 
 /*
 
@@ -131,22 +139,56 @@ export const run_twitch = () => {
     // !SECTION
 
 
-    // A user is cheering us on!
-    // client.on("cheer", (channel: string, context: tmi.Userstate, message: string) => {
-    //     // Do your stuff.
-    //     let bit_count: number = context.bits;
-    //     // Should be able to just call the CMD handler with a falsified command message
-    //     // which would allow us to just kinda hack our way around the fact it's automated
-    // });
+    // SECTION: Auto bit addition
+    client.on("cheer", (channel: string, context: tmi.Userstate, message: string) => {
+
+        let bit_total: number = parseInt(context.bits);
+        let data: option[] = LOAD(channel.replace(/#/g, ""));
+        let aliases: string[] = [];
+
+
+        // Condense aliases
+        for (var opt of data) { aliases.push(...opt.aliases); };
+
+
+        // Iterate through message
+        for (var word of message.split(" ")) {
+
+            // Punctuation cleanup
+            word = word.toLowerCase().replace(/\W/g, "")
+
+            // Ensure valid option
+            if (aliases.includes(word)) {
+
+                // Trigger addition
+                let response = HANDLE_MESSAGE({
+                    message: `${config.bot.PREFIX}points add ${bit_total} ${word} ${context.username}`,
+                    source: "Twitch",
+                    channel: channel,
+                    level: PERM.MOD,
+                    user: context.username,
+                    cooldown: false
+                });
+
+                // Reply if possible
+                if (response && config.twitch.REPLY_TO_AUTO_ADD) {
+                    client.say(channel, response);
+                };
+                return;
+            };
+        };
+    });
+    // !SECTION
+
 
     client.on("disconnected", (reason: string) => {
-        console.log(`* Disconnected from Twitch`);
+        log({ msg: `* Disconnected from Twitch` });
     });
+
 
     client.on("connected", (addr: string, port: number) => {
-        console.log(`* Connected to ${addr}:${port}`);
-        // client.say("#alkali_metal", "Connected to chat. I'm now active.");
+        log({ msg: `* Disconnected from Twitch` });
     });
 
-    client.connect().catch((err) => {throw err})
+    client.connect().catch((_) => {})
 };
