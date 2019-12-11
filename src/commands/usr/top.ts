@@ -2,11 +2,11 @@
 // top.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/29 - 2019/12/09)
+// Written by: Tyler Akins (2019/11/29 - 2019/12/10)
 //
 
 import { REGISTER_COMMAND } from "../../cmd_handler";
-import { SORT_OPTIONS } from "../../utils/Options";
+import { SORT_OPTIONS } from "../../utils/sorting";
 import { PERM } from "../../constants";
 import { LOAD } from "../../utils/db";
 
