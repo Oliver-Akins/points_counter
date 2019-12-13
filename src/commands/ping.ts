@@ -5,8 +5,8 @@
 // Written by: Tyler Akins (2019/11/06 - 2019/11/23)
 //
 
-import { REGISTER_COMMAND } from "../../cmd_handler";
-import { PERM } from "../../constants";
+import { REGISTER_COMMAND } from "../cmd_handler";
+import { PERM } from "../constants";
 
 
 const PING_COMMAND = (context: msg_data, args: string[]): string => {

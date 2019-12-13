@@ -180,19 +180,19 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
 
 
 /* Importing all the commands so they can register */
-import "./commands/usr/all";
-import "./commands/usr/top";
-import "./commands/usr/ping";
-import "./commands/usr/help";
-import "./commands/usr/lead";
-import "./commands/usr/version";
-import "./commands/usr/alias_list";
-import "./commands/mod/points_add";
-import "./commands/mod/options_add";
-import "./commands/mod/alias_remove";
-import "./commands/usr/options_list";
-import "./commands/usr/options_info";
-import "./commands/mod/points_remove";
-import "./commands/mod/options_remove";
-import "./commands/admin/init_datafile";
-import "./commands/admin/delete_datafile";
+import "./commands/all";
+import "./commands/top";
+import "./commands/ping";
+import "./commands/help";
+import "./commands/lead";
+import "./commands/version";
+import "./commands/alias_list";
+import "./commands/points_add";
+import "./commands/options_add";
+import "./commands/alias_remove";
+import "./commands/options_list";
+import "./commands/options_info";
+import "./commands/points_remove";
+import "./commands/options_remove";
+import "./commands/init_datafile";
+import "./commands/delete_datafile";

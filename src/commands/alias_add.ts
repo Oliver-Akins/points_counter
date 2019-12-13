@@ -6,7 +6,7 @@
 //
 
 
-import { LOAD } from "../../utils/db";
+import { LOAD } from "../utils/db";
 
 
 const ALIAS_ADD = (ctx: msg_data, args: string[]): string => {

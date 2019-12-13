@@ -5,10 +5,10 @@
 // Written by: Tyler Akins (2019/11/29 - 2019/12/10)
 //
 
-import { REGISTER_COMMAND } from "../../cmd_handler";
-import { SORT_OPTIONS } from "../../utils/sorting";
-import { PERM } from "../../constants";
-import { LOAD } from "../../utils/db";
+import { REGISTER_COMMAND } from "../cmd_handler";
+import { SORT_OPTIONS } from "../utils/sorting";
+import { PERM } from "../constants";
+import { LOAD } from "../utils/db";
 
 
 const TOP_COMMAND = (context: msg_data, args: string[]): string => {

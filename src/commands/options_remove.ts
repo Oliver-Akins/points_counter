@@ -6,9 +6,9 @@
 //
 
 
-import { REGISTER_COMMAND } from "../../cmd_handler";
-import { LOAD, WRITE } from "../../utils/db";
-import { PERM } from "../../constants";
+import { REGISTER_COMMAND } from "../cmd_handler";
+import { LOAD, WRITE } from "../utils/db";
+import { PERM } from "../constants";
 
 
 

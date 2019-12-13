@@ -6,11 +6,11 @@
 //
 
 
-import { REGISTER_COMMAND, confirms } from "../../cmd_handler";
-import { Confirmation } from "../../utils/Command";
-import { LOAD_CONFIG } from "../../utils/Config";
-import { DELETE } from "../../utils/db";
-import { PERM } from "../../constants";
+import { REGISTER_COMMAND, confirms } from "../cmd_handler";
+import { Confirmation } from "../utils/Command";
+import { LOAD_CONFIG } from "../utils/Config";
+import { DELETE } from "../utils/db";
+import { PERM } from "../constants";
 
 
 

@@ -5,9 +5,9 @@
 // Written by: Tyler Akins (2019/11/23)
 //
 
-import { REGISTER_COMMAND } from "../../cmd_handler";
-import { LOAD_CONFIG } from "../../utils/Config";
-import { PERM } from "../../constants";
+import { REGISTER_COMMAND } from "../cmd_handler";
+import { LOAD_CONFIG } from "../utils/Config";
+import { PERM } from "../constants";
 
 
 const VERSION_COMMAND = (context: msg_data, args: string[]): string => {
