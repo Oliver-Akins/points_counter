@@ -186,6 +186,7 @@ import "./commands/usr/ping";
 import "./commands/usr/help";
 import "./commands/usr/lead";
 import "./commands/usr/version";
+import "./commands/usr/alias_list";
 import "./commands/mod/points_add";
 import "./commands/mod/options_add";
 import "./commands/usr/options_list";
