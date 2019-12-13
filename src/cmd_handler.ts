@@ -61,7 +61,7 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
             if (cmd_resp) {
                 log({
                     title: `Log Entry (Confirmation Response):`,
-                    msg: `Command:\`\`\`${context.message}\`\`\`\n\nResponse:\`\`\`${cmd_resp}\`\`\``,
+                    msg: `Command:\`\`\`\n${context.message}\n\`\`\`\n\nResponse:\`\`\`\n${cmd_resp}\n\`\`\``,
                     embed: true,
                     fields: {
                         "Date:": date,
@@ -159,7 +159,7 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
 
         log({
             title: `Log Entry:`,
-            msg: `Command:\`\`\`${context.message}\`\`\`\n\nResponse:\`\`\`${response}\`\`\``,
+            msg: `Command:\`\`\`\n${context.message}\n\`\`\`\n\nResponse:\`\`\`\n${response}\n\`\`\``,
             embed: true,
             fields: {
                 "Date:": date,
