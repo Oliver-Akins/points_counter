@@ -189,6 +189,7 @@ import "./commands/usr/version";
 import "./commands/usr/alias_list";
 import "./commands/mod/points_add";
 import "./commands/mod/options_add";
+import "./commands/mod/alias_remove";
 import "./commands/usr/options_list";
 import "./commands/usr/options_info";
 import "./commands/mod/points_remove";
