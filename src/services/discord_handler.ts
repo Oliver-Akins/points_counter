@@ -71,7 +71,8 @@ export const run_discord = () => {
                 message: msg.content.trim().replace(/\n/g, ""),
                 source: "Discord",
                 user: msg.author.username,
-                cooldown: true
+                cooldown: true,
+                test: false
             });
 
             // NOTE: Ensure response isn't null

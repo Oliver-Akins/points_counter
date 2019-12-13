@@ -83,7 +83,8 @@ export const run_twitch = () => {
                 level: level,
                 source: "Twitch",
                 user: context.username,
-                cooldown: true
+                cooldown: true,
+                test: false
             });
 
 
@@ -167,7 +168,8 @@ export const run_twitch = () => {
                     channel: channel,
                     level: PERM.MOD,
                     user: context.username,
-                    cooldown: false
+                    cooldown: false,
+                    test: false
                 });
 
                 // Reply if possible
