@@ -30,7 +30,7 @@ const ALIAS_LIST = (ctx: msg_data, args: string[]): string => {
 };
 
 
-const metadata: cmd_metadata = {
+REGISTER_COMMAND({
     description: "Lists all the aliases associated with a specific option in the channel.",
     requires_confirm: false,
     case_sensitive: false,
@@ -42,5 +42,19 @@ const metadata: cmd_metadata = {
     group: "alias",
     name: "list",
     level: PERM.ALL
-};
-REGISTER_COMMAND(metadata);
+});
+
+
+REGISTER_COMMAND({
+    description: "Lists all the aliases associated with a specific option in the channel. This is an alias for alias_list",
+    requires_confirm: false,
+    case_sensitive: false,
+    executable: ALIAS_LIST,
+    opt_args: 0,
+    args: [
+        "<Option: String>"
+    ],
+    group: null,
+    name: "aliases",
+    level: PERM.ALL
+});
