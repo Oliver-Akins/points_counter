@@ -27,6 +27,6 @@ export const LOAD_LINKS = (): {[key: string]: string} => {
 export const UPDATE_LINKS = (data: {[key: string]: string}): void => {
     writeFileSync(
         resolve(`${config.DATA_DIR}/#links#.json`),
-        data
+        JSON.stringify(data)
     );
 };
