@@ -2,7 +2,7 @@
 // cmd_handler.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/06 - 2019/12/06)
+// Written by: Tyler Akins (2019/11/06 - 2019/12/13)
 //
 
 
@@ -186,6 +186,7 @@ import "./commands/ping";
 import "./commands/help";
 import "./commands/lead";
 import "./commands/version";
+import "./commands/alias_add";
 import "./commands/alias_list";
 import "./commands/points_add";
 import "./commands/options_add";
@@ -193,6 +194,6 @@ import "./commands/alias_remove";
 import "./commands/options_list";
 import "./commands/options_info";
 import "./commands/points_remove";
-import "./commands/options_remove";
 import "./commands/init_datafile";
+import "./commands/options_remove";
 import "./commands/delete_datafile";
