@@ -189,6 +189,7 @@ import "./commands/version";
 import "./commands/data_init";
 import "./commands/alias_add";
 import "./commands/alias_list";
+import "./commands/admin_link";
 import "./commands/points_add";
 import "./commands/data_delete";
 import "./commands/options_add";
