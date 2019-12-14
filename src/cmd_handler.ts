@@ -194,6 +194,7 @@ import "./commands/points_add";
 import "./commands/data_delete";
 import "./commands/options_add";
 import "./commands/alias_remove";
+import "./commands/admin_unlink";
 import "./commands/options_list";
 import "./commands/options_info";
 import "./commands/points_remove";
