@@ -7,8 +7,7 @@
 
 
 import { LOAD_CONFIG } from "./Config";
-import { readFileSync } from "fs";
-import { resolve } from "path";
+import { LOAD_LINKS } from "./links";
 
 
 const config: config = LOAD_CONFIG();
@@ -24,10 +23,7 @@ export const RESOLVE_CHANNEL = (ctx: msg_data, link_resolutions=5): string => {
     ctx.channel = ctx.channel.replace(/ /g, "_");
 
 
-    const links = JSON.parse(
-        // @ts-ignore
-        readFileSync(resolve(`${config.DATA_DIR}/#links#.json`))
-    );
+    const links = LOAD_LINKS();
 
 
     let resolves = 0;
