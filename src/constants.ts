@@ -2,8 +2,11 @@
 // constants.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/06 - 2019/11/07)
+// Written by: Tyler Akins (2019/11/06 - 2019/12/13)
 //
+
+export const VERSION: string = "3.0.0"
+
 
 export const PERM: perms = {
     ALL: 0,

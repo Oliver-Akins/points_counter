@@ -2,17 +2,15 @@
 // version.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/23)
+// Written by: Tyler Akins (2019/11/23 - 2019/12/13)
 //
 
 import { REGISTER_COMMAND } from "../cmd_handler";
-import { LOAD_CONFIG } from "../utils/Config";
-import { PERM } from "../constants";
+import { PERM, VERSION } from "../constants";
 
 
 const VERSION_COMMAND = (context: msg_data, args: string[]): string => {
-    let config: config = LOAD_CONFIG();
-    return `Bot version: ${config.bot.VERSION}`;
+    return `Bot version: ${VERSION}`;
 };
 
 

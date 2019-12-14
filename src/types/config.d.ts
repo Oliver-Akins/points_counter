@@ -40,7 +40,6 @@ interface mixer_options extends auth_options {
 
 interface bot_options {
     PREFIX: string;
-    VERSION: string;
     COOLDOWN_TIME: number;
     INVALID_PERM_ERROR: boolean;
     COOLDOWN_TYPE: "GLOBAL"|"COMMAND"|"SERVICE";
