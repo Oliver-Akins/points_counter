@@ -53,7 +53,7 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
         );
 
         if (!["no_match", "expired"].includes(response)) {
-            confirms.splice(parseInt(index), 1)
+            confirms.splice(parseInt(index), 1);
             let cmd_resp = confirmation.run(response);
 
 
@@ -74,14 +74,14 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
                         "Confirm Type": response
                     },
                     no_stdout: true
-                })
-            }
+                });
+            };
 
             return cmd_resp;
         }
 
         else if (response === "expired") {
-            confirms.splice(parseInt(index), 1)
+            confirms.splice(parseInt(index), 1);
             confirmation.run(response);
         };
     };
@@ -95,7 +95,7 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
                 return null;
             };
         };
-        global_last_ran = Date.now()
+        global_last_ran = Date.now();
     }
     // !SECTION: Global command cooldowns
 
@@ -108,8 +108,8 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
                 return null;
             };
         };
-        service_last_rans[context.source] = Date.now()
-    }
+        service_last_rans[context.source] = Date.now();
+    };
     // !SECTION: Service command cooldowns
 
 
@@ -125,7 +125,7 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
         if (context.level < cmd.level) {
             if (config.bot.INVALID_PERM_ERROR) {
                 return `Invalid Permissions, you must be at least level ${cmd.level}, you are level ${context.level}.`;
-            }
+            };
             return null;
         };
 
@@ -171,11 +171,11 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
                 "Platform": context.source
             },
             no_stdout: true
-        })
+        });
         return response;
     };
     return null;
-}
+};
 
 
 

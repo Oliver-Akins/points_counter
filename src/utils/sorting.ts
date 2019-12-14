@@ -2,7 +2,7 @@
 // sorting.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/29 - 2019/12/10)
+// Written by: Tyler Akins (2019/11/29 - 2019/12/13)
 //
 
 
@@ -19,8 +19,8 @@ export const SORT_OPTIONS = (data: option[]): option[] => {
 
         else if (a_total > b_total) { return -1; }
 
-        else { return 0; }
-    })
+        else { return 0; };
+    });
 };
 
 
@@ -35,6 +35,6 @@ export const SORT_COMMANDS = (data: Command[]): Command[] => {
 
         else if (a_name > b_name) { return 1; }
 
-        else { return 0; }
-    })
-}
+        else { return 0; };
+    });
+};
