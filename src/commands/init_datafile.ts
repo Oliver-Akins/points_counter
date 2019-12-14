@@ -24,6 +24,8 @@ const INIT_DATAFILE = (ctx: msg_data, args: string[]): string => {
             return `A datafile for a channel with name "${channel}" already exists.`;
         case "ERROR":
             return `Something went wrong while creating datafile with name: "${channel}"`;
+        default:
+            return "Something unknown happened. Open an issue with error code: 00001"'
     };
 };
 
