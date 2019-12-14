@@ -16,16 +16,6 @@ const config = LOAD_CONFIG();
 
 export const LOAD = (channel: string): option[] => {
 
-    // Load the links file
-    let links: object = fs.readFileSync(
-        path.resolve(`${config.DATA_DIR}/#links#.json`)
-    );
-
-    // Check if the channel is linked to a different channel.
-    if (links[channel]) {
-        channel = links[channel];
-    };
-
     let filepath: string = path.resolve(`${config.DATA_DIR}/${channel}.json`);
 
     // Ensure file exists
