@@ -2,7 +2,7 @@
 // discord_handler.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/23)
+// Written by: Tyler Akins (2019/11/23 - 2019/12/13)
 //
 
 
@@ -19,7 +19,7 @@ export const run_discord = () => {
 
     const config: config = LOAD_CONFIG();
 
-    var bot = new Eris(config.discord.DEV_TOKEN);
+    let bot = new Eris(config.DEV ? config.discord.DEV_TOKEN : config.discord.OAUTH_TOKEN);
 
 
     bot.on("ready", () => {
