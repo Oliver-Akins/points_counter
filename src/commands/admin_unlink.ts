@@ -17,7 +17,7 @@ const ADMIN_UNLINK = (ctx: msg_data, args: string[]): string => {
     delete data[args[0]];
     UPDATE_LINKS(data);
 
-    return `Linked channel \`${args[0]}\` to \`${args[1]}\``;
+    return `Removed the link for channel \`${args[0]}\`.`;
 };
 
 
