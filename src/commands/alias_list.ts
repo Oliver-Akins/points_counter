@@ -2,10 +2,11 @@
 // alias_list.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/12)
+// Written by: Tyler Akins (2019/12/12 - 2019/12/13)
 //
 
 
+import { RESOLVE_CHANNEL } from "../utils/metadata";
 import { REGISTER_COMMAND } from "../cmd_handler";
 import { PERM } from "../constants";
 import { LOAD } from "../utils/db";
@@ -14,7 +15,7 @@ import { LOAD } from "../utils/db";
 
 const ALIAS_LIST = (ctx: msg_data, args: string[]): string => {
 
-    let data = LOAD(ctx.channel.replace(/#/g, "").replace(/ /g, "_"));
+    let data = LOAD(RESOLVE_CHANNEL(ctx));
     let target = args[0];
 
 

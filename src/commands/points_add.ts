@@ -2,10 +2,11 @@
 // points_add.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/29)
+// Written by: Tyler Akins (2019/11/29 - 2019/12/13)
 //
 
 
+import { RESOLVE_CHANNEL } from "../utils/metadata";
 import { REGISTER_COMMAND } from "../cmd_handler";
 import { LOAD, WRITE } from "../utils/db";
 import { PERM } from "../constants";
@@ -13,14 +14,15 @@ import { PERM } from "../constants";
 
 
 const POINTS_ADD_COMMAND = (ctx: msg_data, args: string[]): string => {
-    ctx.channel = ctx.channel.replace(/\#/, "").replace(" ", "_");
+    let channel = RESOLVE_CHANNEL(ctx);
+    let data = LOAD(channel);
 
-    let data = LOAD(ctx.channel);
 
-    let amount: number = parseInt(args[0]);
-    if (!amount) { return `Cannot convert "${args[0]}" into an integer.`; };
+    let amount: number = parseInt(args[1]);
+    if (!amount) { return `Cannot convert "${args[1]}" into an integer.`; };
 
-    let target = args[1];
+
+    let target = args[0];
     let user = args[2] || "%anonymous%";
 
 
@@ -51,8 +53,8 @@ const metadata: cmd_metadata = {
     executable: POINTS_ADD_COMMAND,
     opt_args: 1,
     args: [
-        "<Amount: Integer>",
         "<Option: String>",
+        "<Amount: Integer>",
         "[User: String]"
     ],
     group: "points",

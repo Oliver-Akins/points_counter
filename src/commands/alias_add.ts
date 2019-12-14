@@ -2,12 +2,14 @@
 // alias_add.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/12)
+// Written by: Tyler Akins (2019/12/12 2019/13/13)
 //
 
 
-import { LOAD, WRITE } from "../utils/db";
 import { RESOLVE_CHANNEL } from "../utils/metadata";
+import { REGISTER_COMMAND } from "../cmd_handler";
+import { LOAD, WRITE } from "../utils/db";
+import { PERM } from "../constants";
 
 
 const ALIAS_ADD = (ctx: msg_data, args: string[]): string => {
@@ -28,10 +30,28 @@ const ALIAS_ADD = (ctx: msg_data, args: string[]): string => {
     };
 
     if (all_aliases.includes(new_alias)) {
-        return `That alias is already in use.`
+        return `That alias is already in use.`;
     };
+
 
     target_data.aliases.push(new_alias);
     WRITE(channel, data);
-    return `Added \`${new_alias}\` to ${target_data.name}.`
-}
+    return `Added \`${new_alias}\` to ${target_data.name}.`;
+};
+
+
+const metadata: cmd_metadata = {
+    description: "Adds the given alias to the option specified. Alias must be unique across all options.",
+    requires_confirm: false,
+    case_sensitive: false,
+    executable: ALIAS_ADD,
+    opt_args: 0,
+    args: [
+        "<Option: String>",
+        "<Alias: String>"
+    ],
+    group: "alias",
+    name: "add",
+    level: PERM.MOD
+};
+REGISTER_COMMAND(metadata);

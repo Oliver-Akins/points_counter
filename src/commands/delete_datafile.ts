@@ -2,11 +2,12 @@
 // delete_datafile.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/06)
+// Written by: Tyler Akins (2019/12/06 - 2019/12/13)
 //
 
 
 import { REGISTER_COMMAND, confirms } from "../cmd_handler";
+import { RESOLVE_CHANNEL } from "../utils/metadata";
 import { Confirmation } from "../utils/Command";
 import { LOAD_CONFIG } from "../utils/Config";
 import { DELETE } from "../utils/db";
@@ -17,9 +18,8 @@ import { PERM } from "../constants";
 const CONFIRM_TIMEOUT_SECONDS = 5;
 
 
-
-
-const DELETE_DATAFILE = (ctx: msg_data, args: string[]): string => {
+    // Resolve the channel without following any symlinks
+    let channel = RESOLVE_CHANNEL(ctx, 0);
 
 
     confirms.push(new Confirmation(
@@ -27,7 +27,7 @@ const DELETE_DATAFILE = (ctx: msg_data, args: string[]): string => {
         ctx.channel,
         CONFIRM_TIMEOUT_SECONDS * 1000,
         DELETE_DATAFILE_CONFIRM,
-        ctx.channel.replace(/#/g, "").replace(/ /g, "_")
+        channel
     ));
 
 

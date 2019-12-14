@@ -2,21 +2,26 @@
 // top.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/29 - 2019/12/10)
+// Written by: Tyler Akins (2019/11/29 - 2019/12/13)
 //
 
+
+import { RESOLVE_CHANNEL } from "../utils/metadata";
 import { REGISTER_COMMAND } from "../cmd_handler";
 import { SORT_OPTIONS } from "../utils/sorting";
 import { PERM } from "../constants";
 import { LOAD } from "../utils/db";
 
 
-const TOP_COMMAND = (context: msg_data, args: string[]): string => {
-    let data: option[] = LOAD(context.channel.replace("#", "").replace(" ", ""));
+const TOP_COMMAND = (ctx: msg_data, args: string[]): string => {
+
+    let data: option[] = LOAD(RESOLVE_CHANNEL(ctx));
     let sorted: option[] = SORT_OPTIONS(data);
+
 
     let top_x: number = args[0] ? parseInt(args[0]) : 3
     let top: string[] = [];
+
 
     // Ensure message doesn't get too long
     if (top_x > 10) {

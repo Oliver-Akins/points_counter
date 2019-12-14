@@ -2,24 +2,27 @@
 // options_info.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/06)
+// Written by: Tyler Akins (2019/12/06 - 2019/12/13)
 //
 
 
+import { RESOLVE_CHANNEL } from "../utils/metadata";
 import { REGISTER_COMMAND } from "../cmd_handler";
 import { PERM } from "../constants";
 import { LOAD } from "../utils/db";
 
 
 const OPTIONS_INFO = (ctx: msg_data, args: string[]): string => {
-    let channel = ctx.channel.replace(/\#/, "").replace(" ", "_");
 
+    let channel = RESOLVE_CHANNEL(ctx);
     let data = LOAD(channel);
     let name = args[0];
+
 
     if (!data) {
         return "Cannot load data for this channel. Make sure it's been initialized.";
     };
+
 
     for (var option of data) {
 
@@ -43,13 +46,14 @@ const OPTIONS_INFO = (ctx: msg_data, args: string[]): string => {
             };
         };
     };
+
     return `Cannot find option with name: \`${name}\``;
 };
 
 
 
 const metadata: cmd_metadata = {
-    description: "Gives detailed information about an option.",
+    description: "Gives detailed information about an option. Depending on what service you run this on, it will give you different information.",
     requires_confirm: false,
     case_sensitive: false,
     executable: OPTIONS_INFO,

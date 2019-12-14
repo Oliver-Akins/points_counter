@@ -2,10 +2,11 @@
 // alias_remove.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/12)
+// Written by: Tyler Akins (2019/12/12 - 2019/12/13)
 //
 
 
+import { RESOLVE_CHANNEL } from "../utils/metadata";
 import { REGISTER_COMMAND } from "../cmd_handler";
 import { LOAD, WRITE } from "../utils/db";
 import { PERM } from "../constants";
@@ -14,9 +15,9 @@ import { PERM } from "../constants";
 
 const ALIAS_REMOVE = (ctx: msg_data, args: string[]) => {
 
-    ctx.channel = ctx.channel.replace(/#/g, "").replace(/ /g, "_")
+    let channel = RESOLVE_CHANNEL(ctx)
 
-    let data = LOAD(ctx.channel);
+    let data = LOAD(channel);
     let target = args[0];
 
     // Find data
@@ -30,12 +31,12 @@ const ALIAS_REMOVE = (ctx: msg_data, args: string[]) => {
 
             // Remove alias
             option.aliases.splice(option.aliases.indexOf(target));
-            WRITE(ctx.channel, data);
+            WRITE(channel, data);
             return `Removed alias \`${target}\` from option ${option.name}`;
         };
     };
 
-    return `Could not find an option with alias \`${target}\``
+    return `Could not find an option with alias \`${target}\``;
 };
 
 

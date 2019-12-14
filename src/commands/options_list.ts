@@ -2,17 +2,18 @@
 // options_list.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/11 - 2019/11/23)
+// Written by: Tyler Akins (2019/11/11 - 2019/12/13)
 //
 
 
+import { RESOLVE_CHANNEL } from "../utils/metadata";
 import { REGISTER_COMMAND } from "../cmd_handler";
 import { LIMIT, PERM } from "../constants";
 import { LOAD } from "../utils/db";
 
 
 const LIST_OPTIONS = (ctx: msg_data, args: string[]): string => {
-    let channel = ctx.channel.replace(/\#/, "").replace(" ", "_");
+    let channel = RESOLVE_CHANNEL(ctx);
 
     let data = LOAD(channel);
 

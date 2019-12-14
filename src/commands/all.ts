@@ -2,10 +2,11 @@
 // all.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/06)
+// Written by: Tyler Akins (2019/12/06 - 2019/12/13)
 //
 
 
+import { RESOLVE_CHANNEL } from "../utils/metadata";
 import { REGISTER_COMMAND } from "../cmd_handler";
 import { PERM } from "../constants";
 import { LOAD } from "../utils/db";
@@ -15,7 +16,7 @@ import { LOAD } from "../utils/db";
 const ALL_OPTIONS_COMMAND = (ctx: msg_data, args: string[]): string => {
 
 
-    let data = LOAD(ctx.channel.replace(/#/g, "").replace(/ /g, "_"));
+    let data = LOAD(RESOLVE_CHANNEL(ctx));
     let responses: string[] = [];
 
 

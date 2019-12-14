@@ -2,10 +2,11 @@
 // lead.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/03 - 2019/12/06)
+// Written by: Tyler Akins (2019/12/03 - 2019/12/13)
 //
 
 
+import { RESOLVE_CHANNEL } from "../utils/metadata";
 import { REGISTER_COMMAND } from "../cmd_handler";
 import { PERM } from "../constants";
 import { LOAD } from "../utils/db";
@@ -15,9 +16,7 @@ const LEAD_COMMAND = (ctx: msg_data, args: string[]): string => {
 
     let leader: [string, string, number] = ["Nothing", "is in the lead", -1];
 
-    let data = LOAD(
-        ctx.channel.replace(/#/g, "").replace(/ /g, "_")
-    );
+    let data = LOAD(RESOLVE_CHANNEL(ctx));
 
     // Assert data
     if (data.length === 0) {
