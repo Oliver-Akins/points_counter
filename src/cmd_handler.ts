@@ -197,3 +197,4 @@ import "./commands/options_list";
 import "./commands/options_info";
 import "./commands/points_remove";
 import "./commands/options_remove";
+import "./commands/admin_get_channel";
