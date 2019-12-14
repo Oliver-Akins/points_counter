@@ -2,7 +2,7 @@
 // ping.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/06 - 2019/11/23)
+// Written by: Tyler Akins (2019/11/06 - 2019/12/13)
 //
 
 import { REGISTER_COMMAND } from "../cmd_handler";
@@ -10,7 +10,7 @@ import { PERM } from "../constants";
 
 
 const PING_COMMAND = (context: msg_data, args: string[]): string => {
-    return "Pong!"
+    return "Pong!";
 };
 
 
