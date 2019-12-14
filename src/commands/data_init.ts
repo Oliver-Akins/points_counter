@@ -14,16 +14,16 @@ import { PERM } from "../constants";
 
 
 const INIT_DATAFILE = (ctx: msg_data, args: string[]): string => {
-    let channel = RESOLVE_CHANNEL(ctx);
+    let channel = RESOLVE_CHANNEL(ctx, 0);
 
 
     switch (CREATE(channel)) {
         case "SUCCESS":
-            return `Created data file for channel: ${channel}`;
+            return `Created data file for channel: \`${channel}\``;
         case "EXISTS":
-            return `A datafile for a channel with name "${channel}" already exists.`;
+            return `A datafile for a channel with name \`${channel}\` already exists.`;
         case "ERROR":
-            return `Something went wrong while creating datafile with name: "${channel}"`;
+            return `Something went wrong while creating datafile with name: \`${channel}\``;
         default:
             return "Something unknown happened. Open an issue with error code: 00001";
     };
