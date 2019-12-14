@@ -32,8 +32,9 @@ export const RESOLVE_CHANNEL = (ctx: msg_data, link_resolutions=5): string => {
 
     let resolves = 0;
 
-    while (resolves <= link_resolutions && links[ctx.channel]) {
+    while (resolves < link_resolutions && links[ctx.channel]) {
         ctx.channel = links[ctx.channel];
+        resolves++;
     };
 
     return ctx.channel;
