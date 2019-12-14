@@ -5,6 +5,7 @@
 // Written by: Tyler Akins (2019/11/23)
 //
 
+
 import { HANDLE_MESSAGE } from "../cmd_handler";
 import { LOAD_CONFIG } from "../utils/Config";
 import { DISCORD_MOD } from "../utils/Perms";
@@ -13,7 +14,6 @@ import { PERM } from "../constants";
 const Eris = require("eris");
 
 
-// CHANNEL SYNTAX: Guild_name
 
 export const run_discord = () => {
 
