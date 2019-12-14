@@ -19,7 +19,7 @@ const ADMIN_GET_CHANNEL = (ctx: msg_data): string => {
 const metadata: cmd_metadata = {
     description: "Returns the resolved channel name for the channel being ran in, this is used for linking multiple channels together.",
     requires_confirm: false,
-    case_sensitive: true,
+    case_sensitive: false,
     executable: ADMIN_GET_CHANNEL,
     opt_args: 0,
     args: [],
