@@ -2,7 +2,7 @@
 // help.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/23)
+// Written by: Tyler Akins (2019/11/23 - 2019/12/13)
 //
 
 import { REGISTER_COMMAND } from "../cmd_handler";
@@ -16,7 +16,7 @@ const HELP_COMMAND = (context: msg_data, args: string[]): string => {
     let response = `Help page: ${config.WEBSITE}`;
 
     if (args.length !== 0) {
-        response += `/command/${args[0]}`;
+        response += `/command/${args.join("_")}`;
     };
     return response;
 };
