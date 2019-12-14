@@ -11,11 +11,11 @@ import { RESOLVE_CHANNEL } from "../utils/metadata";
 import { Confirmation } from "../utils/Command";
 import { LOAD_CONFIG } from "../utils/Config";
 import { DELETE } from "../utils/db";
-import { PERM } from "../constants";
+import { PERM, CONFIRM_TIMEOUT } from "../constants";
 
 
 
-const CONFIRM_TIMEOUT_SECONDS = 5;
+const DELETE_DATAFILE = (ctx: msg_data, args: string[]): string => {
 
 
     // Resolve the channel without following any symlinks
@@ -25,7 +25,7 @@ const CONFIRM_TIMEOUT_SECONDS = 5;
     confirms.push(new Confirmation(
         ctx.user,
         ctx.channel,
-        CONFIRM_TIMEOUT_SECONDS * 1000,
+        CONFIRM_TIMEOUT * 1000,
         DELETE_DATAFILE_CONFIRM,
         channel
     ));
@@ -34,8 +34,8 @@ const CONFIRM_TIMEOUT_SECONDS = 5;
     let PRE: string = LOAD_CONFIG().bot.PREFIX;
 
     return `Please confirm that you would like to delete all data for channel ` +
-    `"${ctx.channel.replace(/#/g, "").replace(/ /g, "_")}". Type \`${PRE}yes\`` +
-    ` or \`${PRE}no\` in the next ${CONFIRM_TIMEOUT_SECONDS} seconds.`
+    `"${channel}". Type \`${PRE}yes\` or \`${PRE}no\` in the next` +
+    ` ${CONFIRM_TIMEOUT} seconds.`
 };
 
 
@@ -69,7 +69,7 @@ const DELETE_DATAFILE_CONFIRM = (type: CONFIRM_TYPE, data: string): string => {
 
                 // Oh shit. This shouldn't happen
                 default:
-                    return `Something very very bad happened. I don't know what though.`
+                    return `Something very very bad happened. I don't know what though.`;
             };
 
 
