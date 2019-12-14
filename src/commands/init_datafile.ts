@@ -25,7 +25,7 @@ const INIT_DATAFILE = (ctx: msg_data, args: string[]): string => {
         case "ERROR":
             return `Something went wrong while creating datafile with name: "${channel}"`;
         default:
-            return "Something unknown happened. Open an issue with error code: 00001"'
+            return "Something unknown happened. Open an issue with error code: 00001";
     };
 };
 
