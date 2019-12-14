@@ -66,7 +66,7 @@ export const run_discord = () => {
 
 
             var response: string | void = HANDLE_MESSAGE({
-                channel: msg.member.guild.id,
+                channel: `Discord:${msg.member.guild.id}`,
                 level: level,
                 message: msg.content.trim().replace(/\n/g, ""),
                 source: "Discord",
