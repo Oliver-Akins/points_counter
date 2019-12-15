@@ -2,7 +2,7 @@
 // cmd_handler.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/06 - 2019/12/13)
+// Written by: Tyler Akins (2019/11/06 - 2019/12/15)
 //
 
 
@@ -34,7 +34,7 @@ export const REGISTER_COMMAND = (metadata: cmd_metadata): boolean => {
 
 
 
-export const HANDLE_MESSAGE = (context: msg_data): string => {
+export const HANDLE_MESSAGE = (ctx: msg_data): string => {
 
     let config: config = LOAD_CONFIG();
     let datetime = new Date();
@@ -49,7 +49,7 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
         let confirmation = confirms[index];
 
         let response: CONFIRM_TYPE = confirmation.matches(
-            context.user, context.channel, context.message
+            ctx.user, ctx.channel, ctx.message
         );
 
         if (!["no_match", "expired"].includes(response)) {
@@ -61,16 +61,16 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
             if (cmd_resp) {
                 log({
                     title: `Log Entry (Confirmation Response):`,
-                    msg: `Command:\`\`\`\n${context.message}\n\`\`\`\n\nResponse:\`\`\`\n${cmd_resp}\n\`\`\``,
+                    msg: `Command:\`\`\`\n${ctx.message}\n\`\`\`\n\nResponse:\`\`\`\n${cmd_resp}\n\`\`\``,
                     embed: true,
                     fields: {
                         "Date:": date,
-                        "Is Mod:": context.level >= PERM.MOD,
-                        "Is Admin:": context.level >= PERM.ADMIN,
-                        "Level:": context.level,
-                        "Channel:": context.channel,
-                        "Username": context.user,
-                        "Platform": context.source,
+                        "Is Mod:": ctx.level >= PERM.MOD,
+                        "Is Admin:": ctx.level >= PERM.ADMIN,
+                        "Level:": ctx.level,
+                        "Channel:": ctx.channel,
+                        "Username": ctx.user,
+                        "Platform": ctx.source,
                         "Confirm Type": response
                     },
                     no_stdout: true
@@ -89,7 +89,7 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
 
 
     // SECTION: Global command cooldowns
-    if (config.bot.COOLDOWN_TYPE === "GLOBAL" && context.cooldown) {
+    if (config.bot.COOLDOWN_TYPE === "GLOBAL" && ctx.cooldown) {
         if (global_last_ran) {
             if (Date.now() - global_last_ran < config.bot.COOLDOWN_TIME * 1000) {
                 return null;
@@ -102,13 +102,13 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
 
 
     // SECTION: Service command cooldowns
-    else if (config.bot.COOLDOWN_TYPE === "SERVICE" && context.cooldown) {
-        if (service_last_rans[context.source]) {
-            if (Date.now() - service_last_rans[context.source] < config.bot.COOLDOWN_TIME * 1000) {
+    else if (config.bot.COOLDOWN_TYPE === "SERVICE" && ctx.cooldown) {
+        if (service_last_rans[ctx.source]) {
+            if (Date.now() - service_last_rans[ctx.source] < config.bot.COOLDOWN_TIME * 1000) {
                 return null;
             };
         };
-        service_last_rans[context.source] = Date.now();
+        service_last_rans[ctx.source] = Date.now();
     };
     // !SECTION: Service command cooldowns
 
@@ -118,20 +118,20 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
     for (var cmd of commands) {
 
         // NOTE: Checking if message doesn't match
-        if (!cmd.matches(context.message.toLowerCase())) { continue; };
+        if (!cmd.matches(ctx.message.toLowerCase())) { continue; };
 
 
         // NOTE: Permission checking
-        if (context.level < cmd.level) {
+        if (ctx.level < cmd.level) {
             if (config.bot.INVALID_PERM_ERROR) {
-                return `Invalid Permissions, you must be at least level ${cmd.level}, you are level ${context.level}.`;
+                return `Invalid Permissions, you must be at least level ${cmd.level}, you are level ${ctx.level}.`;
             };
             return null;
         };
 
 
         // NOTE: per-command cooldown
-        if (config.bot.COOLDOWN_TYPE === "COMMAND" && context.cooldown) {
+        if (config.bot.COOLDOWN_TYPE === "COMMAND" && ctx.cooldown) {
             if (cmd.last_ran) {
                 if (Date.now() - cmd.last_ran < config.bot.COOLDOWN_TIME * 1000) {
                     return null;
@@ -143,32 +143,38 @@ export const HANDLE_MESSAGE = (context: msg_data): string => {
 
         // NOTE: Case sensitivity
         if (!cmd.case_sensitive) {
-            context.message = context.message.toLowerCase();
+            ctx.message = ctx.message.toLowerCase();
         };
 
 
         // NOTE: Argument parsing
-        let args = context.message.slice(config.bot.PREFIX.length).split(" ").slice(
-            cmd.group ? 2 : 1
-        );
+        let args = ctx.message
+            .slice(config.bot.PREFIX.length)
+            .split(" ")
+            .slice(cmd.full_name.split(" ").length);
+
+
+        // Ensure the use supplied enough arguments
         if (args.length < cmd.mand_args) {
             return `Not enough arguments, missing argument: \`${cmd.arg_list[args.length]}\``;
         };
 
-        let response = cmd.execute(context, args);
+
+        let response = cmd.execute(ctx, args);
+
 
         log({
             title: `Log Entry:`,
-            msg: `Command:\`\`\`\n${context.message}\n\`\`\`\n\nResponse:\`\`\`\n${response}\n\`\`\``,
+            msg: `Command:\`\`\`\n${ctx.message}\n\`\`\`\n\nResponse:\`\`\`\n${response}\n\`\`\``,
             embed: true,
             fields: {
                 "Date:": date,
-                "Is Mod:": context.level >= PERM.MOD,
-                "Is Admin:": context.level >= PERM.ADMIN,
-                "Level:": context.level,
-                "Channel:": context.channel,
-                "Username": context.user,
-                "Platform": context.source
+                "Is Mod:": ctx.level >= PERM.MOD,
+                "Is Admin:": ctx.level >= PERM.ADMIN,
+                "Level:": ctx.level,
+                "Channel:": ctx.channel,
+                "Username": ctx.user,
+                "Platform": ctx.source
             },
             no_stdout: true
         });
@@ -186,12 +192,10 @@ import "./commands/ping";
 import "./commands/help";
 import "./commands/lead";
 import "./commands/version";
-import "./commands/data_init";
 import "./commands/alias_add";
 import "./commands/alias_list";
 import "./commands/admin_link";
 import "./commands/points_add";
-import "./commands/data_delete";
 import "./commands/options_add";
 import "./commands/alias_remove";
 import "./commands/admin_unlink";
@@ -199,4 +203,6 @@ import "./commands/options_list";
 import "./commands/options_info";
 import "./commands/points_remove";
 import "./commands/options_remove";
+import "./commands/admin_data_init";
+import "./commands/admin_data_delete";
 import "./commands/admin_get_channel";
