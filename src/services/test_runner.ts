@@ -2,10 +2,11 @@
 // test_runner.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/17 - 2019/12/14)
+// Written by: Tyler Akins (2019/11/17 - 2019/12/15)
 //
 
 
+import { TEST_CHANNEL, TEST_USER } from "../constants";
 import { CREATE, LOAD, WRITE, DELETE } from "../utils/db";
 import { HANDLE_MESSAGE } from "../cmd_handler";
 import { LOAD_CONFIG } from "../utils/Config";
@@ -23,48 +24,25 @@ export const run_tests = (silent: boolean): number => {
     // Run through each test
     for (var test of tests) {
 
-        let filepath = path.resolve(config.DATA_DIR) + `/${test.msg_meta.channel}.json`;
+        let filepath = path.resolve(config.DATA_DIR) + `/${TEST_CHANNEL}.json`;
+        let data: option[];
 
         // Check to see if the test needs a datafile and if it doesn't exist
         switch (test.datafile_should_exist) {
             case "EXISTS":
 
-                let data: option[];
-
                 // Reset the file if it exists already so we know EXACTLY
                 // what data is inside of it
-                if (fs.existsSync(filepath)) {
-                    data = [];
-                } else {
-                    CREATE(test.msg_meta.channel);
-                    data = [];
+                if (!fs.existsSync(filepath)) {
+                    CREATE(TEST_CHANNEL);
                 };
-
-
-                // Add some random data to the file to be able to manipulate
-                data.push({
-                    "aliases": ["potato"],
-                    "name": "Potato",
-                    "data_version": "2.0",
-                    "points": {},
-                    "total": 0
-                });
-                data.push({
-                    "aliases": ["green", "eggs"],
-                    "name": "Green",
-                    "data_version": "2.0",
-                    "points": {},
-                    "total": 0
-                });
-
-                // Save the file so that the command can load the data
-                WRITE(test.msg_meta.channel, data);
+                data = [];
                 break;
 
             case "NOT_EXISTS":
-                // Delete the file if needed to
+                // Delete the file if needed
                 if (fs.existsSync(filepath)) {
-                    DELETE(test.msg_meta.channel)
+                    DELETE(TEST_CHANNEL);
                 };
                 break;
             default:
@@ -72,26 +50,66 @@ export const run_tests = (silent: boolean): number => {
         };
 
 
-        let response = HANDLE_MESSAGE(test.msg_meta);
+        // Populate the data file if needed.
+        if (test.datafile_populated && test.datafile_should_exist != "NOT_EXISTS") {
+            data.push({
+                name: "Potato",
+                aliases: ["potato", "salad"],
+                data_version: "3.0.0",
+                points: {"%anonymous%": 0},
+                total: 0
+            });
+            data.push({
+                name: "Foo",
+                aliases: ["foo", "bar"],
+                data_version: "3.0.0",
+                points: {"%anonymous%": 0},
+                total: 0
+            });
+        } else {
+            data = [];
+        };
+        WRITE(TEST_CHANNEL, data);
+
+
+        let response = HANDLE_MESSAGE({
+            message: test.msg_meta.message,
+            level: test.msg_meta.level,
+            user: TEST_USER,
+            cooldown: false,
+            source: test.msg_meta.source,
+            channel: TEST_CHANNEL,
+            test: true
+        });
+
 
         // If the confirmation message is defined, trigger a confirmation
-        if (test.confirmation_msg) {
-            response = HANDLE_MESSAGE(test.confirmation_msg);
+        if (test.confirm_msg) {
+            response = HANDLE_MESSAGE({
+                message: test.confirm_msg.message,
+                level: test.confirm_msg.level,
+                user: TEST_USER,
+                cooldown: false,
+                source: test.confirm_msg.source,
+                channel: TEST_CHANNEL,
+                test: true
+            });
         };
+
 
         // Compare outputs
         if (test.expected_return != response) {
             fail_count++;
             if (!silent) {
                 console.log("=====================================================");
-                console.log(`${test.id}: Test failed`);
-                console.log(`${test.id}:    Expected: "${test.expected_return}"`);
-                console.log(`${test.id}:    Received: "${response}"`);
+                console.log(`Test ${test.id} failed`);
+                console.log(`    Expected: "${test.expected_return}"`);
+                console.log(`    Received: "${response}"`);
             };
         };
 
         if (fs.existsSync(filepath)) {
-            DELETE(test.msg_meta.channel)
+            DELETE(TEST_CHANNEL);
         };
     };
 
