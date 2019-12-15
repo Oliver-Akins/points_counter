@@ -2,7 +2,7 @@
 // ping.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/06 - 2019/12/13)
+// Written by: Tyler Akins (2019/11/06 - 2019/12/15)
 //
 
 import { REGISTER_COMMAND } from "../cmd_handler";
@@ -15,7 +15,7 @@ const PING_COMMAND = (context: msg_data, args: string[]): string => {
 
 
 const metadata: cmd_metadata = {
-    description: "Allows you to test to make sure the bot is online",
+    description: "Allows you to test to make sure the bot is online.",
     executable: PING_COMMAND,
     requires_confirm: false,
     case_sensitive: false,
