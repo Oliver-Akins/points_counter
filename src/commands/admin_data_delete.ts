@@ -31,7 +31,7 @@ const DELETE_DATAFILE = (ctx: msg_data, args: string[]): string => {
     ));
 
 
-    let PRE: string = LOAD_CONFIG().bot.PREFIX;
+    const PRE: string = LOAD_CONFIG().bot.PREFIX;
 
     return `Please confirm that you would like to delete all data for channel ` +
     `\`${channel}\`. Type \`${PRE}yes\` or \`${PRE}no\` in the next` +
