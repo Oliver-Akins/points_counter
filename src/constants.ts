@@ -24,3 +24,7 @@ export const LIMIT = {
     DISCORD: 2000,
     TWITCH: 500
 };
+
+
+export const TEST_CHANNEL = "#tests_channel#";
+export const TEST_USER = "#test_user#";
