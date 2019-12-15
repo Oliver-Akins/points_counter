@@ -2,15 +2,15 @@
 // twitch_handler.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/10)
+// Written by: Tyler Akins (2019/12/10 - 2019/12/14)
 //
 
-import * as tmi from "tmi.js";
+import { log_error, log } from "../utils/webhook";
 import { HANDLE_MESSAGE } from "../cmd_handler";
 import { LOAD_CONFIG } from "../utils/Config";
-import { log_error, log } from "../utils/webhook";
 import { PERM } from "../constants";
 import { LOAD } from "../utils/db";
+import * as tmi from "tmi.js";
 
 /*
 
