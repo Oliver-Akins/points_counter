@@ -38,8 +38,8 @@ const metadata: cmd_metadata = {
     case_sensitive: false,
     opt_args: 0,
     args: [],
-    group: "data",
-    name: "init",
+    group: "admin",
+    name: "data init",
     level: PERM.ADMIN
 };
 REGISTER_COMMAND(metadata)
