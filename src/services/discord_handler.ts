@@ -2,7 +2,7 @@
 // discord_handler.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/23 - 2019/12/13)
+// Written by: Tyler Akins (2019/11/23 - 2019/12/14)
 //
 
 
@@ -15,7 +15,7 @@ const Eris = require("eris");
 
 
 
-export const run_discord = () => {
+export const run_discord = (): void => {
 
     const config: config = LOAD_CONFIG();
 

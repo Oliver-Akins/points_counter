@@ -8,7 +8,7 @@
 
 /*
 Templater For ExpressJS: https://github.com/Drulac/express-tl
-Templater in general (for cmd bit): https://github.com/Drulac/template-literal
+Templater:: https://github.com/Drulac/template-literal
 */
 
 
@@ -23,7 +23,7 @@ import * as fs from "fs";
 
 
 
-export const run_web_server = () => {
+export const run_web_server = (): void => {
 
     const config = LOAD_CONFIG();
     const DOCS = path.resolve(config.web.ROOT)

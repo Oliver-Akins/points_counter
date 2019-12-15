@@ -5,6 +5,7 @@
 // Written by: Tyler Akins (2019/11/06 - 2019/11/17)
 //
 
+
 import { run_discord } from "./services/discord_handler";
 import { run_web_server } from "./services/web_server";
 import { run_twitch } from "./services/twitch_handler";
@@ -27,9 +28,8 @@ if (args.length < 1) {
 
 // TODO: Add an init_prog_data system so we don't need to store %links% in git
 if (args.includes("--test")) {
-    run_tests(args.includes("--silent"));
-    process.exit(0)
-}
+    process.exit(run_tests(args.includes("--silent")));
+};
 
 
 if (args.includes("--twitch")) {

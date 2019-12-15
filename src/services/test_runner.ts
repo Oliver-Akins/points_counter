@@ -2,7 +2,7 @@
 // test_runner.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/17 - 2019/11/20)
+// Written by: Tyler Akins (2019/11/17 - 2019/12/14)
 //
 
 
@@ -18,7 +18,7 @@ const config = LOAD_CONFIG();
 var fail_count = 0;
 
 
-export const run_tests = (silent: boolean) => {
+export const run_tests = (silent: boolean): number => {
 
     // Run through each test
     for (var test of tests) {
@@ -101,4 +101,5 @@ export const run_tests = (silent: boolean) => {
     // Output summary
     console.log(`Tests: ${fail_count} tests failed out of ${tests.length} tests.`);
     console.log(`       ${Math.round(((tests.length - fail_count) / tests.length) * 100)}% passed`);
+    return fail_count;
 };
