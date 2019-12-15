@@ -2,16 +2,16 @@
 // message_metadata.d.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/07 - 2019/12/14)
+// Written by: Tyler Akins (2019/11/07 - 2019/12/15)
 //
 
 
-type platform = "Discord"|"Twitch"|"Tests"
+type platform = "Discord"|"Twitch"
 
 
 interface msg_data {
-    source: platform;
     cooldown: boolean;
+    source: platform;
     channel: string;
     message: string;
     level: number;
