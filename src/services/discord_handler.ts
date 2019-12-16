@@ -56,7 +56,9 @@ export const run_discord = (): void => {
             // !SECTION: Exit conditions
 
 
-            var is_mod = DISCORD_MOD(msg.member.roles);
+            var is_mod = msg.member.roles.filter(
+                (x: string) => { return config.discord.MOD_ROLES.includes(x); }
+            ).length > 0;
             var is_admin = config.discord.ADMIN.includes(msg.member.id);
 
 
