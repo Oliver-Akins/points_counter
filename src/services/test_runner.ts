@@ -9,6 +9,7 @@
 import { TEST_CHANNEL, TEST_USER } from "../constants";
 import { CREATE, LOAD, WRITE, DELETE } from "../utils/db";
 import { HANDLE_MESSAGE } from "../cmd_handler";
+import { UPDATE_LINKS } from "../utils/links";
 import { LOAD_CONFIG } from "../utils/Config";
 import { tests } from "../utils/tests";
 import * as path from "path";
@@ -40,10 +41,7 @@ export const run_tests = (silent: boolean): number => {
                 break;
 
             case "NOT_EXISTS":
-                // Delete the file if needed
-                if (fs.existsSync(filepath)) {
-                    DELETE(TEST_CHANNEL);
-                };
+                DELETE(filepath);
                 break;
             default:
                 break;
@@ -51,7 +49,7 @@ export const run_tests = (silent: boolean): number => {
 
 
         // Populate the data file if needed.
-        if (test.datafile_populated && test.datafile_should_exist != "NOT_EXISTS") {
+        if (test.datafile_populated && test.datafile_should_exist === "EXISTS") {
             data.push({
                 name: "Potato",
                 aliases: ["potato", "salad"],
@@ -61,7 +59,7 @@ export const run_tests = (silent: boolean): number => {
             });
             data.push({
                 name: "Foo",
-                aliases: ["foo", "bar"],
+                aliases: ["foo"],
                 data_version: "3.0.0",
                 points: {"%anonymous%": 0},
                 total: 0
@@ -69,7 +67,17 @@ export const run_tests = (silent: boolean): number => {
         } else {
             data = [];
         };
-        WRITE(TEST_CHANNEL, data);
+
+
+        // Write the datafile only if it should exist, so it doesn't get created
+        // when we don't want it to exist.
+        if (test.datafile_should_exist == "EXISTS") {
+            WRITE(TEST_CHANNEL, data);
+        };
+
+
+        // Update links
+        UPDATE_LINKS(test.links);
 
 
         let response = HANDLE_MESSAGE({
@@ -78,7 +86,7 @@ export const run_tests = (silent: boolean): number => {
             user: TEST_USER,
             cooldown: false,
             source: test.msg_meta.source,
-            channel: TEST_CHANNEL,
+            channel: test.msg_meta.channel,
             test: true
         });
 
@@ -91,7 +99,7 @@ export const run_tests = (silent: boolean): number => {
                 user: TEST_USER,
                 cooldown: false,
                 source: test.confirm_msg.source,
-                channel: TEST_CHANNEL,
+                channel: test.msg_meta.channel,
                 test: true
             });
         };
@@ -114,7 +122,10 @@ export const run_tests = (silent: boolean): number => {
     };
 
     // Check if we are being silent
-    if (!silent) { console.log("====================================================="); };
+    if (!silent && fail_count > 0) {
+        console.log("=====================================================");
+    };
+
 
     // Output summary
     console.log(`Tests: ${fail_count} tests failed out of ${tests.length} tests.`);
