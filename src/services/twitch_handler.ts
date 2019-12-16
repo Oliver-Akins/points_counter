@@ -183,12 +183,12 @@ export const run_twitch = (): void => {
 
 
     client.on("disconnected", (reason: string) => {
-        log({ msg: `* Disconnected from Twitch` });
+        log({ msg: `* Disconnected from Twitch w/ reason: ${reason}` });
     });
 
 
     client.on("connected", (addr: string, port: number) => {
-        log({ msg: `* Disconnected from Twitch` });
+        log({ msg: `* Connected to Twitch on ${addr}:${port}` });
     });
 
     client.connect().catch((_) => {})
