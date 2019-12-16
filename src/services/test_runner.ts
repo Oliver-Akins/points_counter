@@ -61,8 +61,8 @@ export const run_tests = (silent: boolean): number => {
                 name: "Foo",
                 aliases: ["foo"],
                 data_version: "3.0",
-                points: {"%anonymous%": 5},
-                total: 5
+                points: {"%anonymous%": 5, "spam": 50},
+                total: 55
             });
         } else {
             data = [];

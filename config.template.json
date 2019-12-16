@@ -7,7 +7,8 @@
     "USERNAME": null,
     "CLIENT_ID": null,
     "CHANNELS": [],
-    "ADMIN": []
+    "ADMIN": [],
+    "REPLY_TO_AUTO_ADD": true
   },
   "discord": {
     "OAUTH_TOKEN": null,

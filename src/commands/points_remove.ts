@@ -2,7 +2,7 @@
 // points_remove.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/06 - 2019/12/13)
+// Written by: Tyler Akins (2019/12/06 - 2019/12/16)
 //
 
 
@@ -22,6 +22,10 @@ const POINTS_REMOVE = (ctx: msg_data, args: string[]): string => {
 
     let target = args[0];
     let user: string = args[2] || "%anonymous%";
+
+
+    // Ensure username doesn't start with an "@"
+    if (user.startsWith("@")) { user = user.slice(1); };
 
 
     for (var option of data) {
