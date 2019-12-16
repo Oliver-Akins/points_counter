@@ -15,20 +15,20 @@ import { LOAD } from "../utils/db";
 
 const TOP_COMMAND = (ctx: msg_data, args: string[]): string => {
 
-    let data: option[] = LOAD(RESOLVE_CHANNEL(ctx));
-    let sorted: option[] = SORT_OPTIONS(data);
-
-
-    let top_x: number = args[0] ? parseInt(args[0]) : 3
+    let top_x: number = parseInt(args[0]) || 3
     let top: string[] = [];
 
 
     // Ensure message doesn't get too long
     if (top_x > 10) {
         return `I can't display more than 10 of the top options.`;
-    } else if (top_x <= 0) {
-        return `I can't display less than or equal to 0 of the top results.`;
+    } else if (top_x < 0) {
+        return `I can't display less than 0 of the top results.`;
     };
+
+
+    let data: option[] = LOAD(RESOLVE_CHANNEL(ctx));
+    let sorted: option[] = SORT_OPTIONS(data);
 
 
     // Get the top x option strings

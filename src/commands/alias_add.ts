@@ -17,7 +17,7 @@ const ALIAS_ADD = (ctx: msg_data, args: string[]): string => {
     let channel = RESOLVE_CHANNEL(ctx);
     let data = LOAD(channel);
     let target = args[0];
-    let new_alias = args[1];
+    let new_alias = args[1].toLowerCase();
     let all_aliases: string[] = [];
     let target_data: option;
 

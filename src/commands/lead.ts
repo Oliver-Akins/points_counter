@@ -14,7 +14,7 @@ import { LOAD } from "../utils/db";
 
 const LEAD_COMMAND = (ctx: msg_data, args: string[]): string => {
 
-    let leader: [string, string, number] = ["Nothing", "is in the lead", -1];
+    let leader: [string, string, number] = ["Nothing", "is in the lead", 0];
 
     let data = LOAD(RESOLVE_CHANNEL(ctx));
 

@@ -18,7 +18,7 @@ const POINTS_REMOVE = (ctx: msg_data, args: string[]): string => {
 
 
     let amount: number = parseInt(args[1]);
-    if (!amount) { return `Cannot convert "${args[1]}" into an integer.`; };
+    if (!amount) { return `Cannot convert \`${args[1]}\` into an integer.`; };
 
     let target = args[0];
     let user: string = args[2] || "%anonymous%";
@@ -31,8 +31,12 @@ const POINTS_REMOVE = (ctx: msg_data, args: string[]): string => {
             // Ensure user is defined before trying to add to undefined
             if (option.points[user]) {
 
-                // Unset user if points removed > total points given
-                if (option.points[user] - amount <= 0) {
+
+                if (option.points[user] - amount < 0) {
+
+                    // Adjust to make sure that we can't go negative with amount
+                    // values larger than what the user has donated
+                    amount -= option.points[user] - (amount - option.points[user])
                     option.points[user] = 0;
                 } else {
                     option.points[user] -= amount;
@@ -41,17 +45,15 @@ const POINTS_REMOVE = (ctx: msg_data, args: string[]): string => {
 
             // User isn't defined.
             else {
-                return `${user} has not contributed any points to ${option.name}`;
+                return `${user} has not contributed any points to ${option.name}.`;
             };
 
-
             option.total -= amount;
-
             WRITE(channel, data);
-            return `${amount} points have been removed to ${option.name} on behalf of ${user}.`;
+            return `${amount} points have been removed from ${option.name} on behalf of ${user}.`;
         };
     };
-    return `Could not find an option of name \`${target}\``
+    return `Could not find an option of name \`${target}\`.`
 };
 
 
@@ -63,7 +65,7 @@ const metadata: cmd_metadata = {
     executable: POINTS_REMOVE,
     opt_args: 1,
     args: [
-        "<Option: String>",
+        "<Alias: String>",
         "<Amount: Integer>",
         "[User: String]"
     ],

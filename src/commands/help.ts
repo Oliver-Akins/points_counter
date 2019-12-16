@@ -2,16 +2,19 @@
 // help.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/23 - 2019/12/13)
+// Written by: Tyler Akins (2019/11/23 - 2019/12/15)
 //
+
 
 import { REGISTER_COMMAND } from "../cmd_handler";
 import { LOAD_CONFIG } from "../utils/Config";
 import { PERM } from "../constants";
 
 
-const HELP_COMMAND = (context: msg_data, args: string[]): string => {
-    let config: config = LOAD_CONFIG();
+const config: config = LOAD_CONFIG();
+
+
+const HELP_COMMAND = (ctx: msg_data, args: string[]): string => {
 
     let response = `Help page: ${config.WEBSITE}`;
 
@@ -28,8 +31,10 @@ const metadata: cmd_metadata = {
     requires_confirm: false,
     case_sensitive: false,
     name: "help",
-    opt_args: 0,
-    args: [],
+    opt_args: 1,
+    args: [
+        "[Command: String]"
+    ],
     level: PERM.ALL
 };
 REGISTER_COMMAND(metadata)

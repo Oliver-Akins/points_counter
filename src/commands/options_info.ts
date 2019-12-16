@@ -2,7 +2,7 @@
 // options_info.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/06 - 2019/12/13)
+// Written by: Tyler Akins (2019/12/06 - 2019/12/15)
 //
 
 
@@ -19,8 +19,8 @@ const OPTIONS_INFO = (ctx: msg_data, args: string[]): string => {
     let name = args[0];
 
 
-    if (!data) {
-        return "Cannot load data for this channel. Make sure it's been initialized.";
+    if (data.length === 0) {
+        return "No data for this channel, make there are options added.";
     };
 
 

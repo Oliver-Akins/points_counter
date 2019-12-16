@@ -19,7 +19,7 @@ const POINTS_ADD_COMMAND = (ctx: msg_data, args: string[]): string => {
 
 
     let amount: number = parseInt(args[1]);
-    if (!amount) { return `Cannot convert "${args[1]}" into an integer.`; };
+    if (!amount) { return `Cannot convert \`${args[1]}\` into an integer.`; };
 
 
     let target = args[0];
@@ -41,7 +41,7 @@ const POINTS_ADD_COMMAND = (ctx: msg_data, args: string[]): string => {
             return `${amount} points have been added to ${option.name} on behalf of ${user}.`;
         };
     };
-    return `Could not find an option of name \`${target}\``
+    return `Could not find an option of name \`${target}\`.`
 };
 
 
@@ -53,7 +53,7 @@ const metadata: cmd_metadata = {
     executable: POINTS_ADD_COMMAND,
     opt_args: 1,
     args: [
-        "<Option: String>",
+        "<Alias: String>",
         "<Amount: Integer>",
         "[User: String]"
     ],

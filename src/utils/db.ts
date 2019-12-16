@@ -2,7 +2,7 @@
 // db.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/11 - 2019/11/20)
+// Written by: Tyler Akins (2019/11/11 - 2019/12/15)
 //
 
 
@@ -20,7 +20,7 @@ export const LOAD = (channel: string): option[] => {
 
     // Ensure file exists
     if (!fs.existsSync(filepath)) {
-        return null;
+        return [];
     };
 
     // @ts-ignore
