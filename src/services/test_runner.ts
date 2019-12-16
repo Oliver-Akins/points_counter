@@ -53,16 +53,16 @@ export const run_tests = (silent: boolean): number => {
             data.push({
                 name: "Potato",
                 aliases: ["potato", "salad"],
-                data_version: "3.0.0",
+                data_version: "3.0",
                 points: {"%anonymous%": 0},
                 total: 0
             });
             data.push({
                 name: "Foo",
                 aliases: ["foo"],
-                data_version: "3.0.0",
-                points: {"%anonymous%": 0},
-                total: 0
+                data_version: "3.0",
+                points: {"%anonymous%": 5},
+                total: 5
             });
         } else {
             data = [];
