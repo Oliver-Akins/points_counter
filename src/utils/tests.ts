@@ -503,7 +503,7 @@ export const tests: test[] = [
             level: PERM.ALL,
             channel: TEST_CHANNEL
         },
-        expected_return: `All options with points: Foo (5)`
+        expected_return: `All options with points: Foo (55)`
     },
     {
         id: `00038`,
@@ -565,7 +565,7 @@ export const tests: test[] = [
             level: PERM.ALL,
             channel: TEST_CHANNEL
         },
-        expected_return: `Foo is in the lead with 5 points.`
+        expected_return: `Foo is in the lead with 55 points.`
     },
     {
         id: `00043`,
@@ -618,8 +618,8 @@ export const tests: test[] = [
             channel: TEST_CHANNEL
         },
         expected_return: `Option Information for: Foo\n` +
-        `    Total Points: 5\n` +
-        `    Total Contributors: 1\n` +
+        `    Total Points: 55\n` +
+        `    Total Contributors: 2\n` +
         `    Data Version: 3.0\n` +
         `    Aliases: foo`
     },
@@ -877,7 +877,7 @@ export const tests: test[] = [
             level: PERM.MOD,
             channel: TEST_CHANNEL
         },
-        expected_return: `The top 3 options are: Foo (5), Potato (0)`
+        expected_return: `The top 3 options are: Foo (55), Potato (0)`
     },
     {
         id: `00067`,
@@ -890,7 +890,7 @@ export const tests: test[] = [
             level: PERM.ALL,
             channel: TEST_CHANNEL
         },
-        expected_return: `The top 1 options are: Foo (5)`
+        expected_return: `The top 1 options are: Foo (55)`
     },
     {
         id: `00068`,
@@ -916,7 +916,7 @@ export const tests: test[] = [
             level: PERM.ALL,
             channel: TEST_CHANNEL
         },
-        expected_return: `The top 3 options are: Foo (5), Potato (0)`
+        expected_return: `The top 3 options are: Foo (55), Potato (0)`
     },
     {
         id: `00070`,
@@ -930,5 +930,31 @@ export const tests: test[] = [
             channel: TEST_CHANNEL
         },
         expected_return: `Bot version: ${VERSION}`
+    },
+    {
+        id: `00071`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        datafile_populated: true,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${config.bot.PREFIX}points add potato 10 @spam`,
+            level: PERM.MOD,
+            channel: TEST_CHANNEL
+        },
+        expected_return: `10 points have been added to Potato on behalf of spam.`
+    },
+    {
+        id: `00072`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        datafile_populated: true,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${config.bot.PREFIX}points remove foo 5 @spam`,
+            level: PERM.MOD,
+            channel: TEST_CHANNEL
+        },
+        expected_return: `5 points have been removed from Foo on behalf of spam.`
     },
 ];

@@ -2,7 +2,7 @@
 // points_add.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/29 - 2019/12/13)
+// Written by: Tyler Akins (2019/11/29 - 2019/12/16)
 //
 
 
@@ -24,6 +24,10 @@ const POINTS_ADD_COMMAND = (ctx: msg_data, args: string[]): string => {
 
     let target = args[0];
     let user = args[2] || "%anonymous%";
+
+
+    // Ensure username doesn't start with an "@"
+    if (user.startsWith("@")) { user = user.slice(1); };
 
 
     for (var option of data) {
