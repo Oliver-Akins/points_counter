@@ -2,13 +2,12 @@
 // discord_handler.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/23 - 2019/12/14)
+// Written by: Tyler Akins (2019/11/23 - 2019/12/16)
 //
 
 
 import { HANDLE_MESSAGE } from "../cmd_handler";
 import { LOAD_CONFIG } from "../utils/Config";
-import { DISCORD_MOD } from "../utils/Perms";
 import { log_error } from "../utils/webhook";
 import { PERM } from "../constants";
 const Eris = require("eris");
@@ -56,7 +55,9 @@ export const run_discord = (): void => {
             // !SECTION: Exit conditions
 
 
-            var is_mod = DISCORD_MOD(msg.member.roles);
+            var is_mod = msg.member.roles.filter(
+                (x: string) => { return config.discord.MOD_ROLES.includes(x); }
+            ).length > 0;
             var is_admin = config.discord.ADMIN.includes(msg.member.id);
 
 
