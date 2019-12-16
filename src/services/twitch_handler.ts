@@ -78,7 +78,7 @@ export const run_twitch = (): void => {
             // NOTE: Get response
             let response: string = HANDLE_MESSAGE({
                 message: message,
-                channel: channel,
+                channel: `Twitch:${channel}`,
                 level: level,
                 source: "Twitch",
                 user: context.username,
