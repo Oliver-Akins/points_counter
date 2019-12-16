@@ -2,226 +2,207 @@
 // cmd_handler.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/10/31)
+// Written by: Tyler Akins (2019/11/06 - 2019/12/15)
 //
 
 
-/* Command Imports */
-import { ADD_SELECT, REMOVE_SELECT } from "./cmds/admin/select_commands";
-import { ADD_ALIAS, REMOVE_ALIAS } from "./cmds/admin/select_alias";
-import { ADMIN_HELP_COMMAND } from "./cmds/admin/admin_help";
-import { DATA_FILE_COMMAND } from "./cmds/admin/data_file";
-import { REMOVE_COMMAND } from "./cmds/mod/remove_points";
-import { VERSION_COMMAND } from "./cmds/user/version";
-import { OPTION_INFO } from "./cmds/user/option_info";
-import { LIST_ALIASES } from "./cmds/mod/alias_list";
-import { ADD_COMMAND } from "./cmds/mod/add_points";
-import { PING_COMMAND } from "./cmds/user/ping";
-import { HELP_COMMAND } from "./cmds/user/help";
-import { LEAD_COMMAND } from "./cmds/user/lead";
-import { LIST_COMMAND } from "./cmds/user/list";
-import { TOP3_COMMAND } from "./cmds/user/top";
-import { ALL_COMMAND } from "./cmds/user/all";
-
-import { PUSH } from "./utils/webhook";
+/* Imports */
+import { Command, Confirmation } from "./utils/Command";
+import { SORT_COMMANDS } from "./utils/sorting";
+import { LOAD_CONFIG } from "./utils/Config";
+import { log } from "./utils/webhook";
+import { PERM } from "./constants";
 
 
-const logger = (ctx: log_data): void => {
-    var datetime = new Date();
-    var date = `${datetime.getFullYear()}-${datetime.getMonth()+1}-${datetime.getDate()}`;
 
-    console.log(
-        `* [${date}][c:${ctx.channel}]` +
-        `[m:${ctx.is_mod}][a:${ctx.is_admin}]` +
-        `[u:${ctx.username}][s:${ctx.platform}]` +
-        ` - Running command: ${ctx.command}`
-    );
+export var commands: Command[] = [];
+export var confirms: Confirmation[] = [];
+var global_last_ran: number;
+var service_last_rans: any = {}
 
-    PUSH({
-        "content": "New log entry",
-        "embeds": [{
-            "title": "Log entry:",
-            "color": 43520,
-            "description": `Command ran : \`\`\`\n${ctx.command} ${ctx.args.join(" ")}\n\`\`\``,
-            "fields": [
-                { "name": "Date:", "value": date, "inline": true },
-                { "name": "Is mod:", "value": ctx.is_mod, "inline": true },
-                { "name": "Is admin:", "value": ctx.is_admin, "inline": true },
-                { "name": "Channel:", "value": ctx.channel, "inline": true },
-                { "name": "Username:", "value": ctx.username, "inline": true },
-                { "name": "Platform:", "value": ctx.platform, "inline": true }
-            ]
-        }]
-    });
+
+export const REGISTER_COMMAND = (metadata: cmd_metadata): boolean => {
+    // Ensure command gets added correctly
+    try {
+        commands.push(new Command(metadata));
+        SORT_COMMANDS(commands);
+        return true;
+    } catch (error) {
+        return false;
+    };
 };
 
 
 
-export const COMMAND_HANDLER = (command: string, args: string[], metadata: cmd_meta): string|void => {
+export const HANDLE_MESSAGE = (ctx: msg_data): string => {
 
-    let context = {
-        platform: metadata.platform,
-        username: metadata.username,
-        is_admin: metadata.is_admin,
-        channel: metadata.channel,
-        is_mod: metadata.is_mod,
-        command: command,
-        args: args
+    let config: config = LOAD_CONFIG();
+    let datetime = new Date();
+    let timezone = datetime.toLocaleTimeString("en-us", {timeZoneName:"short"}).split(" ")[2];
+    let date = `${datetime.getFullYear()}-${datetime.getMonth()+1}-${datetime.getDate()}`
+        + ` @ ${datetime.getHours()}:${datetime.getMinutes()} ${timezone}`;
+
+
+    // Confirmation handling:
+    // Check if we need any confirmations from users
+    for (var index in confirms) {
+        let confirmation = confirms[index];
+
+        let response: CONFIRM_TYPE = confirmation.matches(
+            ctx.user, ctx.channel, ctx.message
+        );
+
+        if (!["no_match", "expired"].includes(response)) {
+            confirms.splice(parseInt(index), 1);
+            let cmd_resp = confirmation.run(response);
+
+
+            // Check if we have a response to log
+            if (cmd_resp) {
+                log({
+                    title: `Log Entry (Confirmation Response):`,
+                    msg: `Command:\`\`\`\n${ctx.message}\n\`\`\`\n\nResponse:\`\`\`\n${cmd_resp}\n\`\`\``,
+                    embed: true,
+                    fields: {
+                        "Date:": date,
+                        "Is Mod:": ctx.level >= PERM.MOD,
+                        "Is Admin:": ctx.level >= PERM.ADMIN,
+                        "Level:": ctx.level,
+                        "Channel:": ctx.channel,
+                        "Username": ctx.user,
+                        "Platform": ctx.source,
+                        "Confirm Type": response
+                    },
+                    no_stdout: true
+                });
+            };
+
+            return cmd_resp;
+        }
+
+        else if (response === "expired") {
+            confirms.splice(parseInt(index), 1);
+            confirmation.run(response);
+        };
+    };
+
+
+
+    // SECTION: Global command cooldowns
+    if (config.bot.COOLDOWN_TYPE === "GLOBAL" && ctx.cooldown) {
+        if (global_last_ran) {
+            if (Date.now() - global_last_ran < config.bot.COOLDOWN_TIME * 1000) {
+                return null;
+            };
+        };
+        global_last_ran = Date.now();
     }
+    // !SECTION: Global command cooldowns
 
-    // SECTION: Admin Commands
-    if (command === "admin") {
-        logger(context)
+
+
+    // SECTION: Service command cooldowns
+    else if (config.bot.COOLDOWN_TYPE === "SERVICE" && ctx.cooldown) {
+        if (service_last_rans[ctx.source]) {
+            if (Date.now() - service_last_rans[ctx.source] < config.bot.COOLDOWN_TIME * 1000) {
+                return null;
+            };
+        };
+        service_last_rans[ctx.source] = Date.now();
+    };
+    // !SECTION: Service command cooldowns
+
+
+
+    // Check all registered commands
+    for (var cmd of commands) {
+
+        // NOTE: Checking if message doesn't match
+        if (!cmd.matches(ctx.message.toLowerCase())) { continue; };
+
 
         // NOTE: Permission checking
-        if (!metadata.is_admin) { return "You don't have permission to run that command."; }
-
-        // NOTE: Subcommand check
-        else if (args.length < 1) { return "Not enough arguments, must specify a sub-command."; }
-
-
-        let subcommand: string = args[0];
-
-
-        // NOTE: data file subcommand
-        if (subcommand === "db") { return DATA_FILE_COMMAND(args[1].toLowerCase()); }
-
-        // NOTE: admin help
-        else if (subcommand === "help") { return ADMIN_HELP_COMMAND(); }
-
-
-        // SECTION: Alias subcommand
-        else if (subcommand === "alias") {
-
-            // NOTE: Ensure arguments
-            if (args.length < 4) { return "Not enough arguments, must specify an action."; }
-
-            let target = args[1].toLowerCase();
-            let alias = args[3].toLowerCase();
-
-            // NOTE: Alias add
-            if (args[2] === "add") { return ADD_ALIAS(target, alias); }
-
-            // NOTE: alias remove
-            else if (args[2] === "remove") { return REMOVE_ALIAS(target, alias); }
-        }
-        // !SECTION
-
-
-        // SECTION: Select subcommand
-        else if (subcommand === "option") {
-
-            // NOTE: Ensure arguments
-            if (args.length < 3) { return "Not enough arguments, must specify an action."; }
-
-            // NOTE: Alias add
-            else if (args[1] === "add") { return ADD_SELECT(args[2]); }
-
-            // NOTE: alias remove
-            else if (args[1] === "remove") { return REMOVE_SELECT(args[2].toLowerCase()); }
-        }
-        //!SECTION
-    }
-    // !SECTION: Admin Commands
-
-
-
-    // SECTION: Moderator Commands
-
-    // NOTE: add command
-    if (command === "add") {
-        logger(context);
-
-        // Permission check
-        if (!metadata.is_mod && !metadata.is_admin) {
-            return "You don't have permission to run that command.";
-        }
-
-        return ADD_COMMAND(args);
-
-    }
-
-    // NOTE: remove command
-    else if (command === "remove") {
-        logger(context);
-
-        // Permission check
-        if (!metadata.is_mod && !metadata.is_admin) {
-            return "You don't have permission to run that command.";
-        }
-
-        return REMOVE_COMMAND(args);
-    }
-
-    else if (command === "aliases") {
-        if (args.length < 1) {
-            return "Not enough arguments, must specify a target.";
+        if (ctx.level < cmd.level) {
+            if (config.bot.INVALID_PERM_ERROR) {
+                return `Invalid Permissions, you must be at least level ${cmd.level}, you are level ${ctx.level}.`;
+            };
+            return null;
         };
 
-        logger(context);
-        return LIST_ALIASES(args[0].toLowerCase())
-    }
-    // !SECTION: Moderator Commands
 
-
-
-    // SECTION: User Commands
-    // NOTE: info command
-    else if (command === "info") {
-        if (args.length < 1) {
-            return "Not enough arguments, must specify a target.";
+        // NOTE: per-command cooldown
+        if (config.bot.COOLDOWN_TYPE === "COMMAND" && ctx.cooldown) {
+            if (cmd.last_ran) {
+                if (Date.now() - cmd.last_ran < config.bot.COOLDOWN_TIME * 1000) {
+                    return null;
+                };
+            };
+            cmd.last_ran = Date.now();
         };
-        logger(context);
-        return OPTION_INFO(args[0].toLowerCase())
-    }
-    // NOTE: list command
-    else if (command === "list") {
-        logger(context);
-        return LIST_COMMAND();
-    }
 
 
-    // NOTE: ping command
-    else if (command === "ping") {
-        logger(context);
-        return PING_COMMAND();
-    }
+        // NOTE: Case sensitivity
+        if (!cmd.case_sensitive) {
+            ctx.message = ctx.message.toLowerCase();
+        };
 
 
-    // NOTE: help command
-    else if (command === "help") {
-        logger(context);
-        return HELP_COMMAND();
-    }
+        // NOTE: Argument parsing
+        let args = ctx.message
+            .slice(config.bot.PREFIX.length)
+            .split(" ")
+            .slice(cmd.full_name.split(" ").length);
 
 
-    // NOTE: lead command
-    else if (command === "lead") {
-        logger(context);
-        return LEAD_COMMAND();
-    }
+        // Ensure the use supplied enough arguments
+        if (args.length < cmd.mand_args) {
+            return `Not enough arguments, missing argument: \`${cmd.arg_list[args.length]}\``;
+        };
 
 
-    // NOTE: top command
-    else if (command === "top")  {
-        logger(context);
-        return TOP3_COMMAND();
-    }
+        let response = cmd.execute(ctx, args);
 
 
-    // NOTE: version command
-    else if (command === "version") {
-        logger(context);
-        return VERSION_COMMAND();
-    }
-
-
-    // NOTE: all command
-    else if (command === "all") {
-        logger(context);
-        return ALL_COMMAND();
-    }
-    // !SECTION: User Commands
-
+        log({
+            title: `Log Entry:`,
+            msg: `Command:\`\`\`\n${ctx.message}\n\`\`\`\n\nResponse:\`\`\`\n${response}\n\`\`\``,
+            embed: true,
+            fields: {
+                "Date:": date,
+                "Is Mod:": ctx.level >= PERM.MOD,
+                "Is Admin:": ctx.level >= PERM.ADMIN,
+                "Level:": ctx.level,
+                "Channel:": ctx.channel,
+                "Username": ctx.user,
+                "Platform": ctx.source
+            },
+            no_stdout: true
+        });
+        return response;
+    };
     return null;
 };
+
+
+
+/* Importing all the commands so they can register */
+import "./commands/all";
+import "./commands/top";
+import "./commands/ping";
+import "./commands/help";
+import "./commands/lead";
+import "./commands/version";
+import "./commands/alias_add";
+import "./commands/alias_list";
+import "./commands/admin_link";
+import "./commands/points_add";
+import "./commands/options_add";
+import "./commands/alias_remove";
+import "./commands/admin_unlink";
+import "./commands/options_list";
+import "./commands/options_info";
+import "./commands/points_remove";
+import "./commands/options_remove";
+import "./commands/admin_data_init";
+import "./commands/admin_data_delete";
+import "./commands/admin_get_channel";

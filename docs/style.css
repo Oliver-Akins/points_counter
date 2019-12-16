@@ -1,0 +1,80 @@
+:root {
+    --anchor-default: #00aa00;
+    --anchor-hover: #1b7709;
+
+    --info-background: rgba(114, 137, 218, .3);
+    --info-text: #ffffff;
+    --info-border: rgba(114, 137, 218, .75);
+
+    --warn-background: rgba(250, 166, 26, .3);
+    --warn-text: #ffffff;
+    --warn-border: rgba(250, 166, 26, .75);
+
+    --error-background: rgba(240, 71, 71, .3);
+    --error-border: rgba(240, 71, 71, .75);
+    --error-text: #ffffff;
+}
+
+
+
+div a, p a { color: var(--anchor-default); }
+div a:hover, p a:hover { color: var(--anchor-hover); }
+
+
+
+div.nav {
+    display: inline-flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+}
+div.item {
+    text-align: center;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    flex-basis: content;
+}
+
+
+
+div.alert {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 7px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 7px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+div.error {
+    border-color: var(--error-border);
+    color: var(--error-text);
+    background-color: var(--error-background);
+}
+
+div.warn {
+    border-color: var(--warn-border);
+    color: var(--warn-text);
+    background-color: var(--warn-background);
+}
+
+div.info {
+    border-color: var(--info-border);
+    color: var(--info-text);
+    background-color: var(--info-background);
+}
+
+
+.title {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+.center {
+    text-align: center;
+}
+.small {
+    font-size: small;
+}

@@ -10,10 +10,12 @@
         "rootDir": "src",
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "noImplicitReturns": true
     },
     "include": [
-        "./src/**/*.ts"
+        "./src/**/*.ts",
+        "./src/**/*.d.ts"
     ],
     "exclude": [
         "node_modules",

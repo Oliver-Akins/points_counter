@@ -1,0 +1,35 @@
+{
+  "DEV": false,
+  "DATA_DIR": "./data",
+  "WEBSITE": "localhost",
+  "twitch": {
+    "OAUTH_TOKEN": null,
+    "USERNAME": null,
+    "CLIENT_ID": null,
+    "CHANNELS": [],
+    "ADMIN": []
+  },
+  "discord": {
+    "OAUTH_TOKEN": null,
+    "DEV_TOKEN": null,
+    "SECRET": null,
+    "PERMISSIONS_VALUE": 3072,
+    "CLIENT_ID": null,
+    "MOD_ROLES": [],
+    "ADMIN": []
+  },
+  "bot": {
+    "PREFIX": "!",
+    "COOLDOWN_TIME": 5,
+    "COOLDOWN_TYPE": "SERVICE",
+    "INVALID_PERM_ERROR": false
+  },
+  "webhooks": {
+    "LOGGING": "MUST_BE_FILLED_IN",
+    "ERROR": "MUST_BE_FILLED_IN"
+  },
+  "web": {
+    "ROOT": "./docs",
+    "PORT": 4000
+  }
+}
