@@ -8,6 +8,7 @@
 
 interface test_msg_data {
     source: platform;
+    channel: string;
     message: string;
     level: number;
 }
