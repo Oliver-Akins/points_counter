@@ -2,7 +2,7 @@
 // twitch_handler.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/10 - 2019/12/14)
+// Written by: Tyler Akins (2019/12/10 - 2019/12/18)
 //
 
 /*
@@ -162,7 +162,7 @@ export const run_twitch = (): void => {
 
                 // Trigger addition
                 let response = HANDLE_MESSAGE({
-                    message: `${config.bot.PREFIX}points add ${bit_total} ${word} ${context.username}`,
+                    message: `${config.bot.PREFIX}points add ${word} ${bit_total} ${context.username}`,
                     source: "Twitch",
                     channel: channel,
                     level: PERM.MOD,
