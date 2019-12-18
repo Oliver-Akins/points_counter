@@ -10,6 +10,7 @@ tmi.js DOCS: https://github.com/tmijs/docs/blob/gh-pages/_posts/v1.4.2/2019-03-0
 */
 
 
+import { RESOLVE_CHANNEL_STRING } from "../utils/metadata";
 import { log_error, log } from "../utils/webhook";
 import { HANDLE_MESSAGE } from "../cmd_handler";
 import { LOAD_CONFIG } from "../utils/Config";
@@ -143,7 +144,7 @@ export const run_twitch = (): void => {
     client.on("cheer", (channel: string, context: tmi.Userstate, message: string) => {
 
         let bit_total: number = parseInt(context.bits);
-        let data: option[] = LOAD(channel.replace(/#/g, ""));
+        let data: option[] = LOAD(RESOLVE_CHANNEL_STRING(`Twitch:${channel}`));
         let aliases: string[] = [];
 
 
@@ -164,7 +165,7 @@ export const run_twitch = (): void => {
                 let response = HANDLE_MESSAGE({
                     message: `${config.bot.PREFIX}points add ${word} ${bit_total} ${context.username}`,
                     source: "Twitch",
-                    channel: channel,
+                    channel: `Twitch:${channel}`,
                     level: PERM.MOD,
                     user: context.username,
                     cooldown: false,
