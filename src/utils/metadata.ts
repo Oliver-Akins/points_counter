@@ -2,7 +2,7 @@
 // metadata.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/13)
+// Written by: Tyler Akins (2019/12/13 - 2019/12/18)
 //
 
 
@@ -34,4 +34,23 @@ export const RESOLVE_CHANNEL = (ctx: msg_data, link_resolutions=5): string => {
     };
 
     return ctx.channel;
+};
+
+
+
+export const RESOLVE_CHANNEL_STRING = (channel: string, link_resolutions=5): string => {
+
+    channel = channel.replace(/#/g, "").replace(/ /g, "_");
+
+    const links = LOAD_LINKS();
+
+
+    let resolves = 0;
+
+    while (resolves < link_resolutions && links[channel]) {
+        channel = links[channel];
+        resolves++;
+    };
+
+    return channel;
 };
