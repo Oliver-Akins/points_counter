@@ -10,7 +10,7 @@
     </head>
     <body>
         <h1 class="title center">${d.cmd.full_name} command help</h1>
-        <p class="small center">Version ${d.c.bot.VERSION}</p>
+        <p class="small center">Version ${d.version}</p>
         <hr>
         <div class="nav">
             <div class="item">
@@ -33,7 +33,7 @@
                 <th>Value</th>
                 <th>Description</th>
             </tr>
-            <tr>
+            <tr ${d.cmd.group ? "" : "hidden"}>
                 <td>Group</td>
                 <td>${d.cmd.group}</td>
                 <td>

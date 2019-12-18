@@ -10,7 +10,7 @@
     </head>
     <body>
         <h1 class="title center">Points Counter Commands</h1>
-        <p class="small center">Version ${d.c.bot.VERSION}</p>
+        <p class="small center">Version ${d.version}</p>
         <hr>
         <div class="nav">
             <div class="item">
