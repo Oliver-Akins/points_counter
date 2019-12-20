@@ -2,7 +2,7 @@
 // webhook.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/11)
+// Written by: Tyler Akins (2019/11/11 - 2019/12/19)
 //
 
 
@@ -20,7 +20,6 @@ export const log = (context: log_data) => {
     // Should we output the data to the console, ensure the data is console-outputable
     if (config.DEV && !context.no_stdout) {
         console.log(context.msg);
-        return;
     };
 
 
@@ -66,6 +65,12 @@ export const log_error = (payload: any) => {
 
 
 export const push = (payload: any, webhook: WEBHOOK_TYPE) => {
+
+    // Output to stdout?
+    if (payload.content && !payload.no_stdout && payload.no_stdout != undefined) {
+        console.log(payload.content)
+    };
+
     requests.post({
         uri: config.webhooks[webhook],
         body: payload,
