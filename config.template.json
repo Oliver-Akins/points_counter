@@ -27,7 +27,8 @@
   },
   "webhooks": {
     "LOGGING": "MUST_BE_FILLED_IN",
-    "ERROR": "MUST_BE_FILLED_IN"
+    "ERROR": "MUST_BE_FILLED_IN",
+    "TWITCH_MISSED_BITS": "MUST_BE_FILLED_IN"
   },
   "web": {
     "ROOT": "./docs",
