@@ -28,59 +28,49 @@ export const log = (context: log_data) => {
 
     // Are we embedding the response or not?
     if (context.embed) {
-        options = {
-            uri: config.webhooks.LOGGING,
-            body: {
-                "content": "Log Entry:",
-                "embeds": [
-                    {
-                        color: 43520,
-                        title: context.title,
-                        description: context.msg,
-                        fields: []
-                    }
-                ]
-            },
-            json: true
+        let payload = {
+            "content": "Log Entry:",
+            "embeds": [
+                {
+                    color: 43520,
+                    title: context.title,
+                    description: context.msg,
+                    fields: []
+                }
+            ]
         };
 
         // Add fields
         for (var field in context.fields) {
-            options["body"]["embeds"][0]["fields"].push({
+            payload.embeds[0].fields.push({
                 name: field,
                 value: context.fields[field],
                 inline: true
             });
         };
-    } else {
-        options = {
-            uri: config.webhooks.LOGGING,
-            body: {
-                "content": context.msg
-            },
-            json: true
-        };
-    };
 
-    // Push to webhook
-    requests.post(options)
-    .catch((error: any) => {
-        console.error("OHNO, Shit Went DOWWWNNNNNN");
-    })
-}
+        push(payload, "LOGGING")
+    } else {
+        push({
+            "content": context.msg
+        }, "LOGGING");
+    };
+};
+
 
 
 export const log_error = (payload: any) => {
-    let config: config = LOAD_CONFIG();
+    push(payload, "ERROR");
+};
 
-    let options = {
-        uri: config.webhooks.ERROR,
+
+
+export const push = (payload: any, webhook: WEBHOOK_TYPE) => {
+    requests.post({
+        uri: config.webhooks[webhook],
         body: payload,
         json: true
-    };
-
-    requests.post(options)
-    .catch((error: any) => {
+    }).catch((_: any) => {
         console.error("OHNO, Shit Went DOWWWNNNNNN");
     });
-}
+};
