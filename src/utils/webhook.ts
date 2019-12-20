@@ -10,8 +10,11 @@ import * as requests from "request-promise-native";
 import { LOAD_CONFIG } from "./Config";
 
 
+const config: config = LOAD_CONFIG();
+
+
+
 export const log = (context: log_data) => {
-    let config: config = LOAD_CONFIG();
 
 
     // Should we output the data to the console, ensure the data is console-outputable
