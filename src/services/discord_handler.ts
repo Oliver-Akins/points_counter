@@ -2,13 +2,13 @@
 // discord_handler.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/23 - 2019/12/16)
+// Written by: Tyler Akins (2019/11/23 - 2019/12/19)
 //
 
 
+import { log_error, log } from "../utils/webhook";
 import { HANDLE_MESSAGE } from "../cmd_handler";
 import { LOAD_CONFIG } from "../utils/Config";
-import { log_error } from "../utils/webhook";
 import { PERM } from "../constants";
 const Eris = require("eris");
 
@@ -22,8 +22,7 @@ export const run_discord = (): void => {
 
 
     bot.on("ready", () => {
-        console.log(`* Connected to Discord gateways`);
-        // TODO: Maybe send connection message to Discord Webhook
+        log({ msg: `* Connected to Discord gateway` });
     });
 
 
