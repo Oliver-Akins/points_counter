@@ -83,6 +83,9 @@
             <p>
                 <pre><code>${d.cmd.syntax.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>
             </p>
+            <p>
+                ${d.arg_help.join("<br />")}
+            </p>
         </div>
         <hr>
         <div class="nav">

@@ -2,7 +2,7 @@
 // options_add.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/29 - 2019/12/13)
+// Written by: Tyler Akins (2019/11/29 - 2019/12/23)
 //
 
 
@@ -53,6 +53,7 @@ const metadata: cmd_metadata = {
     ],
     group: "options",
     name: "add",
-    level: PERM.MOD
+    level: PERM.MOD,
+    arg_info: []
 };
 REGISTER_COMMAND(metadata);

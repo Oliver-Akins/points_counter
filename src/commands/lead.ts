@@ -2,7 +2,7 @@
 // lead.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/03 - 2019/12/13)
+// Written by: Tyler Akins (2019/12/03 - 2019/12/23)
 //
 
 
@@ -53,6 +53,7 @@ const metadata: cmd_metadata = {
     args: [],
     group: null,
     name: "lead",
-    level: PERM.ALL
+    level: PERM.ALL,
+    arg_info: []
 };
 REGISTER_COMMAND(metadata);

@@ -2,7 +2,7 @@
 // admin_get_channel.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/13)
+// Written by: Tyler Akins (2019/12/13 - 2019/12/23)
 //
 
 
@@ -25,6 +25,7 @@ const metadata: cmd_metadata = {
     args: [],
     group: "admin",
     name: "get channel",
-    level: PERM.ADMIN
+    level: PERM.ADMIN,
+    arg_info: []
 };
 REGISTER_COMMAND(metadata);

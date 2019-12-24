@@ -2,7 +2,7 @@
 // admin_link.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/13)
+// Written by: Tyler Akins (2019/12/13 - 2019/12/23)
 //
 
 
@@ -33,6 +33,10 @@ const metadata: cmd_metadata = {
     ],
     group: "admin",
     name: "link",
-    level: PERM.ADMIN
+    level: PERM.ADMIN,
+    arg_info: [
+        "The symlink to create pointing at Target_Channel",
+        "The channel that will be resolved to. This can either be another symlink or a direct channel."
+    ]
 };
 REGISTER_COMMAND(metadata);

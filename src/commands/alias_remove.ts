@@ -2,7 +2,7 @@
 // alias_remove.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/12 - 2019/12/13)
+// Written by: Tyler Akins (2019/12/12 - 2019/12/23)
 //
 
 
@@ -48,10 +48,13 @@ const metadata: cmd_metadata = {
     executable: ALIAS_REMOVE,
     opt_args: 0,
     args: [
-        "<Option: String>"
+        "<Alias: String>"
     ],
     group: "alias",
     name: "remove",
-    level: PERM.MOD
+    level: PERM.MOD,
+    arg_info: [
+        "The alias to remove from whatever option has it. This cannot remove the last alias from an option."
+    ]
 };
 REGISTER_COMMAND(metadata);

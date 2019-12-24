@@ -2,7 +2,7 @@
 // Command.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/06 - 2019/12/10)
+// Written by: Tyler Akins (2019/11/06 - 2019/12/23)
 //
 
 
@@ -14,6 +14,7 @@ export class Command {
     readonly requires_confirm: boolean;
     readonly case_sensitive: boolean;
     readonly arg_list: string[];
+    readonly arg_info: string[];
     readonly mand_args: number;
     readonly full_name: string;
     readonly opt_args: number;
@@ -43,6 +44,7 @@ export class Command {
         this.alert = metadata.alerts;
         this.requires_confirm = metadata.requires_confirm;
         this.full_name = this.group ? `${this.group} ${this.name}` : `${this.name}`;
+        this.arg_info = metadata.arg_info
 
 
         // NOTE: Create syntax dynamically

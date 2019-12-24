@@ -2,7 +2,7 @@
 // web_server.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/08 - 2019/12/18)
+// Written by: Tyler Akins (2019/12/08 - 2019/12/23)
 //
 
 
@@ -99,22 +99,36 @@ export const run_web_server = (): void => {
         let command = req.params.cmd;
 
         for (var cmd of commands) {
+            let arg_help: string[] = [];
+
+            for (var i in cmd.arg_list) {
+                arg_help.push(
+                    `<code>
+                    ${cmd.arg_list[i].replace(/</g, "&lt;").replace(/>/g, "&gt;")}
+                    </code>
+                    : ${cmd.arg_info[i]}`);
+            };
+
+
+            let data = {
+                "c": config,
+                "cmd": cmd,
+                "version": VERSION,
+                "arg_help": arg_help
+            }
+
+
             if (cmd.group) {
-                if (`${cmd.group}_${cmd.name}` === command) {
-                    res.render("single_command", {
-                        "c": config,
-                        "cmd": cmd,
-                        "version": VERSION
-                    });
+                if (cmd.full_name.replace(/ /g, "_") === command) {
+                    res.render("single_command", data);
                     return;
                 };
-            } else {
+            }
+
+
+            else {
                 if (cmd.name === command) {
-                    res.render("single_command", {
-                        "c": config,
-                        "cmd": cmd,
-                        "version": VERSION
-                    });
+                    res.render("single_command", data);
                     return;
                 }
             }

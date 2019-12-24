@@ -2,7 +2,7 @@
 // options_remove.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/06 - 2019/12/13)
+// Written by: Tyler Akins (2019/12/06 - 2019/12/23)
 //
 
 
@@ -47,6 +47,9 @@ const metadata: cmd_metadata = {
     ],
     group: "options",
     name: "remove",
-    level: PERM.MOD
+    level: PERM.MOD,
+    arg_info: [
+        "The option to remove from the dataset."
+    ]
 };
 REGISTER_COMMAND(metadata);

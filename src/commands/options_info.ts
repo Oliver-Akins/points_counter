@@ -2,7 +2,7 @@
 // options_info.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/06 - 2019/12/15)
+// Written by: Tyler Akins (2019/12/06 - 2019/12/23)
 //
 
 
@@ -63,6 +63,9 @@ const metadata: cmd_metadata = {
     ],
     group: "options",
     name: "info",
-    level: PERM.ALL
+    level: PERM.ALL,
+    arg_info: [
+        "The option to get information for."
+    ]
 };
 REGISTER_COMMAND(metadata);
