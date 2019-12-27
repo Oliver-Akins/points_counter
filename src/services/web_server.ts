@@ -2,7 +2,7 @@
 // web_server.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/08)
+// Written by: Tyler Akins (2019/12/08 - 2019/12/23)
 //
 
 
@@ -14,8 +14,8 @@ Templater:: https://github.com/Drulac/template-literal
 
 import * as templater from "template-literal";
 import { LOAD_CONFIG } from "../utils/Config";
+import { PERM, VERSION } from "../constants";
 import { commands } from "../cmd_handler";
-import { PERM } from "../constants";
 import * as express from "express";
 import * as tl from "express-tl"
 import * as path from "path";
@@ -49,7 +49,8 @@ export const run_web_server = (): void => {
         // Prevent caching when developing
         if (config.DEV) {res.set("Cache-Control", "no-store, no-cache, must-revalidate, private");};
         res.render("index", {
-            c: config
+            "c": config,
+            "version": VERSION
         });
     });
 
@@ -86,7 +87,8 @@ export const run_web_server = (): void => {
             "c": config,
             "u_cmds": usr_cmds,
             "m_cmds": mod_cmds,
-            "a_cmds": admin_cmds
+            "a_cmds": admin_cmds,
+            "version": VERSION
         });
     });
 
@@ -97,27 +99,44 @@ export const run_web_server = (): void => {
         let command = req.params.cmd;
 
         for (var cmd of commands) {
+            let arg_help: string[] = [];
+
+            for (var i in cmd.arg_list) {
+                arg_help.push(
+                    `<code>
+                    ${cmd.arg_list[i].replace(/</g, "&lt;").replace(/>/g, "&gt;")}
+                    </code>
+                    : ${cmd.arg_info[i]}`);
+            };
+
+
+            let data = {
+                "c": config,
+                "cmd": cmd,
+                "version": VERSION,
+                "arg_help": arg_help
+            }
+
+
             if (cmd.group) {
-                if (`${cmd.group}_${cmd.name}` === command) {
-                    res.render("single_command", {
-                        "c": config,
-                        "cmd": cmd
-                    });
+                if (cmd.full_name.replace(/ /g, "_") === command) {
+                    res.render("single_command", data);
                     return;
                 };
-            } else {
+            }
+
+
+            else {
                 if (cmd.name === command) {
-                    res.render("single_command", {
-                        "c": config,
-                        "cmd": cmd
-                    });
+                    res.render("single_command", data);
                     return;
                 }
             }
         };
         res.render("errors/404", {
             "c": config,
-            "command": command
+            "command": command,
+            "version": VERSION
         })
     });
 
@@ -126,7 +145,8 @@ export const run_web_server = (): void => {
     // Technical details
     server.get("/tech-specs", (_, res) => {
         res.render("tech-specs", {
-            "c": config
+            "c": config,
+            "version": VERSION
         });
     });
 
@@ -135,7 +155,8 @@ export const run_web_server = (): void => {
     // CLI arguments
     server.get("/cli-args", (_, res) => {
         res.render("cli-args", {
-            "c": config
+            "c": config,
+            "version": VERSION
         })
     });
 
@@ -144,7 +165,8 @@ export const run_web_server = (): void => {
     // Copyright
     server.get("/copyright", (_, res) => {
         res.render("copyright", {
-            "c": config
+            "c": config,
+            "version": VERSION
         });
     });
 

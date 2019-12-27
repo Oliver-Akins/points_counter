@@ -2,7 +2,7 @@
 // command_metadata.d.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/06 - 2019/12/10)
+// Written by: Tyler Akins (2019/11/06 - 2019/12/23)
 //
 
 
@@ -32,6 +32,7 @@ interface cmd_metadata {
     case_sensitive: boolean;
     alerts?: alert_structure;
     description: string;
+    arg_info: string[];
     opt_args: number;
     group?: string;
     args: string[];

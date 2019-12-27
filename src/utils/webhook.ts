@@ -2,7 +2,7 @@
 // webhook.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/11)
+// Written by: Tyler Akins (2019/11/11 - 2019/12/19)
 //
 
 
@@ -10,14 +10,16 @@ import * as requests from "request-promise-native";
 import { LOAD_CONFIG } from "./Config";
 
 
+const config: config = LOAD_CONFIG();
+
+
+
 export const log = (context: log_data) => {
-    let config: config = LOAD_CONFIG();
 
 
     // Should we output the data to the console, ensure the data is console-outputable
     if (config.DEV && !context.no_stdout) {
         console.log(context.msg);
-        return;
     };
 
 
@@ -25,59 +27,55 @@ export const log = (context: log_data) => {
 
     // Are we embedding the response or not?
     if (context.embed) {
-        options = {
-            uri: config.webhooks.LOGGING,
-            body: {
-                "content": "Log Entry:",
-                "embeds": [
-                    {
-                        color: 43520,
-                        title: context.title,
-                        description: context.msg,
-                        fields: []
-                    }
-                ]
-            },
-            json: true
+        let payload = {
+            "content": "Log Entry:",
+            "embeds": [
+                {
+                    color: 43520,
+                    title: context.title,
+                    description: context.msg,
+                    fields: []
+                }
+            ]
         };
 
         // Add fields
         for (var field in context.fields) {
-            options["body"]["embeds"][0]["fields"].push({
+            payload.embeds[0].fields.push({
                 name: field,
                 value: context.fields[field],
                 inline: true
             });
         };
-    } else {
-        options = {
-            uri: config.webhooks.LOGGING,
-            body: {
-                "content": context.msg
-            },
-            json: true
-        };
-    };
 
-    // Push to webhook
-    requests.post(options)
-    .catch((error: any) => {
-        console.error("OHNO, Shit Went DOWWWNNNNNN");
-    })
-}
+        push(payload, "LOGGING")
+    } else {
+        push({
+            "content": context.msg
+        }, "LOGGING");
+    };
+};
+
 
 
 export const log_error = (payload: any) => {
-    let config: config = LOAD_CONFIG();
+    push(payload, "ERROR");
+};
 
-    let options = {
-        uri: config.webhooks.ERROR,
-        body: payload,
-        json: true
+
+
+export const push = (payload: any, webhook: WEBHOOK_TYPE) => {
+
+    // Output to stdout?
+    if (payload.content && !payload.no_stdout && payload.no_stdout != undefined) {
+        console.log(payload.content)
     };
 
-    requests.post(options)
-    .catch((error: any) => {
+    requests.post({
+        uri: config.webhooks[webhook],
+        body: payload,
+        json: true
+    }).catch((_: any) => {
         console.error("OHNO, Shit Went DOWWWNNNNNN");
     });
-}
+};

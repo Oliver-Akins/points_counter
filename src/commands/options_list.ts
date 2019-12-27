@@ -2,7 +2,7 @@
 // options_list.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/11 - 2019/12/15)
+// Written by: Tyler Akins (2019/11/11 - 2019/12/23)
 //
 
 
@@ -73,4 +73,5 @@ REGISTER_COMMAND({
     group: "options",
     name: "list",
     level: PERM.ALL,
+    arg_info: []
 });

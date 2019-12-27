@@ -2,7 +2,7 @@
 // admin_unlink.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/13)
+// Written by: Tyler Akins (2019/12/13 - 2019/12/23)
 //
 
 
@@ -32,6 +32,9 @@ const metadata: cmd_metadata = {
     ],
     group: "admin",
     name: "unlink",
-    level: PERM.ADMIN
+    level: PERM.ADMIN,
+    arg_info: [
+        "The symlink to delete."
+    ]
 };
 REGISTER_COMMAND(metadata);

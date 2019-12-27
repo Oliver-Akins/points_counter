@@ -28,7 +28,8 @@
 			"    args: [],",
 			"    group: null,",
 			"    name: \"\",",
-			"    level: 0",
+			"    level: 0,",
+			"    arg_info: []",
 			"};",
 			"REGISTER_COMMAND(metadata);"
 		]

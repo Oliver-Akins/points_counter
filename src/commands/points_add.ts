@@ -2,7 +2,7 @@
 // points_add.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/29 - 2019/12/16)
+// Written by: Tyler Akins (2019/11/29 - 2019/12/23)
 //
 
 
@@ -57,12 +57,17 @@ const metadata: cmd_metadata = {
     executable: POINTS_ADD_COMMAND,
     opt_args: 1,
     args: [
-        "<Alias: String>",
+        "<Option: String>",
         "<Amount: Integer>",
         "[User: String]"
     ],
     group: "points",
     name: "add",
-    level: PERM.MOD
+    level: PERM.MOD,
+    arg_info: [
+        "The option to add the points to.",
+        "The number of points to add to the option.",
+        "The user who donated the bits to the user, this defaults to '%anonymous%' if not specified."
+    ]
 };
 REGISTER_COMMAND(metadata);

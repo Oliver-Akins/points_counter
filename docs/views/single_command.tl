@@ -10,7 +10,7 @@
     </head>
     <body>
         <h1 class="title center">${d.cmd.full_name} command help</h1>
-        <p class="small center">Version ${d.c.bot.VERSION}</p>
+        <p class="small center">Version ${d.version}</p>
         <hr>
         <div class="nav">
             <div class="item">
@@ -31,34 +31,50 @@
             <tr>
                 <th>Field</th>
                 <th>Value</th>
-                <th>Description</th>
             </tr>
-            <tr>
-                <td>Group</td>
+            <tr ${d.cmd.group ? "" : "hidden"}>
+                <td>
+                    <div class="tooltip">
+                        Group
+                        <span class="hover_text">
+                            The group that this command belongs to.
+                        </span>
+                    </div>
+                </td>
                 <td>${d.cmd.group}</td>
-                <td>
-                    The group that this command belongs to. This is typically
-                    only set for commands with subcommands.
-                </td>
             </tr>
             <tr>
-                <td>Name</td>
+                <td>
+                    <div class="tooltip">
+                        Name
+                        <div class="hover_text">
+                            The name of the command.
+                        </div>
+                    </div>
+                </td>
                 <td>${d.cmd.name}</td>
-                <td>The name of this command.</td>
             </tr>
             <tr>
-                <td>Level</td>
+                <td>
+                    <div class="tooltip">
+                        Level
+                        <span class="hover_text">
+                            The minimum level required to be able to run this command.
+                        </span>
+                    </div>
+                </td>
                 <td>${d.cmd.level}</td>
-                <td>
-                    The minimum level required to be able to run this command.
-                </td>
             </tr>
             <tr>
-                <td>Requires Confirmation</td>
-                <td>${d.cmd.requires_confirm}</td>
                 <td>
-                    Whether or not this command requires a confirmation command.
+                    <div class="tooltip">
+                        Requires Confirmation
+                        <div class="hover_text">
+                            Whether or not this command requires a confirmation command.
+                        </div>
+                    </div>
                 </td>
+                <td>${d.cmd.requires_confirm}</td>
             </tr>
         </table>
         <hr>
@@ -66,6 +82,9 @@
             <h2>Usage:</h2>
             <p>
                 <pre><code>${d.cmd.syntax.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>
+            </p>
+            <p>
+                ${d.arg_help.join("<br />")}
             </p>
         </div>
         <hr>

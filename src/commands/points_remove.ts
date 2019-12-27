@@ -2,7 +2,7 @@
 // points_remove.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/06 - 2019/12/16)
+// Written by: Tyler Akins (2019/12/06 - 2019/12/23)
 //
 
 
@@ -75,6 +75,11 @@ const metadata: cmd_metadata = {
     ],
     group: "points",
     name: "remove",
-    level: PERM.MOD
+    level: PERM.MOD,
+    arg_info: [
+        "The option to add the points to.",
+        "The number of points to add to the option.",
+        "The user who donated the bits to the user, this defaults to '%anonymous%' if not specified."
+    ]
 };
 REGISTER_COMMAND(metadata);

@@ -11,7 +11,7 @@ tmi.js DOCS: https://github.com/tmijs/docs/blob/gh-pages/_posts/v1.4.2/2019-03-0
 
 
 import { RESOLVE_CHANNEL_STRING } from "../utils/metadata";
-import { log_error, log } from "../utils/webhook";
+import { log_error, log, push } from "../utils/webhook";
 import { HANDLE_MESSAGE } from "../cmd_handler";
 import { LOAD_CONFIG } from "../utils/Config";
 import { PERM } from "../constants";
@@ -179,6 +179,9 @@ export const run_twitch = (): void => {
                 return;
             };
         };
+        push({
+            content: `${context.username} donated ${bit_total} bits, but didn't specify a target in their message!`
+        }, "TWITCH_MISSED_BITS")
     });
     // !SECTION
 

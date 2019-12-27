@@ -2,7 +2,7 @@
 // alias_add.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/12 2019/13/13)
+// Written by: Tyler Akins (2019/12/12 2019/13/23)
 //
 
 
@@ -52,6 +52,10 @@ const metadata: cmd_metadata = {
     ],
     group: "alias",
     name: "add",
-    level: PERM.MOD
+    level: PERM.MOD,
+    arg_info: [
+        "The option to add the alias to.",
+        "The alias to add. This must be unique across all options in order for the command to work."
+    ]
 };
 REGISTER_COMMAND(metadata);

@@ -2,7 +2,7 @@
 // version.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/23 - 2019/12/13)
+// Written by: Tyler Akins (2019/11/23 - 2019/12/23)
 //
 
 import { REGISTER_COMMAND } from "../cmd_handler";
@@ -22,6 +22,7 @@ const metadata: cmd_metadata = {
     name: "version",
     opt_args: 0,
     args: [],
-    level: PERM.ALL
+    level: PERM.ALL,
+    arg_info: []
 };
 REGISTER_COMMAND(metadata)

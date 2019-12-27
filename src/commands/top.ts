@@ -2,7 +2,7 @@
 // top.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/29 - 2019/12/13)
+// Written by: Tyler Akins (2019/11/29 - 2019/12/23)
 //
 
 
@@ -51,6 +51,9 @@ const metadata: cmd_metadata = {
     args: [
         "[Amount: Integer]"
     ],
-    level: PERM.ALL
+    level: PERM.ALL,
+    arg_info: [
+        "The number of top positions to show. This defaults to 3 if not specified."
+    ]
 };
 REGISTER_COMMAND(metadata)

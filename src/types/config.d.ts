@@ -2,7 +2,7 @@
 // config.d.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/07-2019/12/10)
+// Written by: Tyler Akins (2019/11/07 - 2019/12/18)
 //
 
 interface auth_options {
@@ -63,8 +63,12 @@ interface config {
     mixer: mixer_options;
     bot: bot_options;
     webhooks: {
-        LOGGING?: string;
+        LOGGING: string;
         ERROR?: string;
+        TWITCH_MISSED_BITS?: string;
     };
     web: web_server_options;
 }
+
+
+type WEBHOOK_TYPE = "LOGGING"|"ERROR"|"TWITCH_MISSED_BITS"

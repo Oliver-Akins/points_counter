@@ -2,7 +2,7 @@
 // help.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/23 - 2019/12/15)
+// Written by: Tyler Akins (2019/11/23 - 2019/12/23)
 //
 
 
@@ -35,6 +35,9 @@ const metadata: cmd_metadata = {
     args: [
         "[Command: String]"
     ],
-    level: PERM.ALL
+    level: PERM.ALL,
+    arg_info: [
+        "The command you are wanting help with."
+    ]
 };
 REGISTER_COMMAND(metadata)

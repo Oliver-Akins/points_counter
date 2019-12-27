@@ -13,6 +13,11 @@
     --error-background: rgba(240, 71, 71, .3);
     --error-border: rgba(240, 71, 71, .75);
     --error-text: #ffffff;
+
+    --tooltip-background: #000000;
+    --tooltip-text: #ffffff;
+    --tooltip-underline: #00aa00;
+    --tooltip-width: 240px;
 }
 
 
@@ -77,4 +82,37 @@ div.info {
 }
 .small {
     font-size: small;
+}
+
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted var(--tooltip-underline);
+}
+
+.tooltip>.hover_text {
+    visibility: hidden;
+    background-color: var(--tooltip-background);
+    text-align: center;
+    color: var(--tooltip-text);
+    padding: 5px;
+    border-radius: 6px;
+
+
+    /* Positioning at the tooltip text */
+    position: absolute;
+    z-index: 1;
+
+
+    /* Putting tooltip above the text */
+    width: var(--tooltip-width);
+    bottom: 110%;
+    left: calc((var(--tooltip-width) / 2) - 5px);
+    margin-left: calc(0px - (var(--tooltip-width) / 2));
+}
+
+.tooltip:hover .hover_text {
+    visibility: visible;
 }

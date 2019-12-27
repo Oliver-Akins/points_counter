@@ -2,7 +2,7 @@
 // delete_datafile.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/06 - 2019/12/15)
+// Written by: Tyler Akins (2019/12/06 - 2019/12/23)
 //
 
 
@@ -91,6 +91,7 @@ const metadata: cmd_metadata = {
     args: [],
     group: "admin",
     name: "data delete",
-    level: PERM.ADMIN
+    level: PERM.ADMIN,
+    arg_info: []
 };
 REGISTER_COMMAND(metadata);

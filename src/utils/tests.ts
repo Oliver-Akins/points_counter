@@ -2,7 +2,7 @@
 // tests.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/17 - 2019/12/13)
+// Written by: Tyler Akins (2019/11/17 - 2019/12/27)
 //
 
 
@@ -38,7 +38,7 @@ export const tests: test[] = [
             level: PERM.ALL,
             channel: TEST_CHANNEL
         },
-        expected_return: INV_PERM ? `Invalid Permissions, you must be at least level ${PERM.MOD}, you are level ${PERM.ALL}.` : null
+        expected_return: `Pong!`
     },
     {
         id: `00003`,

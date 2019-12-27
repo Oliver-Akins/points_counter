@@ -2,7 +2,7 @@
 // alias_list.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/12/12 - 2019/12/13)
+// Written by: Tyler Akins (2019/12/12 - 2019/12/23)
 //
 
 
@@ -41,7 +41,10 @@ REGISTER_COMMAND({
     ],
     group: "alias",
     name: "list",
-    level: PERM.ALL
+    level: PERM.ALL,
+    arg_info: [
+        "The option to list aliases for."
+    ]
 });
 
 
@@ -56,5 +59,8 @@ REGISTER_COMMAND({
     ],
     group: null,
     name: "aliases",
-    level: PERM.ALL
+    level: PERM.ALL,
+    arg_info: [
+        "The option to list aliases for."
+    ]
 });
