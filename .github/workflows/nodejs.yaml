@@ -1,4 +1,4 @@
-name: Node.js
+name: Compilation and Test
 
 on: [push]
 
@@ -19,8 +19,11 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm install, build, and test
       run: |
-        npm i
+        npm ci
+        echo "Made it past install"
         tsc
-        node dist/main.js --test
+        echo "Made it past compile"
+        node dist/main.js --test --silent
+        echo "Made it past testings"
       env:
         CI: true
