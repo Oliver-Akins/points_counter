@@ -192,7 +192,7 @@ export const run_twitch = (): void => {
 
 
     client.on("connected", (addr: string, port: number) => {
-        log({ msg: `* Connected to Twitch on ${addr}:${port}` });
+        log({ msg: `* Connected to Twitch on \`${addr}:${port}\`` });
     });
 
     client.connect().catch((_) => {})
