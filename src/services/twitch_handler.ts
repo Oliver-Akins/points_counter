@@ -179,9 +179,11 @@ export const run_twitch = (): void => {
                 return;
             };
         };
-        push({
-            content: `${context.username} donated ${bit_total} bits, but didn't specify a target in their message!`
-        }, "TWITCH_MISSED_BITS")
+        if (config.twitch.ALERT_MISSED_BITS) {
+            push({
+                content: `${context.username} donated ${bit_total} bits, but didn't specify a target in their message!`
+            }, "TWITCH_MISSED_BITS")
+        }
     });
     // !SECTION
 
