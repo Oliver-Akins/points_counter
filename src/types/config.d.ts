@@ -2,7 +2,7 @@
 // config.d.ts
 // Protected under Canadian Copyright Laws
 //
-// Written by: Tyler Akins (2019/11/07 - 2019/12/18)
+// Written by: Tyler Akins (2019/11/07 - 2019/12/27)
 //
 
 interface auth_options {
@@ -18,7 +18,8 @@ interface discord_options extends auth_options {
     DEV_TOKEN: string;
 }
 interface twitch_options extends auth_options {
-    REPLY_TO_AUTO_ADD: boolean
+    REPLY_TO_AUTO_ADD: boolean;
+    ALERT_MISSED_BITS: boolean;
     CHANNELS: [string];
     USERNAME: string;
 }
