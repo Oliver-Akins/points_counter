@@ -1,6 +1,5 @@
 //
 // web_server.ts
-// Protected under Canadian Copyright Laws
 //
 // Written by: Tyler Akins (2019/12/08 - 2019/12/23)
 //
@@ -103,10 +102,9 @@ export const run_web_server = (): void => {
 
             for (var i in cmd.arg_list) {
                 arg_help.push(
-                    `<code>
-                    ${cmd.arg_list[i].replace(/</g, "&lt;").replace(/>/g, "&gt;")}
-                    </code>
-                    : ${cmd.arg_info[i]}`);
+                    `<code
+                    >${cmd.arg_list[i].replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code
+                    >: ${cmd.arg_info[i]}`);
             };
 
 

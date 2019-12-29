@@ -1,6 +1,5 @@
 //
 // twitch_handler.ts
-// Protected under Canadian Copyright Laws
 //
 // Written by: Tyler Akins (2019/12/10 - 2019/12/18)
 //

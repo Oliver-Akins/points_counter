@@ -1,6 +1,5 @@
 //
 // constants.ts
-// Protected under Canadian Copyright Laws
 //
 // Written by: Tyler Akins (2019/11/06 - 2019/12/13)
 //
@@ -28,3 +27,6 @@ export const LIMIT = {
 
 export const TEST_CHANNEL = "#tests_channel#";
 export const TEST_USER = "#test_user#";
+
+
+export const REPO = "https://github.com/Tyler-A/points_counter";
