@@ -27,3 +27,6 @@ export const LIMIT = {
 
 export const TEST_CHANNEL = "#tests_channel#";
 export const TEST_USER = "#test_user#";
+
+
+export const REPO = "https://github.com/Tyler-A/points_counter";

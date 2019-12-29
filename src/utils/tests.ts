@@ -1,11 +1,11 @@
 //
 // tests.ts
 //
-// Written by: Tyler Akins (2019/11/17 - 2019/12/27)
+// Written by: Tyler Akins (2019/11/17 - 2019/12/29)
 //
 
 
-import { PERM, VERSION, TEST_CHANNEL } from "../constants";
+import { PERM, VERSION, TEST_CHANNEL, REPO } from "../constants";
 import { LOAD_CONFIG } from "./Config";
 
 
@@ -955,5 +955,29 @@ export const tests: test[] = [
             channel: TEST_CHANNEL
         },
         expected_return: `5 points have been removed from Foo on behalf of spam.`
+    },
+    {
+        id: `00073`,
+        links: {},
+        datafile_should_exist: `IGNORES`,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${config.bot.PREFIX}source`,
+            level: PERM.ALL,
+            channel: TEST_CHANNEL
+        },
+        expected_return: `The source code for the bot is available at: ${REPO}`
+    },
+    {
+        id: `00074`,
+        links: {},
+        datafile_should_exist: `IGNORES`,
+        msg_meta: {
+            source: `Discord`,
+            message: `${config.bot.PREFIX}source`,
+            level: PERM.ADMIN,
+            channel: TEST_CHANNEL
+        },
+        expected_return: `The source code for the bot is available at: <${REPO}>`
     },
 ];

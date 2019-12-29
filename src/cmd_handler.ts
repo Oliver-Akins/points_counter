@@ -1,7 +1,7 @@
 //
 // cmd_handler.ts
 //
-// Written by: Tyler Akins (2019/11/06 - 2019/12/15)
+// Written by: Tyler Akins (2019/11/06 - 2019/12/29)
 //
 
 
@@ -190,6 +190,7 @@ import "./commands/top";
 import "./commands/ping";
 import "./commands/help";
 import "./commands/lead";
+import "./commands/source";
 import "./commands/version";
 import "./commands/alias_add";
 import "./commands/alias_list";
