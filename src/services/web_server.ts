@@ -103,10 +103,9 @@ export const run_web_server = (): void => {
 
             for (var i in cmd.arg_list) {
                 arg_help.push(
-                    `<code>
-                    ${cmd.arg_list[i].replace(/</g, "&lt;").replace(/>/g, "&gt;")}
-                    </code>
-                    : ${cmd.arg_info[i]}`);
+                    `<code
+                    >${cmd.arg_list[i].replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code
+                    >: ${cmd.arg_info[i]}`);
             };
 
 
