@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Points Counter Help</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/dark.css">
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <h1 class="title center">Differences Between 2.X and 3.X</h1>
+        <hr>
+        <div class="nav">
+            <div class="item">
+                <a href="http://alayn.xyz" target="_blank">Home</a>
+            </div>
+            <div class="item">
+                <a href="http://alayn.xyz/commands" target="_blank">Commands</a>
+            </div>
+            <div class="item">
+                <a href="http://alayn.xyz/tech-specs" target="_blank">Technical</a>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <h3>Points Modification Commands</h3>
+            <p>
+                The <code>!add</code> is now <code>!points add</code>.
+                <br>
+                The <code>!remove</code> is now <code>!points remove</code>.
+                <br>
+                <br>
+                The syntax of these commands also changed, read the following
+                pages to learn about the syntax change:
+                <br>
+                <a href="http://alayn.xyz/command/points_add#usage" target="_blank">points add</a>
+                <br>
+                <a href="http://alayn.xyz/command/points_remove#usage" target="_blank">points remove</a>
+            </p>
+        </div>
+        <hr>
+        <div>
+            <h3>Auto-Addition of Twitch Bits</h3>
+            <p>
+                The bot will now automatically add bits to a user based on if
+                they included a target in the message with the bits. Whether
+                or not the bot responds depends on a configuration value, for
+                Starwoo, it is set to respond to the user sending the bits if
+                it matches and attempts to add them, otherwise it will ignore
+                the message.
+            </p>
+        </div>
+        <hr>
+        <div>
+            <h3>Missed Twitch Bits in Discord</h3>
+            <p>
+                If a user sends a bit message in the chat without specifying a
+                target, the bot may send a message into Discord with the donator
+                and the total number of bits, indicating that they were not
+                added automatically, this allows the mods to not waste time
+                manually counting a large number of bits that are only 1 bit
+                each.
+            </p>
+        </div>
+        <hr>
+        <div>
+            <h3>Option Listing</h3>
+            <p>
+                To list options now, the command is <code>!options list</code>.
+            </p>
+        </div>
+        <hr>
+        <div class="nav">
+            <div class="item">
+                <a href="http://alayn.xyz/copyright">Copyright</a>
+            </div>
+        </div>
+    </body>
+</html>
