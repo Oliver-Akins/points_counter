@@ -24,6 +24,11 @@
             </div>
         </div>
         <hr>
-        This bot was written for Resonym's Twitch stream on behalf of Tyler Akins, all rights remain under Canadian Copyright Law with Tyler Akins as their rightful owner.
+        This bot is open source under the
+        <a
+            href="https://github.com/Tyler-A/points_counter/blob/master/LICENSE"
+            target="_blank"
+            >GNU GPL 3.0 License</a
+        >
     </body>
 </html>
