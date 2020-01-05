@@ -1,7 +1,7 @@
 //
 // options_add.ts
 //
-// Written by: Tyler Akins (2019/11/29 - 2019/12/23)
+// Written by: Tyler Akins (2019/11/29 - 2020/01/04)
 //
 
 
@@ -17,6 +17,7 @@ const OPTIONS_ADD_COMMAND = (ctx: msg_data, args: string[]): string => {
     let channel = RESOLVE_CHANNEL(ctx);
     let data = LOAD(channel);
     let name = args[0];
+    let flags = args[1] || "";
 
     for (var option of data) {
         if (option.aliases.includes(name.toLowerCase())) {
@@ -31,7 +32,8 @@ const OPTIONS_ADD_COMMAND = (ctx: msg_data, args: string[]): string => {
             "%anonymous%": 0
         },
         "total": 0,
-        "data_version": "3.0"
+        "data_version": "3.0",
+        "hidden": flags.includes("h")
     });
 
     WRITE(channel, data);
@@ -46,13 +48,17 @@ const metadata: cmd_metadata = {
     requires_confirm: false,
     case_sensitive: true,
     executable: OPTIONS_ADD_COMMAND,
-    opt_args: 0,
+    opt_args: 1,
     args: [
-        "<Name: string>"
+        "<Name: string>",
+        "[Flags]"
     ],
     group: "options",
     name: "add",
     level: PERM.MOD,
-    arg_info: []
+    arg_info: [
+        "The name of the option to add.",
+        "The flags to modify the adding of the option."
+    ]
 };
 REGISTER_COMMAND(metadata);

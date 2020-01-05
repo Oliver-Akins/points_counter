@@ -1,7 +1,7 @@
 //
 // options_remove.ts
 //
-// Written by: Tyler Akins (2019/12/06 - 2019/12/23)
+// Written by: Tyler Akins (2019/12/06 - 2020/01/04)
 //
 
 

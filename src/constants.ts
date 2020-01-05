@@ -1,11 +1,16 @@
 //
 // constants.ts
 //
-// Written by: Tyler Akins (2019/11/06 - 2019/12/13)
+// Written by: Tyler Akins (2019/11/06 - 2020/01/04)
 //
 
 
 export const VERSION: string = "3.0.0";
+
+
+// The indicator used to tell the bot what arguments are flags.
+// This indicator cannot be used as the start of any non-flag argument
+export const FLAG_INDICATOR: string = "-"
 
 
 // The number of seconds for the confirmation timeouts

@@ -1,7 +1,7 @@
 //
 // command_metadata.d.ts
 //
-// Written by: Tyler Akins (2019/11/06 - 2019/12/23)
+// Written by: Tyler Akins (2019/11/06 - 2020/01/04)
 //
 
 
@@ -28,8 +28,8 @@ interface alert_structure {
 interface cmd_metadata {
     executable(context: msg_data, args: string[]): string;
     requires_confirm: boolean;
-    case_sensitive: boolean;
     alerts?: alert_structure;
+    case_sensitive: boolean;
     description: string;
     arg_info: string[];
     opt_args: number;

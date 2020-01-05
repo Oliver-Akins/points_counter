@@ -1,16 +1,17 @@
 //
 // cmd_handler.ts
 //
-// Written by: Tyler Akins (2019/11/06 - 2019/12/29)
+// Written by: Tyler Akins (2019/11/06 - 2020/01/04)
 //
 
 
 /* Imports */
 import { Command, Confirmation } from "./utils/Command";
+import { PERM, FLAG_INDICATOR } from "./constants";
 import { SORT_COMMANDS } from "./utils/sorting";
 import { LOAD_CONFIG } from "./utils/Config";
+import { GET_FLAGS } from "./utils/flags";
 import { log } from "./utils/webhook";
-import { PERM } from "./constants";
 
 
 
@@ -110,6 +111,14 @@ export const HANDLE_MESSAGE = (ctx: msg_data): string => {
         service_last_rans[ctx.source] = Date.now();
     };
     // !SECTION: Service command cooldowns
+
+
+    // SECTION: Flag parsing
+    ctx.flags = GET_FLAGS(ctx.message);
+
+    // removing arguments that are indicated as flags
+    ctx.message = ctx.message.replace(`/${FLAG_INDICATOR}\w*/g`, "");
+    // !SECTION: Flag parsing
 
 
 

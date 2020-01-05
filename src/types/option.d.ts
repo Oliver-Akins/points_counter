@@ -1,7 +1,7 @@
 //
 // option.d.ts
 //
-// Written by: Tyler Akins (2019/11/11)
+// Written by: Tyler Akins (2019/11/11 - 2020/01/04)
 //
 
 
@@ -13,4 +13,5 @@ interface option {
     };
     total: number;
     data_version: string;
+    hidden: boolean;
 }

@@ -1,7 +1,7 @@
 //
 // message_metadata.d.ts
 //
-// Written by: Tyler Akins (2019/11/07 - 2019/12/15)
+// Written by: Tyler Akins (2019/11/07 - 2020/01/04)
 //
 
 
@@ -13,6 +13,7 @@ interface msg_data {
     source: platform;
     channel: string;
     message: string;
+    flags?: string[];
     level: number;
     test: boolean;
     user: string;
