@@ -1,7 +1,7 @@
 //
 // cmd_handler.ts
 //
-// Written by: Tyler Akins (2019/11/06 - 2020/01/04)
+// Written by: Tyler Akins (2019/11/06 - 2020/01/08)
 //
 
 
@@ -196,7 +196,6 @@ export const HANDLE_MESSAGE = (ctx: msg_data): string => {
 /* Importing all the commands so they can register */
 import "./commands/all";
 import "./commands/top";
-import "./commands/ping";
 import "./commands/help";
 import "./commands/lead";
 import "./commands/source";
