@@ -1,7 +1,7 @@
 //
 // points_add.ts
 //
-// Written by: Tyler Akins (2019/11/29 - 2019/12/23)
+// Written by: Tyler Akins (2019/11/29 - 2020/01/04)
 //
 
 
@@ -22,7 +22,7 @@ const POINTS_ADD_COMMAND = (ctx: msg_data, args: string[]): string => {
 
 
     let target = args[0];
-    let user = args[2] || "%anonymous%";
+    let user: string = args[2] || "%anonymous%";
 
 
     // Ensure username doesn't start with an "@"
@@ -41,10 +41,17 @@ const POINTS_ADD_COMMAND = (ctx: msg_data, args: string[]): string => {
             option.total += amount;
 
             WRITE(ctx.channel, data);
+
+
+            // Silence the message if the option is hidden
+            if (option.hidden && !ctx.flags.includes("L")) {
+                return null;
+            };
+
             return `${amount} points have been added to ${option.name} on behalf of ${user}.`;
         };
     };
-    return `Could not find an option of name \`${target}\`.`
+    return `Could not find an option of name \`${target}\`.`;
 };
 
 

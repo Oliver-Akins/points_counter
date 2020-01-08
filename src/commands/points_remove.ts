@@ -1,7 +1,7 @@
 //
 // points_remove.ts
 //
-// Written by: Tyler Akins (2019/12/06 - 2019/12/23)
+// Written by: Tyler Akins (2019/12/06 - 2020/01/04)
 //
 
 
@@ -21,6 +21,7 @@ const POINTS_REMOVE = (ctx: msg_data, args: string[]): string => {
 
     let target = args[0];
     let user: string = args[2] || "%anonymous%";
+    let flags: string = args.length == 3 ? args[3] : args[2] || "";
 
 
     // Ensure username doesn't start with an "@"
@@ -53,6 +54,14 @@ const POINTS_REMOVE = (ctx: msg_data, args: string[]): string => {
 
             option.total -= amount;
             WRITE(channel, data);
+
+
+            // Silence the message if the option is hidden
+            if (option.hidden && !flags.includes("L")) {
+                return null;
+            };
+
+
             return `${amount} points have been removed from ${option.name} on behalf of ${user}.`;
         };
     };
@@ -66,7 +75,7 @@ const metadata: cmd_metadata = {
     requires_confirm: false,
     case_sensitive: false,
     executable: POINTS_REMOVE,
-    opt_args: 1,
+    opt_args: 2,
     args: [
         "<Alias: String>",
         "<Amount: Integer>",

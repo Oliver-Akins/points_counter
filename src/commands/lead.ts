@@ -1,7 +1,7 @@
 //
 // lead.ts
 //
-// Written by: Tyler Akins (2019/12/03 - 2019/12/23)
+// Written by: Tyler Akins (2019/12/03 - 2020/01/04)
 //
 
 
@@ -25,6 +25,12 @@ const LEAD_COMMAND = (ctx: msg_data, args: string[]): string => {
 
     // Compare all options
     for (var option of data) {
+
+
+        // Check to see if we're including hidden options
+        if (option.hidden && !ctx.flags.includes("A")) {
+            continue;
+        };
 
         // Taking the lead
         if (option.total > leader[2]) {

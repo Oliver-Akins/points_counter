@@ -1,7 +1,7 @@
 //
 // all.ts
 //
-// Written by: Tyler Akins (2019/12/06 - 2019/12/23)
+// Written by: Tyler Akins (2019/12/06 - 2020/01/04)
 //
 
 
@@ -26,6 +26,9 @@ const ALL_OPTIONS_COMMAND = (ctx: msg_data, args: string[]): string => {
 
 
     for (var option of data) {
+
+        // Ensure not hidden or showing hidden
+        if (option.hidden && !ctx.flags.includes("A")) { break; };
 
         // Ensure points
         if (option.total > 0) {

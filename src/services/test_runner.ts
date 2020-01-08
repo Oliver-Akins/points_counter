@@ -1,7 +1,7 @@
 //
 // test_runner.ts
 //
-// Written by: Tyler Akins (2019/11/17 - 2019/12/15)
+// Written by: Tyler Akins (2019/11/17 - 2020/01/04)
 //
 
 
@@ -54,14 +54,24 @@ export const run_tests = (silent: boolean): number => {
                 aliases: ["potato", "salad"],
                 data_version: "3.0",
                 points: {"%anonymous%": 0},
-                total: 0
+                total: 0,
+                hidden: false
             });
             data.push({
                 name: "Foo",
                 aliases: ["foo"],
                 data_version: "3.0",
                 points: {"%anonymous%": 5, "spam": 50},
-                total: 55
+                total: 55,
+                hidden: false
+            });
+            data.push({
+                name: "Option3",
+                aliases: ["option3"],
+                data_version: "3.0",
+                points: {"%anonymous%": 125, "spam": 175},
+                total: 300,
+                hidden: true
             });
         } else {
             data = [];
@@ -76,7 +86,7 @@ export const run_tests = (silent: boolean): number => {
 
 
         // Update links
-        UPDATE_LINKS(test.links);
+        UPDATE_LINKS(test.links, true);
 
 
         let response = HANDLE_MESSAGE({

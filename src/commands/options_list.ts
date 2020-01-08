@@ -1,7 +1,7 @@
 //
 // options_list.ts
 //
-// Written by: Tyler Akins (2019/11/11 - 2019/12/23)
+// Written by: Tyler Akins (2019/11/11 - 2020/01/04)
 //
 
 
@@ -24,40 +24,27 @@ const LIST_OPTIONS = (ctx: msg_data, args: string[]): string => {
 
     // Make list of names
     for (var option of data) {
-        names.push(option.name);
+        if (!option.hidden || (option.hidden && ctx.flags.includes("A"))) {
+            names.push(option.name);
+        };
     };
 
-
-    let response = "Possible options: ";
+    let response = `Possible options: ${names.join(", ")}`
 
     switch (ctx.source) {
         case "Discord":
-            // Run through each name
-            for (var name of names) {
-
-                // Ensure we don't surpass the character limit
-                if ((response.length + name.length)-2 <= LIMIT.DISCORD) {
-                    response += `${name}, `;
-                };
+            if (response.length >= LIMIT.DISCORD) {
+                return response.slice(0, LIMIT.DISCORD)
             };
             break;
-
         case "Twitch":
-            // Run through each name
-            for (var name of names) {
-
-                // Ensure we don't surpass the character limit
-                if ((response.length + name.length)-2 <= LIMIT.TWITCH) {
-                    response += `${name}, `;
-                };
+            if (response.length >= LIMIT.TWITCH) {
+                return response.slice(0, LIMIT.TWITCH)
             };
-            break;
-
-        default:
             break;
     };
 
-    return response.slice(0, -2);
+    return response;
 };
 
 

@@ -1,7 +1,7 @@
 //
 // top.ts
 //
-// Written by: Tyler Akins (2019/11/29 - 2019/12/23)
+// Written by: Tyler Akins (2019/11/29 - 2020/01/04)
 //
 
 
@@ -31,10 +31,22 @@ const TOP_COMMAND = (ctx: msg_data, args: string[]): string => {
 
 
     // Get the top x option strings
-    for (var i: number = 0; i < top_x; i++) {
-        if (sorted[i] == null) { break; };
+    let i = 0;
+    let temp_x = top_x;
+    while (i < temp_x) {
+
+        // Ensure not out of bounds of array
+        if (!sorted[i]) { i++; break; };
+
+        // Ensure not hidden
+        if (sorted[i].hidden && !ctx.flags["A"]) {
+            temp_x++; i++;
+            continue;
+        };
+
         top.push(`${sorted[i].name} (${sorted[i].total})`);
-    };
+        i++;
+    }
 
     return `The top ${top_x} options are: ${top.join(", ")}`;
 };
