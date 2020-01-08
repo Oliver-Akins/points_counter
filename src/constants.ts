@@ -1,11 +1,11 @@
 //
 // constants.ts
 //
-// Written by: Tyler Akins (2019/11/06 - 2020/01/04)
+// Written by: Tyler Akins (2019/11/06 - 2020/01/08)
 //
 
 
-export const VERSION: string = "3.0.0";
+export const VERSION: string = "3.1.0";
 
 
 // The indicator used to tell the bot what arguments are flags.
