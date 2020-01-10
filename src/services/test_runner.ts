@@ -95,7 +95,7 @@ export const run_tests = (silent: boolean): number => {
             user: TEST_USER,
             cooldown: false,
             source: test.msg_meta.source,
-            channel: test.msg_meta.channel,
+            channel: test.msg_meta.channel || TEST_CHANNEL,
             test: true
         });
 
@@ -108,7 +108,7 @@ export const run_tests = (silent: boolean): number => {
                 user: TEST_USER,
                 cooldown: false,
                 source: test.confirm_msg.source,
-                channel: test.msg_meta.channel,
+                channel: test.msg_meta.channel || TEST_CHANNEL,
                 test: true
             });
         };

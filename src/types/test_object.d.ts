@@ -1,13 +1,13 @@
 //
 // test_object.ts
 //
-// Written by: Tyler Akins (2019/11/17 - 2019/12/15)
+// Written by: Tyler Akins (2019/11/17 - 2020/01/10)
 //
 
 
 interface test_msg_data {
     source: platform;
-    channel: string;
+    channel?: string;
     message: string;
     level: number;
 }
