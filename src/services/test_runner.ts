@@ -1,12 +1,12 @@
 //
 // test_runner.ts
 //
-// Written by: Tyler Akins (2019/11/17 - 2020/01/04)
+// Written by: Tyler Akins (2019/11/17 - 2020/01/10)
 //
 
 
-import { TEST_CHANNEL, TEST_USER } from "../constants";
-import { CREATE, LOAD, WRITE, DELETE } from "../utils/db";
+import { TEST_CHANNEL, TEST_USER, TEST_LINKS } from "../constants";
+import { CREATE, WRITE, DELETE } from "../utils/db";
 import { HANDLE_MESSAGE } from "../cmd_handler";
 import { UPDATE_LINKS } from "../utils/links";
 import { LOAD_CONFIG } from "../utils/Config";
@@ -129,6 +129,11 @@ export const run_tests = (silent: boolean): number => {
             DELETE(TEST_CHANNEL);
         };
     };
+
+
+    // Delete the link file used for testing
+    DELETE(TEST_LINKS);
+
 
     // Check if we are being silent
     if (!silent && fail_count > 0) {
