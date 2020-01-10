@@ -28,42 +28,6 @@ export const tests: test[] = [
         expected_return: null
     },
     {
-        id: `00002`,
-        links: {},
-        datafile_should_exist: `IGNORES`,
-        msg_meta: {
-            source: `Twitch`,
-            message: `${config.bot.PREFIX}ping`,
-            level: PERM.ALL,
-            channel: TEST_CHANNEL
-        },
-        expected_return: `Pong!`
-    },
-    {
-        id: `00003`,
-        links: {},
-        datafile_should_exist: `IGNORES`,
-        msg_meta: {
-            source: `Twitch`,
-            message: `${config.bot.PREFIX}ping`,
-            level: PERM.MOD,
-            channel: TEST_CHANNEL
-        },
-        expected_return: `Pong!`
-    },
-    {
-        id: `00004`,
-        links: {},
-        datafile_should_exist: `IGNORES`,
-        msg_meta: {
-            source: `Twitch`,
-            message: `${config.bot.PREFIX}ping potato salad`,
-            level: PERM.ADMIN,
-            channel: TEST_CHANNEL
-        },
-        expected_return: `Pong!`
-    },
-    {
         id: `00005`,
         links: {},
         datafile_should_exist: `NOT_EXISTS`,
