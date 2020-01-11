@@ -67,7 +67,7 @@ export const run_tests = (silent: boolean): number => {
             });
             data.push({
                 name: "Option3",
-                aliases: ["option3"],
+                aliases: ["option3", "option3.1"],
                 data_version: "3.0",
                 points: {"%anonymous%": 125, "spam": 175},
                 total: 300,

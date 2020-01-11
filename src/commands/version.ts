@@ -1,7 +1,7 @@
 //
 // version.ts
 //
-// Written by: Tyler Akins (2019/11/23 - 2019/12/23)
+// Written by: Tyler Akins (2019/11/23 - 2020/01/10)
 //
 
 import { REGISTER_COMMAND } from "../cmd_handler";
@@ -13,7 +13,7 @@ const VERSION_COMMAND = (context: msg_data, args: string[]): string => {
 };
 
 
-const metadata: cmd_metadata = {
+REGISTER_COMMAND({
     description: "Tells you the version of the bot you have.",
     executable: VERSION_COMMAND,
     requires_confirm: false,
@@ -23,5 +23,25 @@ const metadata: cmd_metadata = {
     args: [],
     level: PERM.ALL,
     arg_info: []
-};
-REGISTER_COMMAND(metadata)
+});
+
+
+//---------------------------------------------------------------------------//
+// Tests:
+
+import { PREFIX, tests } from "../utils/tests";
+
+tests.push(
+    {
+        id: `version:1`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        datafile_populated: true,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}version`,
+            level: PERM.ALL
+        },
+        expected_return: `Bot version: ${VERSION}`
+    }
+);

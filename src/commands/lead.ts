@@ -1,13 +1,13 @@
 //
 // lead.ts
 //
-// Written by: Tyler Akins (2019/12/03 - 2020/01/04)
+// Written by: Tyler Akins (2019/12/03 - 2020/01/10)
 //
 
 
+import { PERM, FLAG_INDICATOR } from "../constants";
 import { RESOLVE_CHANNEL } from "../utils/metadata";
 import { REGISTER_COMMAND } from "../cmd_handler";
-import { PERM } from "../constants";
 import { LOAD } from "../utils/db";
 
 
@@ -49,7 +49,7 @@ const LEAD_COMMAND = (ctx: msg_data, args: string[]): string => {
 
 
 
-const metadata: cmd_metadata = {
+REGISTER_COMMAND({
     description: "Tells you what characters are in the lead in a nice, English format.",
     requires_confirm: false,
     case_sensitive: false,
@@ -60,5 +60,50 @@ const metadata: cmd_metadata = {
     name: "lead",
     level: PERM.ALL,
     arg_info: []
-};
-REGISTER_COMMAND(metadata);
+});
+
+
+//---------------------------------------------------------------------------//
+// Tests:
+
+import { PREFIX, tests } from "../utils/tests";
+
+
+tests.push(
+    {
+        id: `lead:1`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        datafile_populated: false,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}lead`,
+            level: PERM.ALL
+        },
+        expected_return: `No options for this channel, meaning that no one can be in the lead.`
+    },
+    {
+        id: `lead:2`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        datafile_populated: true,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}lead`,
+            level: PERM.ALL
+        },
+        expected_return: `Foo is in the lead with 55 points.`
+    },
+    {
+        id: `lead:3`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        datafile_populated: true,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}lead ${FLAG_INDICATOR}A`,
+            level: PERM.ALL
+        },
+        expected_return: `Option3 is in the lead with 300 points.`
+    }
+);

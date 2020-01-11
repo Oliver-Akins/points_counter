@@ -1,13 +1,13 @@
 //
 // options_info.ts
 //
-// Written by: Tyler Akins (2019/12/06 - 2019/12/23)
+// Written by: Tyler Akins (2019/12/06 - 2020/01/10)
 //
 
 
+import { PERM, FLAG_INDICATOR } from "../constants";
 import { RESOLVE_CHANNEL } from "../utils/metadata";
 import { REGISTER_COMMAND } from "../cmd_handler";
-import { PERM } from "../constants";
 import { LOAD } from "../utils/db";
 
 
@@ -23,9 +23,14 @@ const OPTIONS_INFO = (ctx: msg_data, args: string[]): string => {
     };
 
 
+    // Find option
     for (var option of data) {
-
         if (option.aliases.includes(name)) {
+
+
+            // Ensure not hidden, or that we showing all hidden
+            if (option.hidden && !ctx.flags.includes("A")) { break; };
+
 
             // Change amount of data given based on the source of command
             switch (ctx.source) {
@@ -51,7 +56,7 @@ const OPTIONS_INFO = (ctx: msg_data, args: string[]): string => {
 
 
 
-const metadata: cmd_metadata = {
+REGISTER_COMMAND({
     description: "Gives detailed information about an option. Depending on what service you run this on, it will give you different information.",
     requires_confirm: false,
     case_sensitive: false,
@@ -66,5 +71,88 @@ const metadata: cmd_metadata = {
     arg_info: [
         "The option to get information for."
     ]
-};
-REGISTER_COMMAND(metadata);
+});
+
+
+//---------------------------------------------------------------------------//
+// Tests:
+
+import { PREFIX, tests } from "../utils/tests";
+
+tests.push(
+    {
+        id: `option_info:1`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        datafile_populated: true,
+        msg_meta: {
+            source: `Discord`,
+            message: `${PREFIX}options info Foo`,
+            level: PERM.MOD
+        },
+        expected_return: `Option Information for: Foo\n` +
+        `    Total Points: 55\n` +
+        `    Total Contributors: 2\n` +
+        `    Data Version: 3.0\n` +
+        `    Aliases: foo`
+    },
+    {
+        id: `option_info:2`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        datafile_populated: true,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}options info Potato`,
+            level: PERM.ALL
+        },
+        expected_return: `Potato data: 0 points, 2 aliases.`
+    },
+    {
+        id: `option_info:3`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        datafile_populated: true,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}options info spam`,
+            level: PERM.MOD
+        },
+        expected_return: `Cannot find option with name: \`spam\``
+    },
+    {
+        id: `option_info:4`,
+        links: {},
+        datafile_should_exist: `NOT_EXISTS`,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}options info Potato`,
+            level: PERM.MOD
+        },
+        expected_return: `No data for this channel, make there are options added.`
+    },
+    {
+        id: `option_info:5`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        datafile_populated: true,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}options info Option3 ${FLAG_INDICATOR}A`,
+            level: PERM.MOD
+        },
+        expected_return: `Option3 data: 300 points, 2 aliases.`
+    },
+    {
+        id: `option_info:6`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        datafile_populated: true,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}options info Option3`,
+            level: PERM.MOD
+        },
+        expected_return: `Cannot find option with name: \`option3\``
+    }
+);

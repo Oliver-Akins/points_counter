@@ -1,12 +1,12 @@
 //
 // delete_datafile.ts
 //
-// Written by: Tyler Akins (2019/12/06 - 2019/12/23)
+// Written by: Tyler Akins (2019/12/06 - 2020/01/10)
 //
 
 
+import { PERM, CONFIRM_TIMEOUT, TEST_CHANNEL } from "../constants";
 import { REGISTER_COMMAND, confirms } from "../cmd_handler";
-import { PERM, CONFIRM_TIMEOUT } from "../constants";
 import { RESOLVE_CHANNEL } from "../utils/metadata";
 import { Confirmation } from "../utils/Command";
 import { LOAD_CONFIG } from "../utils/Config";
@@ -94,3 +94,95 @@ const metadata: cmd_metadata = {
     arg_info: []
 };
 REGISTER_COMMAND(metadata);
+
+
+//---------------------------------------------------------------------------//
+// Tests:
+
+
+import { PREFIX, tests } from "../utils/tests";
+
+
+
+tests.push(
+    {
+        id: `data_delete:001`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}admin data delete`,
+            level: PERM.ADMIN
+        },
+        confirm_msg: {
+            source: `Twitch`,
+            message: `${PREFIX}yes`,
+            level: PERM.ADMIN
+        },
+        expected_return: `Data deleted for channel: \`${TEST_CHANNEL}\``
+    },
+    {
+        id: `data_delete:002`,
+        links: {},
+        datafile_should_exist: `NOT_EXISTS`,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}admin data delete`,
+            level: PERM.ADMIN
+        },
+        confirm_msg: {
+            source: `Twitch`,
+            message: `${PREFIX}yes`,
+            level: PERM.ADMIN
+        },
+        expected_return: `Cannot delete data for channel \`${TEST_CHANNEL}\` because it doesn't exist.`
+    },
+    {
+        id: `data_delete:003`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}admin data delete`,
+            level: PERM.ADMIN
+        },
+        confirm_msg: {
+            source: `Twitch`,
+            message: `${PREFIX}no`,
+            level: PERM.ADMIN
+        },
+        expected_return: `Did not delete data for channel: \`${TEST_CHANNEL}\``
+    },
+    {
+        id: `data_delete:004`,
+        links: {},
+        datafile_should_exist: `IGNORES`,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}admin data delete`,
+            level: PERM.ADMIN
+        },
+        confirm_msg: {
+            source: `Twitch`,
+            message: `${PREFIX}potato`,
+            level: PERM.ADMIN
+        },
+        expected_return: null
+    },
+    {
+        id: `data_delete:005`,
+        links: {},
+        datafile_should_exist: `IGNORES`,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}admin data delete`,
+            level: PERM.ADMIN
+        },
+        confirm_msg: {
+            source: `Twitch`,
+            message: `potato`,
+            level: PERM.ADMIN
+        },
+        expected_return: null
+    }
+)

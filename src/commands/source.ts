@@ -19,7 +19,7 @@ const SOURCE = (ctx: msg_data, args: string[]): string => {
 };
 
 
-const metadata: cmd_metadata = {
+REGISTER_COMMAND({
     description: "Sends you the link to the source code.",
     executable: SOURCE,
     requires_confirm: false,
@@ -29,5 +29,35 @@ const metadata: cmd_metadata = {
     args: [],
     level: PERM.ALL,
     arg_info: []
-};
-REGISTER_COMMAND(metadata)
+});
+
+
+//---------------------------------------------------------------------------//
+// Tests:
+
+import { PREFIX, tests } from "../utils/tests";
+
+tests.push(
+    {
+        id: `source:1`,
+        links: {},
+        datafile_should_exist: `IGNORES`,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}source`,
+            level: PERM.ALL
+        },
+        expected_return: `The source code for the bot is available at: ${REPO}`
+    },
+    {
+        id: `source:2`,
+        links: {},
+        datafile_should_exist: `IGNORES`,
+        msg_meta: {
+            source: `Discord`,
+            message: `${PREFIX}source`,
+            level: PERM.ADMIN
+        },
+        expected_return: `The source code for the bot is available at: <${REPO}>`
+    }
+);
