@@ -10,7 +10,7 @@ export const VERSION: string = "3.1.0";
 
 // The indicator used to tell the bot what arguments are flags.
 // This indicator cannot be used as the start of any non-flag argument
-export const FLAG_INDICATOR: string = "-"
+export const FLAG_INDICATOR: string = "$"
 
 
 // The number of seconds for the confirmation timeouts
