@@ -1,7 +1,7 @@
 //
 // twitch_handler.ts
 //
-// Written by: Tyler Akins (2019/12/10 - 2019/12/18)
+// Written by: Tyler Akins (2019/12/10 - 2020/01/15)
 //
 
 /*
@@ -141,6 +141,8 @@ export const run_twitch = (): void => {
 
     // SECTION: Auto bit addition
     client.on("cheer", (channel: string, context: tmi.Userstate, message: string) => {
+
+        if (!config.twitch.AUTO_ADD) { return; };
 
         let bit_total: number = parseInt(context.bits);
         let data: option[] = LOAD(RESOLVE_CHANNEL_STRING(`Twitch:${channel}`));
