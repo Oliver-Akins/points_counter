@@ -1,13 +1,13 @@
 //
 // options_list.ts
 //
-// Written by: Tyler Akins (2019/11/11 - 2020/01/04)
+// Written by: Tyler Akins (2019/11/11 - 2020/01/10)
 //
 
 
+import { LIMIT, PERM, FLAG_INDICATOR } from "../constants";
 import { RESOLVE_CHANNEL } from "../utils/metadata";
 import { REGISTER_COMMAND } from "../cmd_handler";
-import { LIMIT, PERM } from "../constants";
 import { LOAD } from "../utils/db";
 
 
@@ -16,11 +16,14 @@ const LIST_OPTIONS = (ctx: msg_data, args: string[]): string => {
     let channel = RESOLVE_CHANNEL(ctx);
     let data = LOAD(channel);
 
+
+    // Ensure data
     if (data.length === 0) {
         return "No data for this channel, make there are options added.";
     };
 
     let names: string[] = [];
+
 
     // Make list of names
     for (var option of data) {
@@ -28,6 +31,7 @@ const LIST_OPTIONS = (ctx: msg_data, args: string[]): string => {
             names.push(option.name);
         };
     };
+
 
     let response = `Possible options: ${names.join(", ")}`
 
@@ -61,3 +65,48 @@ REGISTER_COMMAND({
     level: PERM.ALL,
     arg_info: []
 });
+
+
+
+//---------------------------------------------------------------------------//
+// Tests:
+
+import { PREFIX, tests } from "../utils/tests";
+
+tests.push(
+    {
+        id: `option_list:1`,
+        links: {},
+        datafile_should_exist: `NOT_EXISTS`,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}options list`,
+            level: PERM.ALL
+        },
+        expected_return: `No data for this channel, make there are options added.`
+    },
+    {
+        id: `option_list:2`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        datafile_populated: true,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}options list`,
+            level: PERM.ALL
+        },
+        expected_return: `Possible options: Potato, Foo`
+    },
+    {
+        id: `option_list:3`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        datafile_populated: true,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}options list ${FLAG_INDICATOR}A`,
+            level: PERM.ALL
+        },
+        expected_return: `Possible options: Potato, Foo, Option3`
+    }
+);

@@ -1,7 +1,7 @@
 //
 // config.d.ts
 //
-// Written by: Tyler Akins (2019/11/07 - 2019/12/27)
+// Written by: Tyler Akins (2019/11/07 - 2020/01/15)
 //
 
 interface auth_options {
@@ -20,6 +20,7 @@ interface twitch_options extends auth_options {
     REPLY_TO_AUTO_ADD: boolean;
     ALERT_MISSED_BITS: boolean;
     CHANNELS: [string];
+    AUTO_ADD: boolean;
     USERNAME: string;
 }
 

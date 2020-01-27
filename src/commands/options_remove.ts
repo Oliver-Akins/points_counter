@@ -1,7 +1,7 @@
 //
 // options_remove.ts
 //
-// Written by: Tyler Akins (2019/12/06 - 2020/01/04)
+// Written by: Tyler Akins (2019/12/06 - 2020/01/10)
 //
 
 
@@ -35,7 +35,7 @@ const OPTIONS_REMOVE = (ctx: msg_data, args: string[]): string => {
 
 
 
-const metadata: cmd_metadata = {
+REGISTER_COMMAND({
     description: "Removes an option from the channel's options.",
     requires_confirm: false,
     case_sensitive: false,
@@ -50,5 +50,53 @@ const metadata: cmd_metadata = {
     arg_info: [
         "The option to remove from the dataset."
     ]
-};
-REGISTER_COMMAND(metadata);
+});
+
+
+
+//---------------------------------------------------------------------------//
+// Tests:
+
+import { PREFIX, tests, SEND_INVALID_PERM } from "../utils/tests";
+
+tests.push(
+    {
+        id: `option_remove:1`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        datafile_populated: true,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}options remove Potato`,
+            level: PERM.MOD
+        },
+        expected_return: `Removed option with name: \`Potato\``
+    },
+    {
+        id: `option_remove:2`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        datafile_populated: true,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}options remove Spam`,
+            level: PERM.MOD
+        },
+        expected_return: `Could not find an option with an alias of: \`spam\``
+    },
+    {
+        id: `option_remove:3`,
+        links: {},
+        datafile_should_exist: `IGNORES`,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}options remove Spam`,
+            level: PERM.ALL
+        },
+        expected_return: (
+            SEND_INVALID_PERM
+            ? `Invalid Permissions, you must be at least level ${PERM.MOD}, you are level ${PERM.ALL}.`
+            : null
+        )
+    }
+);

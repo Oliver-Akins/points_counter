@@ -1,7 +1,7 @@
 //
 // alias_list.ts
 //
-// Written by: Tyler Akins (2019/12/12 - 2019/12/23)
+// Written by: Tyler Akins (2019/12/12 - 2020/01/10)
 //
 
 
@@ -63,3 +63,62 @@ REGISTER_COMMAND({
         "The option to list aliases for."
     ]
 });
+
+
+//---------------------------------------------------------------------------//
+// Tests:
+
+
+import { PREFIX, tests } from "../utils/tests";
+
+
+tests.push(
+    {
+        id: `alias_list:01`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        datafile_populated: true,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}alias list potato`,
+            level: PERM.ALL
+        },
+        expected_return: `You can refer to Potato by using: potato, salad`
+    },
+    {
+        id: `alias_list:02`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        datafile_populated: true,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}alias list spam`,
+            level: PERM.ALL
+        },
+        expected_return: `Could not find an option by alias \`spam\``
+    },
+    {
+        id: `alias_list:03`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        datafile_populated: true,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}aliases spam`,
+            level: PERM.ALL
+        },
+        expected_return: `Could not find an option by alias \`spam\``
+    },
+    {
+        id: `alias_list:04`,
+        links: {},
+        datafile_should_exist: `EXISTS`,
+        datafile_populated: true,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${PREFIX}alias list potato`,
+            level: PERM.ALL
+        },
+        expected_return: `You can refer to Potato by using: potato, salad`
+    }
+);

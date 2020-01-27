@@ -1,7 +1,7 @@
 //
 // help.ts
 //
-// Written by: Tyler Akins (2019/11/23 - 2019/12/23)
+// Written by: Tyler Akins (2019/11/23 - 2020/01/10)
 //
 
 
@@ -24,7 +24,7 @@ const HELP_COMMAND = (ctx: msg_data, args: string[]): string => {
 };
 
 
-const metadata: cmd_metadata = {
+REGISTER_COMMAND({
     description: "Takes you to the help page for the bot or a specific command.",
     executable: HELP_COMMAND,
     requires_confirm: false,
@@ -38,5 +38,48 @@ const metadata: cmd_metadata = {
     arg_info: [
         "The command you are wanting help with."
     ]
-};
-REGISTER_COMMAND(metadata)
+});
+
+
+
+//---------------------------------------------------------------------------//
+// Tests:
+
+import { tests } from "../utils/tests";
+
+
+tests.push(
+    {
+        id: `help:1`,
+        links: {},
+        datafile_should_exist: `IGNORES`,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${config.bot.PREFIX}help`,
+            level: PERM.ALL
+        },
+        expected_return: `Help page: ${config.WEBSITE}`
+    },
+    {
+        id: `help:2`,
+        links: {},
+        datafile_should_exist: `IGNORES`,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${config.bot.PREFIX}help points add`,
+            level: PERM.ALL
+        },
+        expected_return: `Help page: ${config.WEBSITE}/command/points_add`
+    },
+    {
+        id: `help:3`,
+        links: {},
+        datafile_should_exist: `IGNORES`,
+        msg_meta: {
+            source: `Twitch`,
+            message: `${config.bot.PREFIX}help points_remove`,
+            level: PERM.ALL
+        },
+        expected_return: `Help page: ${config.WEBSITE}/command/points_remove`
+    },
+);

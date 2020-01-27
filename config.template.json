@@ -9,7 +9,8 @@
     "CHANNELS": [],
     "ADMIN": [],
     "REPLY_TO_AUTO_ADD": true,
-    "ALERT_MISSED_BITS": true
+    "ALERT_MISSED_BITS": true,
+    "AUTO_ADD": true
   },
   "discord": {
     "OAUTH_TOKEN": null,
