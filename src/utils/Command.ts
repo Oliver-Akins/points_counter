@@ -1,7 +1,7 @@
 //
 // Command.ts
 //
-// Written by: Tyler Akins (2019/11/06 - 2019/12/23)
+// Written by: Tyler Akins (2019/11/06 - 2020/01/28)
 //
 
 
@@ -65,7 +65,7 @@ export class Command {
         // Construct the regex
         let regex: string = `^${config.bot.PREFIX}`;
         if (this.group != null) { regex += `(${this.group}\ )`; };
-        regex += `(${this.name})`;
+        regex += `(${this.name}\ )`;
 
         return message.match(regex) !== null;
     };
