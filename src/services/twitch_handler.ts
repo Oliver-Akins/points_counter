@@ -1,7 +1,7 @@
 //
 // twitch_handler.ts
 //
-// Written by: Tyler Akins (2019/12/10 - 2020/01/15)
+// Written by: Tyler Akins (2019/12/10 - 2020/01/31)
 //
 
 /*
@@ -168,7 +168,7 @@ export const run_twitch = (): void => {
                     source: "Twitch",
                     channel: `Twitch:${channel}`,
                     level: PERM.MOD,
-                    user: context.username,
+                    user: "Auto Adder",
                     cooldown: false,
                     test: false
                 });
