@@ -1,7 +1,7 @@
 //
 // cmd_handler.ts
 //
-// Written by: Tyler Akins (2019/11/06 - 2020/01/10)
+// Written by: Tyler Akins (2019/11/06 - 2020/01/31)
 //
 
 
@@ -117,7 +117,7 @@ export const HANDLE_MESSAGE = (ctx: msg_data): string => {
     ctx.flags = GET_FLAGS(ctx.message);
 
     // removing arguments that are indicated as flags
-    let re = new RegExp(`\\${FLAG_INDICATOR}\\w+\\s?`)
+    let re = new RegExp(`\\${FLAG_INDICATOR}\\w+\\s?`, `g`)
     ctx.message = ctx.message.replace(re, ``);
     // !SECTION: Flag parsing
 
