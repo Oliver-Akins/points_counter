@@ -1,7 +1,7 @@
 //
 // alias_list.ts
 //
-// Written by: Tyler Akins (2019/12/12 - 2020/01/10)
+// Written by: Tyler Akins (2019/12/12 - 2020/01/31)
 //
 
 
@@ -21,6 +21,10 @@ const ALIAS_LIST = (ctx: msg_data, args: string[]): string => {
     // Find option
     for (var option of data) {
         if (option.aliases.includes(target)) {
+
+            // Ensure option is not hidden or flag is included
+            if (option.hidden && !ctx.flags.includes("h")) { break; };
+
             return `You can refer to ${option.name} by using: ${option.aliases.join(", ")}`;
         };
     };
@@ -43,7 +47,10 @@ REGISTER_COMMAND({
     level: PERM.ALL,
     arg_info: [
         "The option to list aliases for."
-    ]
+    ],
+    flags: {
+        "h": "The option is a hidden option."
+    }
 });
 
 
@@ -61,7 +68,10 @@ REGISTER_COMMAND({
     level: PERM.ALL,
     arg_info: [
         "The option to list aliases for."
-    ]
+    ],
+    flags: {
+        "h": "The option is a hidden option."
+    }
 });
 
 

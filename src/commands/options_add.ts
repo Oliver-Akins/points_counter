@@ -1,7 +1,7 @@
 //
 // options_add.ts
 //
-// Written by: Tyler Akins (2019/11/29 - 2020/01/10)
+// Written by: Tyler Akins (2019/11/29 - 2020/01/31)
 //
 
 
@@ -59,7 +59,10 @@ REGISTER_COMMAND({
     level: PERM.MOD,
     arg_info: [
         "The name of the option to add."
-    ]
+    ],
+    flags: {
+        "h": "Indicates that this should be hidden option"
+    }
 });
 
 

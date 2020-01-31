@@ -1,7 +1,7 @@
 //
 // admin_link.ts
 //
-// Written by: Tyler Akins (2019/12/13 - 2020/01/10)
+// Written by: Tyler Akins (2019/12/13 - 2020/01/31)
 //
 
 
@@ -36,7 +36,8 @@ REGISTER_COMMAND({
     arg_info: [
         "The symlink to create pointing at Target_Channel",
         "The channel that will be resolved to. This can either be another symlink or a direct channel."
-    ]
+    ],
+    flags: {}
 });
 
 

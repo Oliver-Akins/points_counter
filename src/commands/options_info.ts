@@ -1,7 +1,7 @@
 //
 // options_info.ts
 //
-// Written by: Tyler Akins (2019/12/06 - 2020/01/10)
+// Written by: Tyler Akins (2019/12/06 - 2020/01/31)
 //
 
 
@@ -29,7 +29,7 @@ const OPTIONS_INFO = (ctx: msg_data, args: string[]): string => {
 
 
             // Ensure not hidden, or that we showing all hidden
-            if (option.hidden && !ctx.flags.includes("A")) { break; };
+            if (option.hidden && !ctx.flags.includes("a")) { break; };
 
 
             // Change amount of data given based on the source of command
@@ -70,7 +70,10 @@ REGISTER_COMMAND({
     level: PERM.ALL,
     arg_info: [
         "The option to get information for."
-    ]
+    ],
+    flags: {
+        "a": "Will allow viewing data for a hidden option"
+    }
 });
 
 

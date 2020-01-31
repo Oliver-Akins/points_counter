@@ -1,7 +1,7 @@
 //
 // alias_remove.ts
 //
-// Written by: Tyler Akins (2019/12/12 - 2020/01/10)
+// Written by: Tyler Akins (2019/12/12 - 2020/01/31)
 //
 
 
@@ -57,7 +57,10 @@ REGISTER_COMMAND({
     level: PERM.MOD,
     arg_info: [
         "The alias to remove from whatever option has it. This cannot remove the last alias from an option."
-    ]
+    ],
+    flags: {
+        "h": "Allows removing aliases from hidden options"
+    }
 });
 
 

@@ -1,7 +1,7 @@
 //
 // options_remove.ts
 //
-// Written by: Tyler Akins (2019/12/06 - 2020/01/10)
+// Written by: Tyler Akins (2019/12/06 - 2020/01/31)
 //
 
 
@@ -49,7 +49,8 @@ REGISTER_COMMAND({
     level: PERM.MOD,
     arg_info: [
         "The option to remove from the dataset."
-    ]
+    ],
+    flags: {}
 });
 
 

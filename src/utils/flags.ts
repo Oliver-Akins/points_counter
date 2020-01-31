@@ -1,7 +1,7 @@
 //
 // flags.ts
 //
-// Written by: Tyler Akins (2020/01/04)
+// Written by: Tyler Akins (2020/01/04 - 2020/01/31)
 //
 
 
@@ -23,6 +23,8 @@ export const GET_FLAGS = (msg: string): string[] => {
 
             // Check each flag
             for (var temp_flag of argument.slice(FLAG_INDICATOR.length)) {
+
+                temp_flag = temp_flag.toLowerCase();
 
                 // Only add flags to the array once
                 if (!flags.includes(temp_flag)) {

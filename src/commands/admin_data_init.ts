@@ -1,7 +1,7 @@
 //
 // init_datafile.ts
 //
-// Written by: Tyler Akins (2019/11/11 - 2020/01/10)
+// Written by: Tyler Akins (2019/11/11 - 2020/01/31)
 //
 
 
@@ -40,7 +40,8 @@ REGISTER_COMMAND({
     group: "admin",
     name: "data init",
     level: PERM.ADMIN,
-    arg_info: []
+    arg_info: [],
+    flags: {}
 });
 
 

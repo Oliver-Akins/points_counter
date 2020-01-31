@@ -1,7 +1,7 @@
 //
 // alias_add.ts
 //
-// Written by: Tyler Akins (2019/12/12 - 2020/01/10)
+// Written by: Tyler Akins (2019/12/12 - 2020/01/31)
 //
 
 
@@ -55,7 +55,8 @@ REGISTER_COMMAND({
     arg_info: [
         "The option to add the alias to.",
         "The alias to add. This must be unique across all options in order for the command to work."
-    ]
+    ],
+    flags: {}
 });
 
 

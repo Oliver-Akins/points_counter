@@ -1,7 +1,7 @@
 //
 // lead.ts
 //
-// Written by: Tyler Akins (2019/12/03 - 2020/01/10)
+// Written by: Tyler Akins (2019/12/03 - 2020/01/31)
 //
 
 
@@ -28,7 +28,7 @@ const LEAD_COMMAND = (ctx: msg_data, args: string[]): string => {
 
 
         // Check to see if we're including hidden options
-        if (option.hidden && !ctx.flags.includes("A")) {
+        if (option.hidden && !ctx.flags.includes("a")) {
             continue;
         };
 
@@ -59,7 +59,10 @@ REGISTER_COMMAND({
     group: null,
     name: "lead",
     level: PERM.ALL,
-    arg_info: []
+    arg_info: [],
+    flags: {
+        "a": "Displays hidden options as well."
+    }
 });
 
 

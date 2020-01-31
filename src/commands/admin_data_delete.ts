@@ -1,7 +1,7 @@
 //
 // delete_datafile.ts
 //
-// Written by: Tyler Akins (2019/12/06 - 2020/01/10)
+// Written by: Tyler Akins (2019/12/06 - 2020/01/31)
 //
 
 
@@ -91,7 +91,8 @@ const metadata: cmd_metadata = {
     group: "admin",
     name: "data delete",
     level: PERM.ADMIN,
-    arg_info: []
+    arg_info: [],
+    flags: {}
 };
 REGISTER_COMMAND(metadata);
 

@@ -1,7 +1,7 @@
 //
 // admin_get_channel.ts
 //
-// Written by: Tyler Akins (2019/12/13 - 2020/01/10)
+// Written by: Tyler Akins (2019/12/13 - 2020/01/31)
 //
 
 
@@ -25,7 +25,8 @@ REGISTER_COMMAND({
     group: "admin",
     name: "get channel",
     level: PERM.ADMIN,
-    arg_info: []
+    arg_info: [],
+    flags: {}
 });
 
 

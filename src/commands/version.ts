@@ -1,7 +1,7 @@
 //
 // version.ts
 //
-// Written by: Tyler Akins (2019/11/23 - 2020/01/10)
+// Written by: Tyler Akins (2019/11/23 - 2020/01/31)
 //
 
 import { REGISTER_COMMAND } from "../cmd_handler";
@@ -22,7 +22,8 @@ REGISTER_COMMAND({
     opt_args: 0,
     args: [],
     level: PERM.ALL,
-    arg_info: []
+    arg_info: [],
+    flags: {}
 });
 
 

@@ -27,6 +27,7 @@ interface alert_structure {
 
 interface cmd_metadata {
     executable(context: msg_data, args: string[]): string;
+    flags: {[key: string]: string};
     requires_confirm: boolean;
     alerts?: alert_structure;
     case_sensitive: boolean;

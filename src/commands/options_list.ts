@@ -1,7 +1,7 @@
 //
 // options_list.ts
 //
-// Written by: Tyler Akins (2019/11/11 - 2020/01/10)
+// Written by: Tyler Akins (2019/11/11 - 2020/01/31)
 //
 
 
@@ -27,7 +27,7 @@ const LIST_OPTIONS = (ctx: msg_data, args: string[]): string => {
 
     // Make list of names
     for (var option of data) {
-        if (!option.hidden || (option.hidden && ctx.flags.includes("A"))) {
+        if (!option.hidden || (option.hidden && ctx.flags.includes("a"))) {
             names.push(option.name);
         };
     };
@@ -63,7 +63,10 @@ REGISTER_COMMAND({
     group: "options",
     name: "list",
     level: PERM.ALL,
-    arg_info: []
+    arg_info: [],
+    flags: {
+        "a": "Includes hidden options in the output"
+    }
 });
 
 

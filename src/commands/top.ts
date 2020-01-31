@@ -1,7 +1,7 @@
 //
 // top.ts
 //
-// Written by: Tyler Akins (2019/11/29 - 2020/01/10)
+// Written by: Tyler Akins (2019/11/29 - 2020/01/31)
 //
 
 
@@ -39,7 +39,7 @@ const TOP_COMMAND = (ctx: msg_data, args: string[]): string => {
         if (!sorted[i]) { i++; break; };
 
         // Ensure not hidden
-        if (sorted[i].hidden && !ctx.flags.includes("A")) {
+        if (sorted[i].hidden && !ctx.flags.includes("a")) {
             temp_x++; i++;
             continue;
         };
@@ -65,7 +65,10 @@ REGISTER_COMMAND({
     level: PERM.ALL,
     arg_info: [
         "The number of top positions to show. This defaults to 3 if not specified."
-    ]
+    ],
+    flags: {
+        "a": "Includes hidden options in the list"
+    }
 });
 
 

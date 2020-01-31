@@ -1,7 +1,7 @@
 //
 // points_remove.ts
 //
-// Written by: Tyler Akins (2019/12/06 - 2020/01/10)
+// Written by: Tyler Akins (2019/12/06 - 2020/01/31)
 //
 
 
@@ -60,7 +60,7 @@ const POINTS_REMOVE = (ctx: msg_data, args: string[]): string => {
 
 
             // Silence the message if the option is hidden
-            if (option.hidden && !ctx.flags.includes("L")) {
+            if (option.hidden && !ctx.flags.includes("l")) {
                 return `Could not find an option of name \`${target}\`.`;
             };
 
@@ -91,7 +91,8 @@ REGISTER_COMMAND({
         "The option to add the points to.",
         "The number of points to add to the option. This must be a positive integer.",
         "The user who donated the bits to the user, this defaults to '%anonymous%' if not specified."
-    ]
+    ],
+    flags: {}
 });
 
 

@@ -1,7 +1,7 @@
 //
 // source.ts
 //
-// Written by: Tyler Akins (2019/12/29)
+// Written by: Tyler Akins (2019/12/29 - 2020/01/31)
 //
 
 
@@ -28,7 +28,8 @@ REGISTER_COMMAND({
     opt_args: 0,
     args: [],
     level: PERM.ALL,
-    arg_info: []
+    arg_info: [],
+    flags: {}
 });
 
 

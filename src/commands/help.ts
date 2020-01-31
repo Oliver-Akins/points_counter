@@ -1,7 +1,7 @@
 //
 // help.ts
 //
-// Written by: Tyler Akins (2019/11/23 - 2020/01/10)
+// Written by: Tyler Akins (2019/11/23 - 2020/01/31)
 //
 
 
@@ -37,7 +37,8 @@ REGISTER_COMMAND({
     level: PERM.ALL,
     arg_info: [
         "The command you are wanting help with."
-    ]
+    ],
+    flags: {}
 });
 
 

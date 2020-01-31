@@ -1,7 +1,7 @@
 //
 // admin_unlink.ts
 //
-// Written by: Tyler Akins (2019/12/13 - 2020/01/10)
+// Written by: Tyler Akins (2019/12/13 - 2020/01/31)
 //
 
 
@@ -34,7 +34,8 @@ REGISTER_COMMAND({
     level: PERM.ADMIN,
     arg_info: [
         "The symlink to delete."
-    ]
+    ],
+    flags: {}
 });
 
 
