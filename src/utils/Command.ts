@@ -1,7 +1,7 @@
 //
 // Command.ts
 //
-// Written by: Tyler Akins (2019/11/06 - 2020/01/28)
+// Written by: Tyler Akins (2019/11/06 - 2020/02/14)
 //
 
 
@@ -20,6 +20,7 @@ export class Command {
     readonly syntax: string;
     readonly level: number;
     readonly group: string;
+    readonly flags: object;
     readonly info: string;
     readonly name: string;
 
@@ -43,7 +44,8 @@ export class Command {
         this.alert = metadata.alerts;
         this.requires_confirm = metadata.requires_confirm;
         this.full_name = this.group ? `${this.group} ${this.name}` : `${this.name}`;
-        this.arg_info = metadata.arg_info
+        this.arg_info = metadata.arg_info;
+        this.flags = metadata.flags;
 
 
         // NOTE: Create syntax dynamically

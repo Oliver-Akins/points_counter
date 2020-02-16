@@ -78,14 +78,14 @@
             </tr>
         </table>
         <hr>
-        <div id="usage">
-            <h2>Usage:</h2>
+        <div>
+            <h2 id="usage">Usage:</h2>
             <p>
                 <pre><code>${d.cmd.syntax.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>
             </p>
-            <p>
-                ${d.arg_help.join("<br />")}
-            </p>
+            <p>${d.arg_help.join("<br />")}</p>
+            <h2 id="flags">Flags:</h2>
+            <p>${d.flags.join("<br>")}</p>
         </div>
         <hr>
         <div class="nav">

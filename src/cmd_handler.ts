@@ -117,7 +117,7 @@ export const HANDLE_MESSAGE = (ctx: msg_data): string => {
     ctx.flags = GET_FLAGS(ctx.message);
 
     // removing arguments that are indicated as flags
-    let re = new RegExp(`\\${FLAG_INDICATOR}\\w+\\s?`, `g`)
+    let re = new RegExp(`\\${FLAG_INDICATOR}\\w+\\s?`, `g`);
     ctx.message = ctx.message.replace(re, ``);
     // !SECTION: Flag parsing
 

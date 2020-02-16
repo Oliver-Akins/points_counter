@@ -1,7 +1,7 @@
 //
 // web_server.ts
 //
-// Written by: Tyler Akins (2019/12/08 - 2019/12/23)
+// Written by: Tyler Akins (2019/12/08 - 2020/02/16)
 //
 
 
@@ -108,11 +108,19 @@ export const run_web_server = (): void => {
             };
 
 
+            let flagsTemplate = templater(fs.readFileSync(VIEWS + "/partials/flags.tl"));
+            let flags: string[] = [];
+            for (var flag in cmd.flags) {
+                flags.push(flagsTemplate({ "description": cmd.flags[flag], "code": flag }));
+            };
+
+
             let data = {
                 "c": config,
                 "cmd": cmd,
                 "version": VERSION,
-                "arg_help": arg_help
+                "arg_help": arg_help,
+                "flags": flags
             }
 
 
