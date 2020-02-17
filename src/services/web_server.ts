@@ -11,12 +11,14 @@ Templater:: https://github.com/Drulac/template-literal
 */
 
 
+import { RESOLVE_CHANNEL_STRING } from "../utils/metadata";
 import * as templater from "template-literal";
 import { LOAD_CONFIG } from "../utils/Config";
 import { PERM, VERSION } from "../constants";
 import { commands } from "../cmd_handler";
 import * as express from "express";
-import * as tl from "express-tl"
+import { LOAD } from "../utils/db";
+import * as tl from "express-tl";
 import * as path from "path";
 import * as fs from "fs";
 
@@ -121,7 +123,7 @@ export const run_web_server = (): void => {
                 "version": VERSION,
                 "arg_help": arg_help,
                 "flags": flags
-            }
+            };
 
 
             if (cmd.group) {
@@ -130,7 +132,6 @@ export const run_web_server = (): void => {
                     return;
                 };
             }
-
 
             else {
                 if (cmd.name === command) {
@@ -144,6 +145,40 @@ export const run_web_server = (): void => {
             "command": command,
             "version": VERSION
         })
+    });
+
+
+
+    // Channel options list
+    server.get("/options/:channel", (req, res) => {
+
+        let show_all: boolean = !(req.query.all == undefined);
+        let channel: string = RESOLVE_CHANNEL_STRING(req.params.channel);
+        let options: option[] = LOAD(channel);
+        let option_html: string[] = [];
+
+        // Load templater
+        let optionTemplater = templater(fs.readFileSync(VIEWS + "/partials/option_info.tl"));
+
+        // Template all the options
+        for (var option of options) {
+
+            // Ensure options are visible
+            if ((!option.hidden) || show_all) {
+                option_html.push(optionTemplater({
+                    "name": option.name,
+                    "total_points": option.total,
+                    "donator_count": Object.keys(option.points).length - 1,
+                    "aliases": option.aliases
+                }));
+            };
+        };
+
+        res.render("option_list", {
+            "channel": channel.split(`:`)[1],
+            "version": VERSION,
+            "options": option_html
+        });
     });
 
 
@@ -184,6 +219,7 @@ export const run_web_server = (): void => {
         if (config.DEV) {res.set("Cache-Control", "no-store, no-cache, must-revalidate, private");};
         res.sendFile(DOCS + "/style.css");
     });
+
 
 
     // Start the server so that we can actually server shit
