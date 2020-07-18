@@ -64,7 +64,7 @@ export const run_twitch = (): void => {
             var is_admin = config.twitch.ADMIN.includes(context.username);
             var is_mod = (
                 context.mod ||
-                context.badges ? context.badges.moderator === "1" : false ||
+                context.badges ? context.badges?.moderator === "1" : false ||
                 context.badges ? context.badges.broadcaster === "1" : false ||
                 is_admin
             );
