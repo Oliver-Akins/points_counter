@@ -35,7 +35,7 @@ export const TEST_LINKS = "#test_links";
 export const TEST_USER = "#test_user#";
 
 
-export const REPO = "https://github.com/Tyler-A/points_counter";
+export const REPO = "https://github.com/Oliver-Akins/points_counter";
 
 
 export const LINK_FILE = "#links#";
